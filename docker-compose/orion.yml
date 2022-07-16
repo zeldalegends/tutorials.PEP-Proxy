@@ -232,10 +232,11 @@ services:
       - GITHUB_TOKEN
     depends_on:
       - orion
+    networks:
+      default:
+        ipv4_address: 172.18.1.100
     ports:
       - "1880:1880"
-    networks:
-      - default
     volumes: ##  assures persistence beetween rebuilds and no permission issues
       - node-red-data:/data
 
@@ -246,10 +247,11 @@ services:
     hostname: mongo-express
     depends_on:
       - mongo-db
-    ports:
-      - "2205:8081"
     networks:
-      - default
+      default:
+        ipv4_address: 172.18.1.101
+    ports:
+      - "8081:8081"
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo-db
 
