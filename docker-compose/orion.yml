@@ -21,8 +21,8 @@ services:
   # Orion is the context broker
   orion:
     image: fiware/orion-ld:${ORION_LD_VERSION}
-    hostname: orion
     container_name: fiware-orion
+    hostname: orion
     depends_on:
       - mongo-db
     networks:
@@ -38,8 +38,8 @@ services:
   # IoT-Agent is configured for the UltraLight Protocol
   iot-agent:
     image: fiware/iotagent-ul:${ULTRALIGHT_VERSION}
-    hostname: iot-agent
     container_name: fiware-iot-agent
+    hostname: iot-agent
     depends_on:
       - mongo-db
     networks:
@@ -137,8 +137,8 @@ services:
   # Tutorial acts as a series of dummy IoT Sensors over HTTP
   tutorial:
     image: fiware/tutorials.ngsi-ld
-    hostname: tutorial
     container_name: fiware-tutorial
+    hostname: tutorial
     depends_on:
       orion-proxy :
         condition: service_started
@@ -185,8 +185,8 @@ services:
   # Databases
   mongo-db:
     image: mongo:${MONGO_DB_VERSION}
-    hostname: mongo-db
     container_name: db-mongo
+    hostname: mongo-db
     expose:
       - "${MONGO_DB_PORT}"
     ports:
@@ -204,8 +204,8 @@ services:
   mysql-db:
     restart: always
     image: mysql:${MYSQL_DB_VERSION}
-    hostname: mysql-db
     container_name: db-mysql
+    hostname: mysql-db
     expose:
       - "${MYSQL_DB_PORT}"
     ports:
@@ -224,7 +224,8 @@ services:
 
   node-red:
     build: ../node-red
-    container_name: node-red
+    container_name: fiware-node-red
+    hostname: node-red
     environment: ##  environment variables passed from the hosting system
       - ETHEREUM_PRIVATE_KEY
       - ETHEREUM_PUBLIC_KEY
@@ -239,15 +240,16 @@ services:
       - node-red-data:/data
 
   mongo-express:
+    restart: unless-stopped
     image: mongo-express
     container_name: mongo-express
+    hostname: mongo-express
     depends_on:
       - mongo-db
     ports:
       - "8081:8081"
     networks:
       - default
-    restart: unless-stopped
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo-db
 
