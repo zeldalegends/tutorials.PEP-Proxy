@@ -222,21 +222,21 @@ services:
     secrets:
       - my_secret_data
 
-  node-red:
-    build: ../node-red
-    container_name: node-red
-    environment: ##  environment variables passed from the hosting system
-      - ETHEREUM_PRIVATE_KEY
-      - ETHEREUM_PUBLIC_KEY
-      - GITHUB_TOKEN
-    depends_on:
-      - orion
-    ports:
-      - "1880:1880"
-    networks:
-      - default
-    volumes: ##  assures persistence beetween rebuilds and no permission issues
-      - node-red-data:/data
+#  node-red:
+#    build: ../node-red
+#    container_name: node-red
+#    environment: ##  environment variables passed from the hosting system
+#      - ETHEREUM_PRIVATE_KEY
+#      - ETHEREUM_PUBLIC_KEY
+#      - GITHUB_TOKEN
+#    depends_on:
+#      - orion
+#    ports:
+#      - "1880:1880"
+#    networks:
+#      - default
+#    volumes: ##  assures persistence beetween rebuilds and no permission issues
+#      - node-red-data:/data
 
   mongo-express:
     image: mongo-express
