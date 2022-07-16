@@ -239,19 +239,19 @@ services:
     volumes: ##  assures persistence beetween rebuilds and no permission issues
       - node-red-data:/data
 
-#  mongo-express:
-#    restart: unless-stopped
-#    image: mongo-express
-#    container_name: mongo-express
-#    hostname: mongo-express
-#    depends_on:
-#      - mongo-db
-#    ports:
-#      - "8081:8081"
-#    networks:
-#      - default
-#    environment:
-#      - ME_CONFIG_MONGODB_SERVER=mongo-db
+  mongo-express:
+    restart: unless-stopped
+    image: mongo-express
+    container_name: mongo-express
+    hostname: mongo-express
+    depends_on:
+      - mongo-db
+    ports:
+      - "2205:8081"
+    networks:
+      - default
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo-db
 
 networks:
   default:
