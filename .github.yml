@@ -1,0 +1,29 @@
+tasks:
+  - command: |
+      ./services start
+      docker ps
+      docker exec fiware-orion curl http://localhost:1026/version
+
+ports:
+  - port: 1026
+    onOpen: ignore
+  - port: 1027
+    onOpen: ignore
+  - port: 3001
+    onOpen: ignore
+  - port: 3306
+    onOpen: ignore
+  - port: 4041
+    onOpen: ignore
+  - port: 7896
+    onOpen: ignore
+  - port: 27017
+    onOpen: ignore
+  - port: 1880
+    onOpen: open-browser
+  - port: 3000
+    onOpen: open-preview
+  - port: 3005
+    onOpen: open-preview
+  - port: 8081
+    onOpen: open-preview
