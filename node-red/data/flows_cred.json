@@ -1,0 +1,12 @@
+{
+    "a46f63f7bc8183e7": {
+        "privateKey": "${ETHEREUM_PRIVATE_KEY}"
+    },
+    "15d84497.52381b": {},
+    "93b18379800c0f5a": {
+        "keyPrivate": "${ETHEREUM_PRIVATE_KEY}"
+    },
+    "c4aeb4c22e647f23": {},
+    "bee2f669ae954ab8": {},
+    "0a25a3c7164c9449": {}
+}
