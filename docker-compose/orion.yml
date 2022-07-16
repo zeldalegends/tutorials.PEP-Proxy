@@ -200,7 +200,6 @@ services:
         host=`hostname --ip-address || echo '127.0.0.1'`; 
         mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
       interval: 5s
-    
 
   mysql-db:
     restart: always
@@ -222,14 +221,46 @@ services:
       - ../mysql-data:/docker-entrypoint-initdb.d/:ro
     secrets:
       - my_secret_data
+
+  node-red:
+    build: ../node-red
+    container_name: node-red
+    environment: ##  environment variables passed from the hosting system
+      - ETHEREUM_PRIVATE_KEY
+      - ETHEREUM_PUBLIC_KEY
+      - GITHUB_TOKEN
+    depends_on:
+      - orion
+    ports:
+      - "1880:1880"
+    networks:
+      - default
+    volumes: ##  assures persistence beetween rebuilds and no permission issues
+      - node-red-data:/data
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    depends_on:
+      - mongo-db
+    ports:
+      - "8081:8081"
+    networks:
+      - default
+    restart: unless-stopped
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo-db
+
 networks:
   default:
     ipam:
       config:
         - subnet: 172.18.1.0/24
+
 volumes:
   mysql-db: ~
   mongo-db: ~
+  node-red-data: ~
 
 secrets:
   my_secret_data:
