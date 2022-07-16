@@ -1,7 +1,7 @@
 tasks:
   - command: |
       ./services start
-      docker ps
+      docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" 
       docker exec fiware-orion curl http://localhost:1026/version
 
 ports:
