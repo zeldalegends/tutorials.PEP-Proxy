@@ -1,10 +1,17 @@
 tasks:
-  - init: |
+  - name: utils
+    description: "Some useful commands"
+    init: |
       echo Welcome to FIWARE
-      ./services create
-    command: |
+      node -e "console.log(require('os').version())"
+      docker logs fiware-orion -f
+      docker exec -it db-mysql /bin/bash
       docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
       (gp ports list 2> /dev/null) || true
+      ./services create
+  - name: build
+    description: "Build FIWARE stack"
+    command: |
       ./services start
 ports:
   - name: Orion
