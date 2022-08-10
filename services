@@ -169,8 +169,8 @@ case "${command}" in
 		echo -e "Now open \033[4mhttp://localhost:3000\033[0m"
 		;;
 	"southport")
+		echo -e "\033[1;31mWARNING\033[0m: This command has not been tested and is \033[1;31mNOT SUPPORTED IN THIS BRANCH\033[0m."
 		stoppingContainers
-		echo -e "\033[1;31mNOT SUPPORTED IN THIS BRANCH\033[0m."
 		echo -e "Starting containers: \033[1;34mOrion\033[0m, \033[1;36mIoT-Agent\033[0m, \033[1;31mKeyrock\033[0m, \033[1;31mWilma\033[0m, \033[1mTutorial\033[0m and \033[1mMongoDB\033[0m and \033[1mMySQL\033[0m databases."
 		echo -e "- \033[1;34mOrion\033[0m is the context broker"
 		echo -e "- \033[1;36mIoT-Agent\033[0m is configured for the UltraLight Protocol"
@@ -187,8 +187,8 @@ case "${command}" in
 		echo -e "Now open \033[4mhttp://localhost:3000\033[0m"
 		;;
 	"northport")
+		echo -e "\033[1;31mWARNING\033[0m: This command has not been tested and is \033[1;31mNOT SUPPORTED IN THIS BRANCH\033[0m."
 		stoppingContainers
-		echo -e "\033[1;31mNOT SUPPORTED IN THIS BRANCH\033[0m."
 		echo -e "Starting containers: \033[1;34mOrion\033[0m, \033[1;36mIoT-Agent\033[0m, \033[1;31mKeyrock\033[0m, \033[1;31mWilma\033[0m, \033[1mTutorial\033[0m and \033[1mMongoDB\033[0m and \033[1mMySQL\033[0m databases."
 		echo -e "- \033[1;34mOrion\033[0m is the context broker"
 		echo -e "- \033[1;36mIoT-Agent\033[0m is configured for the UltraLight Protocol"

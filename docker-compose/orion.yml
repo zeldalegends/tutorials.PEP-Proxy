@@ -16,7 +16,7 @@
 # 
 # see: https://github.com/FIWARE/helm-charts/
 #
-version: "3.8"
+version: "3.9"
 services:
   # Orion is the context broker
   orion:
@@ -111,7 +111,7 @@ services:
     secrets:
       - my_secret_data
     healthcheck:
-      interval: 5s
+      interval: 25s
 
 
   # PEP Proxy for Orion
@@ -321,7 +321,7 @@ services:
         mongo --quiet mongo-db/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
 #       host=`hostname --ip-address || echo '127.0.0.1'`; 
 #       mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
-      interval: 5s
+      interval: 25s
     
   mongo-express:
     restart: always
@@ -337,6 +337,11 @@ services:
       - "${MONGO_EXPRESS_PORT}:${MONGO_EXPRESS_PORT}" # localhost:8081
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo-db
+    healthcheck:
+      test: "curl -f localhost:${MONGO_EXPRESS_PORT} || exit 1"
+      interval: 25s
+      timeout: 5s
+      retries: 20
 
   mysql-db:
     restart: always
@@ -357,6 +362,10 @@ services:
       - ../mysql-data:/docker-entrypoint-initdb.d/:ro
     secrets:
       - my_secret_data
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
 networks:
   default:
