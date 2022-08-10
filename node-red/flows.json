@@ -1,0 +1,5938 @@
+[
+    {
+        "id": "ba9285a6.957868",
+        "type": "tab",
+        "label": "SAVE",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "e52631fa86fdd3be",
+        "type": "tab",
+        "label": "Home",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "44b7dbcf27bd28ae",
+        "type": "tab",
+        "label": "FIWARE",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "828bae03b631ac33",
+        "type": "tab",
+        "label": "Ethereum",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "48a7733923a33252",
+        "type": "tab",
+        "label": "Files v2 (reduced)",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f29ecd9eab0f0d83",
+        "type": "tab",
+        "label": "System v3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "416fb17dde932093",
+        "type": "group",
+        "z": "ba9285a6.957868",
+        "name": "SETUP",
+        "style": {
+            "fill": "#ffffbf",
+            "label": true
+        },
+        "nodes": [
+            "30b8aaf6d52456ce"
+        ],
+        "x": 334,
+        "y": 19,
+        "w": 192,
+        "h": 82
+    },
+    {
+        "id": "34047250a1f44ce1",
+        "type": "group",
+        "z": "48a7733923a33252",
+        "name": "",
+        "style": {
+            "stroke": "none",
+            "fill": "#ffbfbf",
+            "label": true
+        },
+        "nodes": [
+            "1a1a090377e2b43e"
+        ],
+        "x": 334,
+        "y": 19
+    },
+    {
+        "id": "ed8605f54d7c9002",
+        "type": "group",
+        "z": "44b7dbcf27bd28ae",
+        "name": "SETUP",
+        "style": {
+            "fill": "#ffffbf",
+            "label": true
+        },
+        "nodes": [
+            "32069561c52cb26e",
+            "532151c821513cdf"
+        ],
+        "x": 294,
+        "y": 19,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "15d84497.52381b",
+        "type": "Context-Broker",
+        "name": "",
+        "endpoint": "http://host.docker.internal:1026",
+        "service": "",
+        "servicepath": "",
+        "idmEndpoint": ""
+    },
+    {
+        "id": "95f6c009.fa934",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "ade1f84b9abbf285",
+        "type": "ui_group",
+        "name": "Monitoring data",
+        "tab": "e6013c6f.69328",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a9912d64.97094",
+        "type": "ui_group",
+        "name": "System Information",
+        "tab": "e6013c6f.69328",
+        "order": 1,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "b6cc1aae65862dae",
+        "type": "ui_group",
+        "name": "Realtime",
+        "tab": "e6013c6f.69328",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f6e5eaea1a3d31cf",
+        "type": "ui_group",
+        "name": "Loadavg",
+        "tab": "e6013c6f.69328",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e6013c6f.69328",
+        "type": "ui_tab",
+        "name": "System Monitor",
+        "icon": "memory",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "96202323dfa1b936",
+        "type": "ui_spacer",
+        "z": "48a7733923a33252",
+        "name": "spacer",
+        "group": "c2e5c6234f1ecb0c",
+        "order": 17,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "c2e5c6234f1ecb0c",
+        "type": "ui_group",
+        "name": "File Browser",
+        "tab": "fbb3939acbbee9df",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fbb3939acbbee9df",
+        "type": "ui_tab",
+        "name": "File Manager",
+        "icon": "folder_open",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "68ea59a18e66e807",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "47bd647b0bf55722",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "68ea59a18e66e807",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "428fc8e6d916cf55",
+        "type": "ui_group",
+        "name": "FIWARE",
+        "tab": "68ea59a18e66e807",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3887268fb207a290",
+        "type": "ui_group",
+        "name": "Ethereum",
+        "tab": "68ea59a18e66e807",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a5b0ce2eb275e336",
+        "type": "ethereum-client",
+        "name": "Rete di test Goerli",
+        "url": "https://rpc.goerli.mudit.blog/"
+    },
+    {
+        "id": "511b16494c95c3e9",
+        "type": "smart-contract",
+        "name": "My_PoE.sol (Remix)",
+        "ethereumClient": "a5b0ce2eb275e336",
+        "address": "0xE1989a90127A449Bd22176299104cf6d2cb5Ba86",
+        "abi": "[ \t{ \t\t\"inputs\": [ \t\t\t{ \t\t\t\t\"internalType\": \"string\", \t\t\t\t\"name\": \"document\", \t\t\t\t\"type\": \"string\" \t\t\t} \t\t], \t\t\"name\": \"notarize\", \t\t\"outputs\": [ \t\t\t{ \t\t\t\t\"internalType\": \"bytes32\", \t\t\t\t\"name\": \"\", \t\t\t\t\"type\": \"bytes32\" \t\t\t} \t\t], \t\t\"stateMutability\": \"nonpayable\", \t\t\"type\": \"function\" \t}, \t{ \t\t\"inputs\": [ \t\t\t{ \t\t\t\t\"internalType\": \"string\", \t\t\t\t\"name\": \"document\", \t\t\t\t\"type\": \"string\" \t\t\t} \t\t], \t\t\"name\": \"checkDocument\", \t\t\"outputs\": [ \t\t\t{ \t\t\t\t\"internalType\": \"bool\", \t\t\t\t\"name\": \"\", \t\t\t\t\"type\": \"bool\" \t\t\t} \t\t], \t\t\"stateMutability\": \"view\", \t\t\"type\": \"function\" \t} ]"
+    },
+    {
+        "id": "160e81fb.f1c86e",
+        "type": "ui_group",
+        "name": "File Browser",
+        "tab": "b63d1f91.68095",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "26e8fe8026c92abb",
+        "type": "ui_group",
+        "name": "Properties",
+        "tab": "b63d1f91.68095",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4128a70510a0cd4e",
+        "type": "ui_group",
+        "name": "Preview",
+        "tab": "b63d1f91.68095",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b63d1f91.68095",
+        "type": "ui_tab",
+        "name": "File Manager",
+        "icon": "folder_open",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a46f63f7bc8183e7",
+        "type": "sender-account",
+        "name": "Account 2 Test",
+        "ethereumClient": "a5b0ce2eb275e336",
+        "address": "0x7efC9d38581c7Cb8372325c349Ec5095D027B3Dd",
+        "managedByEthereumClient": false,
+        "transactionQueueSize": "100"
+    },
+    {
+        "id": "93b18379800c0f5a",
+        "type": "ethers-wallet",
+        "name": "Account 2 Test",
+        "keyPublic": "${ETHEREUM_PUBLIC_KEY}",
+        "keyPublicType": "str",
+        "keyPrivateType": "str"
+    },
+    {
+        "id": "d9ce9f5276beafeb",
+        "type": "ethers-network",
+        "name": "",
+        "url": "goerli"
+    },
+    {
+        "id": "0a1c6c0edd1fd842",
+        "type": "ethers-network",
+        "name": "",
+        "url": "ropsten"
+    },
+    {
+        "id": "26a531bf9aef221a",
+        "type": "ethers-contract",
+        "name": "My_PoE.sol (Remix)",
+        "address": "0xE1989a90127A449Bd22176299104cf6d2cb5Ba86",
+        "abi": "[\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"string\",\n\t\t\t\t\"name\": \"document\",\n\t\t\t\t\"type\": \"string\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"notarize\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"bytes32\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"bytes32\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"string\",\n\t\t\t\t\"name\": \"document\",\n\t\t\t\t\"type\": \"string\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"checkDocument\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"bool\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"bool\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t}\n]"
+    },
+    {
+        "id": "7a33f7076169f66c",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "b6ca04fbefda8832",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b6ca04fbefda8832",
+        "type": "ui_tab",
+        "name": "CB-2-BC NGSI-LV",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f279627921458d5f",
+        "type": "debug",
+        "z": "ba9285a6.957868",
+        "name": "GitHub vars",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "bdd706d8fb85efbd",
+        "type": "change",
+        "z": "ba9285a6.957868",
+        "name": "set flow.Github",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Github.bearer",
+                "pt": "flow",
+                "to": "$contains($lowercase(token), \"bearer \") ? token : (\"bearer \" & token)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "Github.owner",
+                "pt": "flow",
+                "to": "username",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "Github.repo",
+                "pt": "flow",
+                "to": "repository",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 120,
+        "wires": [
+            [
+                "f279627921458d5f"
+            ]
+        ]
+    },
+    {
+        "id": "172d6356ab04a229",
+        "type": "http request",
+        "z": "ba9285a6.957868",
+        "name": "PUT github",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.github.com/repos/{{owner}}/{{repo}}/contents/node-red/data/{{{file}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 870,
+        "y": 460,
+        "wires": [
+            [
+                "0c7340d2a44049f7"
+            ]
+        ]
+    },
+    {
+        "id": "3e5ce0e41afcd72f",
+        "type": "http request",
+        "z": "ba9285a6.957868",
+        "name": "GET github",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.github.com/repos/{{owner}}/{{repo}}/contents/node-red/data/{{{file}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 870,
+        "y": 220,
+        "wires": [
+            [
+                "e866bd89f8560646"
+            ]
+        ]
+    },
+    {
+        "id": "64523d55e5caf6a2",
+        "type": "file in",
+        "z": "ba9285a6.957868",
+        "name": "",
+        "filename": "",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 660,
+        "y": 380,
+        "wires": [
+            [
+                "48decdeb736e977e"
+            ]
+        ]
+    },
+    {
+        "id": "749b59e6136e3253",
+        "type": "change",
+        "z": "ba9285a6.957868",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sha",
+                "pt": "msg",
+                "to": "payload.sha",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 300,
+        "wires": [
+            [
+                "64523d55e5caf6a2"
+            ]
+        ]
+    },
+    {
+        "id": "48decdeb736e977e",
+        "type": "change",
+        "z": "ba9285a6.957868",
+        "name": "set msg.payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"content\": $base64encode(payload)}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload.message",
+                "pt": "msg",
+                "to": "Saved from Node-RED editor",
+                "tot": "str"
+            },
+            {
+                "t": "move",
+                "p": "sha",
+                "pt": "msg",
+                "to": "payload.sha",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 380,
+        "wires": [
+            [
+                "69472f5dbcdf5382"
+            ]
+        ]
+    },
+    {
+        "id": "e866bd89f8560646",
+        "type": "delay",
+        "z": "ba9285a6.957868",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 300,
+        "wires": [
+            [
+                "749b59e6136e3253"
+            ]
+        ]
+    },
+    {
+        "id": "69472f5dbcdf5382",
+        "type": "change",
+        "z": "ba9285a6.957868",
+        "name": "set msg.headers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{\"User-Agent\":\"Node-RED\"}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.Authorization",
+                "pt": "msg",
+                "to": "bearer",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 460,
+        "wires": [
+            [
+                "172d6356ab04a229"
+            ]
+        ]
+    },
+    {
+        "id": "acda9dd01f83bbe0",
+        "type": "debug",
+        "z": "ba9285a6.957868",
+        "name": "commit statusCode",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "statusCode",
+        "statusType": "msg",
+        "x": 850,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "43dcd85b58dfee39",
+        "type": "change",
+        "z": "ba9285a6.957868",
+        "name": "set msg.headers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{\"User-Agent\":\"Node-RED\"}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.Authorization",
+                "pt": "msg",
+                "to": "bearer",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 220,
+        "wires": [
+            [
+                "3e5ce0e41afcd72f"
+            ]
+        ]
+    },
+    {
+        "id": "eaf63b0745580f85",
+        "type": "change",
+        "z": "ba9285a6.957868",
+        "name": "get flow.Github",
+        "rules": [
+            {
+                "t": "set",
+                "p": "bearer",
+                "pt": "msg",
+                "to": "Github.bearer",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "owner",
+                "pt": "msg",
+                "to": "Github.owner",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "repo",
+                "pt": "msg",
+                "to": "Github.repo",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 160,
+        "wires": [
+            [
+                "43dcd85b58dfee39"
+            ]
+        ]
+    },
+    {
+        "id": "0c7340d2a44049f7",
+        "type": "change",
+        "z": "ba9285a6.957868",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "filename",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 540,
+        "wires": [
+            [
+                "acda9dd01f83bbe0"
+            ]
+        ]
+    },
+    {
+        "id": "3118e4be366f0844",
+        "type": "comment",
+        "z": "ba9285a6.957868",
+        "name": "Github token",
+        "info": "Repository:\nhttps://github.com/${GITHUB_USERNAME}/${GITHUB_REPOSITORY}\n\nToken:\nhttps://github.com/settings/tokens\n",
+        "x": 890,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "581edb20c9a627e2",
+        "type": "change",
+        "z": "ba9285a6.957868",
+        "name": "set file paths",
+        "rules": [
+            {
+                "t": "set",
+                "p": "file",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "\"/data/\" & file",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [
+                "eaf63b0745580f85"
+            ]
+        ]
+    },
+    {
+        "id": "7c55382072ac5ecd",
+        "type": "inject",
+        "z": "ba9285a6.957868",
+        "name": "flows_cred.json",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "flows_cred.json",
+        "payloadType": "str",
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "581edb20c9a627e2"
+            ]
+        ]
+    },
+    {
+        "id": "6efcdb36f7b67ad3",
+        "type": "inject",
+        "z": "ba9285a6.957868",
+        "name": "flows.json",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "flows.json",
+        "payloadType": "str",
+        "x": 120,
+        "y": 180,
+        "wires": [
+            [
+                "581edb20c9a627e2"
+            ]
+        ]
+    },
+    {
+        "id": "30b8aaf6d52456ce",
+        "type": "inject",
+        "z": "ba9285a6.957868",
+        "g": "416fb17dde932093",
+        "name": "GitHub",
+        "props": [
+            {
+                "p": "token",
+                "v": "GITHUB_TOKEN",
+                "vt": "env"
+            },
+            {
+                "p": "username",
+                "v": "hybuild-project",
+                "vt": "str"
+            },
+            {
+                "p": "repository",
+                "v": "PEP-Proxy-NGSI-LD",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 440,
+        "y": 60,
+        "wires": [
+            [
+                "bdd706d8fb85efbd"
+            ]
+        ]
+    },
+    {
+        "id": "f3b82308cbd26c4e",
+        "type": "inject",
+        "z": "ba9285a6.957868",
+        "name": "settings.js",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "settings.js",
+        "payloadType": "str",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "581edb20c9a627e2"
+            ]
+        ]
+    },
+    {
+        "id": "826cd1312e95863f",
+        "type": "inject",
+        "z": "ba9285a6.957868",
+        "name": "package.json",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "package.json",
+        "payloadType": "str",
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "581edb20c9a627e2"
+            ]
+        ]
+    },
+    {
+        "id": "9ee5ee3ce991d462",
+        "type": "inject",
+        "z": "ba9285a6.957868",
+        "name": ".config.users.json",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": ".config.users.json",
+        "payloadType": "str",
+        "x": 140,
+        "y": 60,
+        "wires": [
+            [
+                "581edb20c9a627e2"
+            ]
+        ]
+    },
+    {
+        "id": "7ccf9a969511e69c",
+        "type": "ui_template",
+        "z": "e52631fa86fdd3be",
+        "group": "428fc8e6d916cf55",
+        "name": "Orion",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<h4>\n    <img height=\"36\" src=\"https://account.thethingsnetwork.org/api/v2/users/atdfiware/picture.jpg\" />\n    Orion LD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n    <a href=\"https://zeldalegend-tutorialspe-xvippvejf0x.ws-eu54.gitpod.io/\"><input type=\"image\" height=\"36\" src=\"https://gitpod.io/button/open-in-gitpod.svg\" alt=\"Open in Gitpod\"/></a>\n</h4>\n<textarea style=\"font-size:14px;\" rows=\"9\">{{msg.payload}}</textarea>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 570,
+        "y": 180,
+        "wires": [
+            [
+                "584dab5ddb454164"
+            ]
+        ]
+    },
+    {
+        "id": "584dab5ddb454164",
+        "type": "NGSI-Update",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "endpoint": "15d84497.52381b",
+        "protocol": "LD",
+        "updateMode": "upsert-replace",
+        "updateModev2": "append",
+        "ldContext": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
+        "mimeType": "application/ld+json",
+        "x": 710,
+        "y": 180,
+        "wires": [
+            [
+                "0291d8caca30be5c"
+            ]
+        ]
+    },
+    {
+        "id": "0291d8caca30be5c",
+        "type": "debug",
+        "z": "e52631fa86fdd3be",
+        "name": "fiware",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 850,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "11ea9bf44451a42e",
+        "type": "contract-call",
+        "z": "e52631fa86fdd3be",
+        "name": "notarize",
+        "smartContract": "511b16494c95c3e9",
+        "contractFunction": "notarize",
+        "senderAccount": "a46f63f7bc8183e7",
+        "readonlyFunction": false,
+        "weiTransfer": "",
+        "onlyEstimateGas": false,
+        "useEstimatedGasLimit": true,
+        "gasLimit": "46591",
+        "usePreviousBlocksGasPrice": true,
+        "gasPrice": "46591",
+        "fetchFullTransaction": false,
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [
+                "5ead606b11285a79"
+            ],
+            [
+                "482a8db682da28f7"
+            ]
+        ]
+    },
+    {
+        "id": "5c1c64259f8f1c39",
+        "type": "debug",
+        "z": "e52631fa86fdd3be",
+        "name": "txn",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "summary.txHash",
+        "statusType": "msg",
+        "x": 850,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "3de5615b1a791c3a",
+        "type": "debug",
+        "z": "e52631fa86fdd3be",
+        "name": "block",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload.blockHash",
+        "statusType": "msg",
+        "x": 850,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "482a8db682da28f7",
+        "type": "ui_template",
+        "z": "e52631fa86fdd3be",
+        "group": "3887268fb207a290",
+        "name": "Goerli testnet",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<h4>\n    <img height=\"36\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/240px-Ethereum-icon-purple.svg.png\" />\n    Goerli testnet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n    <a href=\"https://goerli.etherscan.io/tx/{{msg.summary.txHash}}\"><input type=\"image\" height=\"24\" src=\"https://etherscan.io/assets/svg/logos/logo-etherscan.svg\" alt=\"Open in Etherscan.io\"/></a>\n</h4>\n<textarea style=\"font-size:14px;\" rows=\"9\">{{msg.payload}}</textarea>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 710,
+        "y": 460,
+        "wires": [
+            [
+                "3de5615b1a791c3a"
+            ]
+        ]
+    },
+    {
+        "id": "0bcb97d5538ee2d6",
+        "type": "http in",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "url": "/test",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 280,
+        "y": 400,
+        "wires": [
+            [
+                "e7bf9d80e073467c",
+                "11ea9bf44451a42e"
+            ]
+        ]
+    },
+    {
+        "id": "e7bf9d80e073467c",
+        "type": "json",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 270,
+        "y": 480,
+        "wires": [
+            [
+                "84325e852cd91bbc"
+            ]
+        ]
+    },
+    {
+        "id": "84325e852cd91bbc",
+        "type": "debug",
+        "z": "e52631fa86fdd3be",
+        "name": "notification",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload.data[0].id",
+        "statusType": "msg",
+        "x": 470,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "486b4d67c15beb04",
+        "type": "inject",
+        "z": "e52631fa86fdd3be",
+        "name": "INIT",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 240,
+        "wires": [
+            [
+                "d33f2b0d0b84571a",
+                "7ae59962402411eb"
+            ]
+        ]
+    },
+    {
+        "id": "df45ac331f0e9ca1",
+        "type": "ui_button",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "group": "428fc8e6d916cf55",
+        "order": 2,
+        "width": "3",
+        "height": 1,
+        "passthru": true,
+        "label": "Subscribe",
+        "tooltip": "Send to BC via CB subscription",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "create",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "1c23b90bebe39753"
+            ]
+        ]
+    },
+    {
+        "id": "d33f2b0d0b84571a",
+        "type": "ui_button",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "group": "428fc8e6d916cf55",
+        "order": 3,
+        "width": "3",
+        "height": 1,
+        "passthru": true,
+        "label": "Unsubscribe",
+        "tooltip": "Clear all CB subscriptions",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "delete",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "first",
+        "topicType": "flow",
+        "x": 290,
+        "y": 260,
+        "wires": [
+            [
+                "d506d76d626f95cc"
+            ]
+        ]
+    },
+    {
+        "id": "1070881307c41888",
+        "type": "comment",
+        "z": "e52631fa86fdd3be",
+        "name": "FE Universe - FIWARE Notarization",
+        "info": "Il programma scrive sul Context Broker\nOrion LD i risultati dei test immessi.\n\nAl riavvio è programmato per annullare\ntutte le sottoscrizioni al Context Broker,\ne mantenerne solo quella al servizio\ndi notarizzazione su Blockchain. \n\nPer imostazione predefinita, notarizza\nsu Blockchain Ethereum (testnet Goerli)\nsolo gli Acceptance Test con un codice\nrisultato pari a 100 o 200.\n\nInserire la URL del Context Broker Orion\nnel flow \"FIWARE\", e a URL di Node-RED\nattualmente sul browser nella scheda\nNotification dei nodi Subscribe.",
+        "x": 780,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "4be507e3bcd99258",
+        "type": "ui_text_input",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "label": "Test reference",
+        "tooltip": "",
+        "group": "47bd647b0bf55722",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [
+                "9ea7a811833baabf"
+            ]
+        ]
+    },
+    {
+        "id": "b4b540e2423f722e",
+        "type": "ui_button",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "group": "47bd647b0bf55722",
+        "order": 5,
+        "width": "0",
+        "height": "0",
+        "passthru": true,
+        "label": "Submit",
+        "tooltip": "Send to the CB",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "send",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "test",
+        "topicType": "flow",
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "f6b2109d74b0c7a2"
+            ]
+        ]
+    },
+    {
+        "id": "9ea7a811833baabf",
+        "type": "change",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "test.reference",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b6623e02d1286557",
+        "type": "change",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "test.result",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f860956e48e981d",
+        "type": "change",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "test.level",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "afad20550f2620e2",
+        "type": "ui_dropdown",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "label": "Test level",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "47bd647b0bf55722",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Unit",
+                "value": "Unit",
+                "type": "str"
+            },
+            {
+                "label": "Integration",
+                "value": "Integration",
+                "type": "str"
+            },
+            {
+                "label": "System",
+                "value": "System",
+                "type": "str"
+            },
+            {
+                "label": "Acceptance",
+                "value": "Acceptance",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 280,
+        "y": 120,
+        "wires": [
+            [
+                "9f860956e48e981d"
+            ]
+        ]
+    },
+    {
+        "id": "f6b2109d74b0c7a2",
+        "type": "template",
+        "z": "e52631fa86fdd3be",
+        "name": "NGSI",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"@context\": [\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\",\n        \"https://schema.lab.fiware.org/ld/context\"\n    ],\n    \"id\": \"urn:entities:{{topic.reference}}\",\n    \"type\": \"Test\",\n    \"level\": {\n        \"type\": \"Property\",\n        \"value\": \"{{topic.level}}\"\n    },\n    \"reference\": {\n        \"type\": \"Property\",\n        \"value\": \"{{topic.reference}}\"\n    },\n    \"result\": {\n        \"type\": \"Property\",\n        \"value\": {{topic.result}}\n    },\n    \"timestamp\": {\n        \"type\": \"Property\",\n        \"value\": {{payload}}\n    }\n}",
+        "output": "json",
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "7ccf9a969511e69c"
+            ]
+        ]
+    },
+    {
+        "id": "33840cdc7d617c9f",
+        "type": "inject",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Acceptance",
+        "payloadType": "str",
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "afad20550f2620e2"
+            ]
+        ]
+    },
+    {
+        "id": "0b0324e0b7872387",
+        "type": "inject",
+        "z": "e52631fa86fdd3be",
+        "name": "random",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "\"IT\" & $round($random()*1000)",
+        "payloadType": "jsonata",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "4be507e3bcd99258"
+            ]
+        ]
+    },
+    {
+        "id": "c811fa769fa1a033",
+        "type": "inject",
+        "z": "e52631fa86fdd3be",
+        "name": "manual",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "b4b540e2423f722e"
+            ]
+        ]
+    },
+    {
+        "id": "168ffbbee04893ca",
+        "type": "inject",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "200",
+        "payloadType": "num",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "7db8b7789c495caf"
+            ]
+        ]
+    },
+    {
+        "id": "7db8b7789c495caf",
+        "type": "ui_numeric",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "label": "Test result",
+        "tooltip": "",
+        "group": "47bd647b0bf55722",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "time",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": "100",
+        "max": "500",
+        "step": "100",
+        "className": "",
+        "x": 290,
+        "y": 40,
+        "wires": [
+            [
+                "b6623e02d1286557"
+            ]
+        ]
+    },
+    {
+        "id": "42cd9ca6be76b1ea",
+        "type": "http request",
+        "z": "e52631fa86fdd3be",
+        "name": "GET",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "{{{orion}}}/ngsi-ld/v1/subscriptions/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 610,
+        "y": 260,
+        "wires": [
+            [
+                "c43bdd592e35febe"
+            ]
+        ]
+    },
+    {
+        "id": "c43bdd592e35febe",
+        "type": "split",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 730,
+        "y": 260,
+        "wires": [
+            [
+                "f129b77e85428011"
+            ]
+        ]
+    },
+    {
+        "id": "f129b77e85428011",
+        "type": "http request",
+        "z": "e52631fa86fdd3be",
+        "name": "DELETE",
+        "method": "DELETE",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "{{{orion}}}/ngsi-ld/v1/subscriptions/{{payload.id}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 860,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d506d76d626f95cc",
+        "type": "change",
+        "z": "e52631fa86fdd3be",
+        "name": "get ORION",
+        "rules": [
+            {
+                "t": "set",
+                "p": "orion",
+                "pt": "msg",
+                "to": "ORION",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 260,
+        "wires": [
+            [
+                "42cd9ca6be76b1ea"
+            ]
+        ]
+    },
+    {
+        "id": "bb1dfa6b940b2d51",
+        "type": "debug",
+        "z": "e52631fa86fdd3be",
+        "name": "subscription",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload.statusCode",
+        "statusType": "msg",
+        "x": 470,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7ae59962402411eb",
+        "type": "delay",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "df45ac331f0e9ca1"
+            ]
+        ]
+    },
+    {
+        "id": "2aa71acb46800323",
+        "type": "NGSI-Dataset",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "endpoint": "15d84497.52381b",
+        "protocol": "LD",
+        "ldContext": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
+        "entityType": "Test",
+        "attrs": "",
+        "q": "",
+        "mode": "keyValues",
+        "x": 450,
+        "y": 560,
+        "wires": [
+            [
+                "466246a303951743"
+            ]
+        ]
+    },
+    {
+        "id": "36ce0b88ca622e3f",
+        "type": "inject",
+        "z": "e52631fa86fdd3be",
+        "name": "get all entities",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 560,
+        "wires": [
+            [
+                "2aa71acb46800323"
+            ]
+        ]
+    },
+    {
+        "id": "466246a303951743",
+        "type": "json",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 570,
+        "y": 560,
+        "wires": [
+            [
+                "559b6dfa1edda109"
+            ]
+        ]
+    },
+    {
+        "id": "559b6dfa1edda109",
+        "type": "debug",
+        "z": "e52631fa86fdd3be",
+        "name": "entities",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "8f31643a8f64dea8",
+        "type": "comment",
+        "z": "e52631fa86fdd3be",
+        "name": "set notification endpoint",
+        "info": "",
+        "x": 140,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "5ead606b11285a79",
+        "type": "template",
+        "z": "e52631fa86fdd3be",
+        "name": "link",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "TXN in progress...\n\nHash: {{payload}}\nLink: https://goerli.etherscan.io/tx/{{payload}}",
+        "output": "str",
+        "x": 690,
+        "y": 380,
+        "wires": [
+            [
+                "5c1c64259f8f1c39",
+                "482a8db682da28f7"
+            ]
+        ]
+    },
+    {
+        "id": "1c23b90bebe39753",
+        "type": "NGSI-Subscription",
+        "z": "e52631fa86fdd3be",
+        "name": "",
+        "endpoint": "15d84497.52381b",
+        "protocol": "LD",
+        "ldContext": "https://schema.lab.fiware.org/ld/context",
+        "entityType": "Test",
+        "watchedAttributes": "",
+        "q": "level==Acceptance;result<300",
+        "notificationMode": "normalized",
+        "notificationEndpoint": "http://host.docker.internal:1880/test",
+        "notificationAttributes": "",
+        "mimeType": "application/ld+json",
+        "x": 270,
+        "y": 360,
+        "wires": [
+            [
+                "bb1dfa6b940b2d51"
+            ]
+        ]
+    },
+    {
+        "id": "b00b7392cc25aa7c",
+        "type": "ui_template",
+        "z": "e52631fa86fdd3be",
+        "group": "47bd647b0bf55722",
+        "name": "Banner",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "format": "<div style=\"background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwMkp29oQjL16Cwdq8l3BOaMDBJTNXSeWdvA&usqp=CAU');text-align:center;font-size:40px;color:white;\">\n    <b>FE Universe</b>\n</div>\n<h4>(C) Alerox, 2022</h4>\n\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 860,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "74f5d320bb16d23a",
+        "type": "NGSI-Entity",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "endpoint": "15d84497.52381b",
+        "protocol": "LD",
+        "ldContext": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
+        "mode": "normalized",
+        "mimeType": "application/ld+json",
+        "attrs": "",
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "31376fe3e25d2bc6"
+            ]
+        ]
+    },
+    {
+        "id": "c2246c8a79185ff6",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "urn:entities:E1",
+        "payloadType": "str",
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "74f5d320bb16d23a"
+            ]
+        ]
+    },
+    {
+        "id": "532151c821513cdf",
+        "type": "NGSI-Update",
+        "z": "44b7dbcf27bd28ae",
+        "g": "ed8605f54d7c9002",
+        "name": "",
+        "endpoint": "15d84497.52381b",
+        "protocol": "LD",
+        "updateMode": "upsert-update",
+        "updateModev2": "append",
+        "ldContext": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
+        "mimeType": "application/ld+json",
+        "x": 390,
+        "y": 120,
+        "wires": [
+            [
+                "bcd0872ae9ab8726"
+            ]
+        ]
+    },
+    {
+        "id": "af7754c6ef0cb3bd",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "set E1.p1 = 12",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"@context\":\"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\",\"id\":\"urn:entities:E1\",\"type\":\"T\",\"p1\":{\"type\":\"Property\",\"value\":12}}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 40,
+        "wires": [
+            [
+                "532151c821513cdf"
+            ]
+        ]
+    },
+    {
+        "id": "3d031fec57346466",
+        "type": "http in",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "url": "/T",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 380,
+        "wires": [
+            [
+                "ed8ddc1ca1d3f908",
+                "1424e1d3206be1fa"
+            ]
+        ]
+    },
+    {
+        "id": "ed8ddc1ca1d3f908",
+        "type": "json",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 570,
+        "y": 340,
+        "wires": [
+            [
+                "2399d51b93b718dd"
+            ]
+        ]
+    },
+    {
+        "id": "f9a5ea12b9dc11bd",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "subscribe",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "44d52fa4fb700894"
+            ]
+        ]
+    },
+    {
+        "id": "bcd0872ae9ab8726",
+        "type": "debug",
+        "z": "44b7dbcf27bd28ae",
+        "name": "status",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 570,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "bd16f9d6d3bfa851",
+        "type": "debug",
+        "z": "44b7dbcf27bd28ae",
+        "name": "p1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload.p1.value",
+        "statusType": "msg",
+        "x": 710,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "31376fe3e25d2bc6",
+        "type": "json",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 570,
+        "y": 200,
+        "wires": [
+            [
+                "bd16f9d6d3bfa851"
+            ]
+        ]
+    },
+    {
+        "id": "25a41fb7f7e1696c",
+        "type": "http request",
+        "z": "44b7dbcf27bd28ae",
+        "name": "GET",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "{{{orion}}}/ngsi-ld/v1/subscriptions/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 440,
+        "wires": [
+            [
+                "10ea0cd83767b230",
+                "9e0ec30507d13f51"
+            ]
+        ]
+    },
+    {
+        "id": "55e872f5abef25f6",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "list subscriptions",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "1bc5cc56d389f0e3"
+            ]
+        ]
+    },
+    {
+        "id": "10ea0cd83767b230",
+        "type": "split",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 710,
+        "y": 440,
+        "wires": [
+            [
+                "5f17343eb183f473",
+                "94cf5e0e57bf36e6"
+            ]
+        ]
+    },
+    {
+        "id": "aab58a90e0095ee0",
+        "type": "http request",
+        "z": "44b7dbcf27bd28ae",
+        "name": "DELETE",
+        "method": "DELETE",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "{{{orion}}}/ngsi-ld/v1/subscriptions/{{topic}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 580,
+        "y": 500,
+        "wires": [
+            [
+                "25a41fb7f7e1696c"
+            ]
+        ]
+    },
+    {
+        "id": "66b4cda77999764c",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "delete latest subscription",
+        "props": [
+            {
+                "p": "topic",
+                "v": "latest",
+                "vt": "flow"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 500,
+        "wires": [
+            [
+                "07d06f24ec64bf87"
+            ]
+        ]
+    },
+    {
+        "id": "56fda1005f19bbab",
+        "type": "debug",
+        "z": "44b7dbcf27bd28ae",
+        "name": "subscribe",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.subscriptionId",
+        "targetType": "msg",
+        "statusVal": "payload.statusCode",
+        "statusType": "msg",
+        "x": 380,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2399d51b93b718dd",
+        "type": "debug",
+        "z": "44b7dbcf27bd28ae",
+        "name": "notify",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload.data[0].p1.value",
+        "statusType": "msg",
+        "x": 710,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "5f17343eb183f473",
+        "type": "debug",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload.id",
+        "statusType": "msg",
+        "x": 870,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "eb3433f71d26e019",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "urn:entities:E2",
+        "payloadType": "str",
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "74f5d320bb16d23a"
+            ]
+        ]
+    },
+    {
+        "id": "2e7a44351a016968",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "urn:entities:E3",
+        "payloadType": "str",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "74f5d320bb16d23a"
+            ]
+        ]
+    },
+    {
+        "id": "32069561c52cb26e",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "g": "ed8605f54d7c9002",
+        "name": "Orion LD",
+        "props": [
+            {
+                "p": "orion",
+                "v": "http://host.docker.internal:1026",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 400,
+        "y": 60,
+        "wires": [
+            [
+                "38e5006502348258"
+            ]
+        ]
+    },
+    {
+        "id": "38e5006502348258",
+        "type": "change",
+        "z": "44b7dbcf27bd28ae",
+        "name": "set ORION",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ORION",
+                "pt": "global",
+                "to": "orion",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 60,
+        "wires": [
+            [
+                "9281f5c77f0b3098"
+            ]
+        ]
+    },
+    {
+        "id": "7852cad12634a479",
+        "type": "debug",
+        "z": "44b7dbcf27bd28ae",
+        "name": "version",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload[\"orionld version\"]",
+        "statusType": "msg",
+        "x": 880,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "9281f5c77f0b3098",
+        "type": "http request",
+        "z": "44b7dbcf27bd28ae",
+        "name": "GET",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "{{{orion}}}/version/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 730,
+        "y": 60,
+        "wires": [
+            [
+                "7852cad12634a479"
+            ]
+        ]
+    },
+    {
+        "id": "a6381005a99dbbe9",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "set E1.p1 = random",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\t   \"@context\": \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\",\t   \"id\":\"urn:entities:E1\",\t   \"type\":\"T\",\t   \"p1\":{\t       \"type\":\"Property\",\t       \"value\":$round($random()*100)\t   }\t}",
+        "payloadType": "jsonata",
+        "x": 150,
+        "y": 60,
+        "wires": [
+            [
+                "532151c821513cdf"
+            ]
+        ]
+    },
+    {
+        "id": "04514f7ba4fdde82",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "set E2.p2 = 24",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"@context\":\"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\",\"id\":\"urn:entities:E2\",\"type\":\"T\",\"p2\":{\"type\":\"Property\",\"value\":24}}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "532151c821513cdf"
+            ]
+        ]
+    },
+    {
+        "id": "e568a027f351927b",
+        "type": "NGSI-Dataset",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "endpoint": "15d84497.52381b",
+        "protocol": "LD",
+        "ldContext": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
+        "entityType": "T",
+        "attrs": "p1,p2",
+        "q": "",
+        "mode": "keyValues",
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "90550634a0e26ce3"
+            ]
+        ]
+    },
+    {
+        "id": "122cb2be7a915a9d",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "all entities",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 260,
+        "wires": [
+            [
+                "e568a027f351927b"
+            ]
+        ]
+    },
+    {
+        "id": "90550634a0e26ce3",
+        "type": "json",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 570,
+        "y": 260,
+        "wires": [
+            [
+                "a6271514dd4860fb",
+                "2d4c33971fc12d15"
+            ]
+        ]
+    },
+    {
+        "id": "a6271514dd4860fb",
+        "type": "split",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 710,
+        "y": 300,
+        "wires": [
+            [
+                "53105beacb3e77cf"
+            ]
+        ]
+    },
+    {
+        "id": "53105beacb3e77cf",
+        "type": "debug",
+        "z": "44b7dbcf27bd28ae",
+        "name": "entity",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2d4c33971fc12d15",
+        "type": "debug",
+        "z": "44b7dbcf27bd28ae",
+        "name": "entities",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "1424e1d3206be1fa",
+        "type": "http response",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "6060f13d759a2f90",
+        "type": "split",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 710,
+        "y": 560,
+        "wires": [
+            [
+                "3ebd6298bec264e1"
+            ]
+        ]
+    },
+    {
+        "id": "3e0fdb9637dabb97",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "delete all subscriptions",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 560,
+        "wires": [
+            [
+                "099e6922dbcfe7be"
+            ]
+        ]
+    },
+    {
+        "id": "09d91fa927852555",
+        "type": "inject",
+        "z": "44b7dbcf27bd28ae",
+        "name": "set E3.p1 = 36, p2 = 48",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"@context\":\"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\",\"id\":\"urn:entities:E3\",\"type\":\"T\",\"p1\":{\"type\":\"Property\",\"value\":36},\"p2\":{\"type\":\"Property\",\"value\":48}}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "532151c821513cdf"
+            ]
+        ]
+    },
+    {
+        "id": "1bc5cc56d389f0e3",
+        "type": "change",
+        "z": "44b7dbcf27bd28ae",
+        "name": "get ORION",
+        "rules": [
+            {
+                "t": "set",
+                "p": "orion",
+                "pt": "msg",
+                "to": "ORION",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 440,
+        "wires": [
+            [
+                "25a41fb7f7e1696c"
+            ]
+        ]
+    },
+    {
+        "id": "976f12386df076ad",
+        "type": "http request",
+        "z": "44b7dbcf27bd28ae",
+        "name": "GET",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "{{{orion}}}/ngsi-ld/v1/subscriptions/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 560,
+        "wires": [
+            [
+                "6060f13d759a2f90"
+            ]
+        ]
+    },
+    {
+        "id": "3ebd6298bec264e1",
+        "type": "http request",
+        "z": "44b7dbcf27bd28ae",
+        "name": "DELETE",
+        "method": "DELETE",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "{{{orion}}}/ngsi-ld/v1/subscriptions/{{payload.id}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 880,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "07d06f24ec64bf87",
+        "type": "change",
+        "z": "44b7dbcf27bd28ae",
+        "name": "get ORION",
+        "rules": [
+            {
+                "t": "set",
+                "p": "orion",
+                "pt": "msg",
+                "to": "ORION",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "aab58a90e0095ee0"
+            ]
+        ]
+    },
+    {
+        "id": "099e6922dbcfe7be",
+        "type": "change",
+        "z": "44b7dbcf27bd28ae",
+        "name": "get ORION",
+        "rules": [
+            {
+                "t": "set",
+                "p": "orion",
+                "pt": "msg",
+                "to": "ORION",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 560,
+        "wires": [
+            [
+                "976f12386df076ad"
+            ]
+        ]
+    },
+    {
+        "id": "94cf5e0e57bf36e6",
+        "type": "change",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "latest",
+                "pt": "flow",
+                "to": "payload.id",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dcae251182b37d2c",
+        "type": "comment",
+        "z": "44b7dbcf27bd28ae",
+        "name": "set notification endpoint",
+        "info": "",
+        "x": 120,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "44d52fa4fb700894",
+        "type": "NGSI-Subscription",
+        "z": "44b7dbcf27bd28ae",
+        "name": "",
+        "endpoint": "15d84497.52381b",
+        "protocol": "LD",
+        "ldContext": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
+        "entityType": "T",
+        "watchedAttributes": "",
+        "q": "",
+        "notificationMode": "normalized",
+        "notificationEndpoint": "http://host.docker.internal:1880/T",
+        "notificationAttributes": "",
+        "mimeType": "application/ld+json",
+        "x": 250,
+        "y": 340,
+        "wires": [
+            [
+                "56fda1005f19bbab"
+            ]
+        ]
+    },
+    {
+        "id": "9e0ec30507d13f51",
+        "type": "debug",
+        "z": "44b7dbcf27bd28ae",
+        "name": "array",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "666bcf1786a8826b",
+        "type": "contract-call",
+        "z": "828bae03b631ac33",
+        "name": "checkDocument",
+        "smartContract": "511b16494c95c3e9",
+        "contractFunction": "checkDocument",
+        "senderAccount": "a46f63f7bc8183e7",
+        "readonlyFunction": true,
+        "weiTransfer": "",
+        "onlyEstimateGas": false,
+        "useEstimatedGasLimit": true,
+        "gasLimit": "",
+        "usePreviousBlocksGasPrice": true,
+        "gasPrice": "",
+        "fetchFullTransaction": false,
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [],
+            [
+                "f1eae5e9d4d1818f"
+            ]
+        ]
+    },
+    {
+        "id": "a8c90eb9fd3bdfa2",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"hello\":\"world\"}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "9f66c2ad0c41f0f4"
+            ]
+        ]
+    },
+    {
+        "id": "66227205f7d98182",
+        "type": "contract-call",
+        "z": "828bae03b631ac33",
+        "name": "notarize",
+        "smartContract": "511b16494c95c3e9",
+        "contractFunction": "notarize",
+        "senderAccount": "a46f63f7bc8183e7",
+        "readonlyFunction": false,
+        "weiTransfer": "",
+        "onlyEstimateGas": false,
+        "useEstimatedGasLimit": true,
+        "gasLimit": "46591",
+        "usePreviousBlocksGasPrice": true,
+        "gasPrice": "46591",
+        "fetchFullTransaction": false,
+        "x": 360,
+        "y": 320,
+        "wires": [
+            [
+                "7584108c1cdcae97"
+            ],
+            [
+                "70a16f865317b93d",
+                "a6c079266424dbdf"
+            ]
+        ]
+    },
+    {
+        "id": "4f17425552d7937f",
+        "type": "debug",
+        "z": "828bae03b631ac33",
+        "name": "transaction",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 830,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "d021545ae8c14adf",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"hello\":\"world\"}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 360,
+        "wires": [
+            [
+                "0a87ac0a37a11591"
+            ]
+        ]
+    },
+    {
+        "id": "996485ba913d1c2c",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "666bcf1786a8826b"
+            ]
+        ]
+    },
+    {
+        "id": "6cab2521221ae1a2",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "66227205f7d98182"
+            ]
+        ]
+    },
+    {
+        "id": "2539a76ebd0a9794",
+        "type": "comment",
+        "z": "828bae03b631ac33",
+        "name": "Come ricavare la Private Key",
+        "info": "# Procedura su Chrome\n - Estensione Metamask\n - Opzioni account (overflow menu icon)\n - Dettagli Account\n - Esporta Chiave Privata",
+        "x": 880,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "0147458d645aba87",
+        "type": "comment",
+        "z": "828bae03b631ac33",
+        "name": "Come ricavare la Public Key",
+        "info": "bash $ `npm i -g ethereum-private-key-to-public-key`\nbash $ `ethereum-private-key-to-public-key` _private-key_\n\n0406c16dffbd03799962604dac8056a0615fd0586c1a1df8c09c05bedd41acec25ab9756c6bc577d0804d4244ed08d86a5bd3fb83991fc67ca13c096a8b8f040e9",
+        "x": 880,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "9125a8580cf73ca4",
+        "type": "comment",
+        "z": "828bae03b631ac33",
+        "name": "node-red-contrib-ethereum",
+        "info": "[Github](https://github.com/timweing/node-red-contrib-ethereum)",
+        "x": 870,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f8737645772d6b90",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "storedValue",
+        "payloadType": "flow",
+        "x": 140,
+        "y": 280,
+        "wires": [
+            [
+                "66227205f7d98182",
+                "c4aeb4c22e647f23"
+            ]
+        ]
+    },
+    {
+        "id": "200abc3bc4f216a2",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "storedValue",
+        "payloadType": "flow",
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "666bcf1786a8826b",
+                "c661074bc8187e52"
+            ]
+        ]
+    },
+    {
+        "id": "8cb44184df95218b",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "create",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\t    \"sender\":\"0x7efC9d38581c7Cb8372325c349Ec5095D027B3Dd\",\t    \"storedValue\":$random(),\t    \"timestamp\":$toMillis($now())\t}",
+        "payloadType": "jsonata",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "2dfaec749c6f71e2"
+            ]
+        ]
+    },
+    {
+        "id": "a2dae50877221c7b",
+        "type": "change",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "storedValue",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 40,
+        "wires": [
+            [
+                "67d7f99fb0af894f"
+            ]
+        ]
+    },
+    {
+        "id": "67d7f99fb0af894f",
+        "type": "debug",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "$eval(payload)",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "2dfaec749c6f71e2",
+        "type": "json",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 230,
+        "y": 40,
+        "wires": [
+            [
+                "a2dae50877221c7b"
+            ]
+        ]
+    },
+    {
+        "id": "9f66c2ad0c41f0f4",
+        "type": "json",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 200,
+        "wires": [
+            [
+                "666bcf1786a8826b"
+            ]
+        ]
+    },
+    {
+        "id": "0a87ac0a37a11591",
+        "type": "json",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 360,
+        "wires": [
+            [
+                "66227205f7d98182"
+            ]
+        ]
+    },
+    {
+        "id": "70a16f865317b93d",
+        "type": "debug",
+        "z": "828bae03b631ac33",
+        "name": "block hash",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload.blockHash",
+        "statusType": "msg",
+        "x": 830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f1eae5e9d4d1818f",
+        "type": "debug",
+        "z": "828bae03b631ac33",
+        "name": "result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 590,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ccaad40191a37e68",
+        "type": "comment",
+        "z": "828bae03b631ac33",
+        "name": "My_PoE.sol",
+        "info": "[Remix](https://remix.ethereum.org/)\n```\n// SPDX-License-Identifier: GPL-3.0\npragma solidity >=0.7.0 <0.9.0;\n\n/**\n * @title Proof of Existence\n * @dev Notarization with Blockchain\n */\ncontract ProofOfExistence {\n  // @dev The contract state\n  mapping (bytes32 => bool) private proofs;\n\n  // @dev Private helper function to get a document's SHA256 hash\n  // *pure function\n  function calculateProof(string memory document) private pure returns (bytes32) {\n    return sha256(abi.encode(document));\n  }\n  \n  // @dev Calculate and store the proof for a document in the contract state\n  // *transactional function*\n  function notarize(string memory document) public returns (bytes32) {\n    bytes32 hash = calculateProof(document);\n    require(proofs[hash] != true, \"Document already notarized.\");\n    proofs[hash] = true;\n    return hash;\n  }\n\n  // @dev Check if a document has been notarized\n  // *read-only function*\n  function checkDocument(string memory document) public view returns (bool) {\n    return proofs[calculateProof(document)];\n  }\n}\n```",
+        "x": 830,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b81c9b20a9cb617f",
+        "type": "transaction-reader",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "ethereumClient": "a5b0ce2eb275e336",
+        "queryReceipt": false,
+        "getByTxHash": true,
+        "fromBlock": "-9",
+        "toBlock": "latest",
+        "filterFrom": "",
+        "filterTo": "",
+        "x": 630,
+        "y": 420,
+        "wires": [
+            [
+                "70a16f865317b93d"
+            ]
+        ]
+    },
+    {
+        "id": "7584108c1cdcae97",
+        "type": "change",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "transaction",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 260,
+        "wires": [
+            [
+                "4f17425552d7937f"
+            ]
+        ]
+    },
+    {
+        "id": "40edd948f48d37e5",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "transaction",
+        "payloadType": "flow",
+        "x": 380,
+        "y": 420,
+        "wires": [
+            [
+                "b81c9b20a9cb617f"
+            ]
+        ]
+    },
+    {
+        "id": "a6c079266424dbdf",
+        "type": "debug",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "summary",
+        "targetType": "msg",
+        "statusVal": "summary.args[0]",
+        "statusType": "msg",
+        "x": 840,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "bee2f669ae954ab8",
+        "type": "ethers-transaction",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "network": "0a1c6c0edd1fd842",
+        "wallet": "93b18379800c0f5a",
+        "output": "payload",
+        "outputType": "msg",
+        "wait": false,
+        "address": "",
+        "addressType": "str",
+        "ether": "",
+        "etherType": "str",
+        "gaslimit": "",
+        "contract": "26a531bf9aef221a",
+        "apiCall": "checkDocument",
+        "params": [
+            "payload"
+        ],
+        "param0": "payload",
+        "typeParam0": "msg",
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "35f7ec80981384b0"
+            ]
+        ]
+    },
+    {
+        "id": "35f7ec80981384b0",
+        "type": "debug",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "0a25a3c7164c9449",
+        "type": "ethers-transaction",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "network": "0a1c6c0edd1fd842",
+        "wallet": "93b18379800c0f5a",
+        "output": "payload",
+        "outputType": "msg",
+        "wait": false,
+        "address": "",
+        "addressType": "str",
+        "ether": "",
+        "etherType": "str",
+        "gaslimit": "",
+        "contract": "26a531bf9aef221a",
+        "apiCall": "notarize",
+        "params": [
+            "payload"
+        ],
+        "param0": "payload",
+        "typeParam0": "msg",
+        "x": 380,
+        "y": 560,
+        "wires": [
+            [
+                "7a06a1dafea5c8a9"
+            ]
+        ]
+    },
+    {
+        "id": "6c0efb7d54703c09",
+        "type": "debug",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "aaf5189ed0b9ad1c",
+        "type": "template",
+        "z": "828bae03b631ac33",
+        "name": "etherscan",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "https://goerli.etherscan.io/tx/{{payload}}",
+        "output": "str",
+        "x": 760,
+        "y": 560,
+        "wires": [
+            [
+                "6c0efb7d54703c09"
+            ]
+        ]
+    },
+    {
+        "id": "7a06a1dafea5c8a9",
+        "type": "function",
+        "z": "828bae03b631ac33",
+        "name": "error check",
+        "func": "if (!msg.error) return msg;\nnode.error(msg.error, msg);",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 560,
+        "wires": [
+            [
+                "aaf5189ed0b9ad1c"
+            ]
+        ]
+    },
+    {
+        "id": "41f41641c1704274",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Test",
+        "payloadType": "str",
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "bee2f669ae954ab8"
+            ]
+        ]
+    },
+    {
+        "id": "05e1517dde152692",
+        "type": "comment",
+        "z": "828bae03b631ac33",
+        "name": "Ropsten (deprecated)",
+        "info": "ProofOfExistence3 (Sepolia)\n0x208e521112313e58EbFe8C7642a23dDEEefB4C8C",
+        "x": 140,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "935c0df299bd347b",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "storedValue",
+        "payloadType": "flow",
+        "x": 140,
+        "y": 480,
+        "wires": [
+            [
+                "bee2f669ae954ab8"
+            ]
+        ]
+    },
+    {
+        "id": "f62e32bae716105f",
+        "type": "inject",
+        "z": "828bae03b631ac33",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "storedValue",
+        "payloadType": "flow",
+        "x": 140,
+        "y": 560,
+        "wires": [
+            [
+                "0a25a3c7164c9449"
+            ]
+        ]
+    },
+    {
+        "id": "c4aeb4c22e647f23",
+        "type": "ethers-transaction",
+        "z": "828bae03b631ac33",
+        "d": true,
+        "name": "",
+        "network": "d9ce9f5276beafeb",
+        "wallet": "93b18379800c0f5a",
+        "output": "payload",
+        "outputType": "msg",
+        "wait": false,
+        "address": "",
+        "addressType": "str",
+        "ether": "",
+        "etherType": "str",
+        "gaslimit": "",
+        "contract": "26a531bf9aef221a",
+        "apiCall": "notarize",
+        "params": [
+            "payload"
+        ],
+        "param0": "payload",
+        "typeParam0": "msg",
+        "x": 380,
+        "y": 280,
+        "wires": [
+            [
+                "8fadde141db77098"
+            ]
+        ]
+    },
+    {
+        "id": "8fadde141db77098",
+        "type": "debug",
+        "z": "828bae03b631ac33",
+        "d": true,
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c661074bc8187e52",
+        "type": "ethers-transaction",
+        "z": "828bae03b631ac33",
+        "d": true,
+        "name": "",
+        "network": "d9ce9f5276beafeb",
+        "wallet": "93b18379800c0f5a",
+        "output": "payload",
+        "outputType": "msg",
+        "wait": false,
+        "address": "",
+        "addressType": "str",
+        "ether": "",
+        "etherType": "str",
+        "gaslimit": "",
+        "contract": "26a531bf9aef221a",
+        "apiCall": "checkDocument",
+        "params": [
+            "payload"
+        ],
+        "param0": "payload",
+        "typeParam0": "msg",
+        "x": 390,
+        "y": 120,
+        "wires": [
+            [
+                "8fadde141db77098"
+            ]
+        ]
+    },
+    {
+        "id": "91618269345c9b5a",
+        "type": "ui_button",
+        "z": "48a7733923a33252",
+        "name": "Refresh",
+        "group": "160e81fb.f1c86e",
+        "order": 10,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "label": "",
+        "tooltip": "",
+        "color": "#5CFEF2",
+        "bgcolor": "",
+        "className": "",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "refresh",
+        "topicType": "str",
+        "x": 100,
+        "y": 380,
+        "wires": [
+            [
+                "874dcadb8b86c83d"
+            ]
+        ]
+    },
+    {
+        "id": "fc10e0dafc44c769",
+        "type": "ui_button",
+        "z": "48a7733923a33252",
+        "name": "Delete",
+        "group": "160e81fb.f1c86e",
+        "order": 8,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "label": "",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#f31100",
+        "className": "",
+        "icon": "delete",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 90,
+        "y": 440,
+        "wires": [
+            [
+                "f115a2bc122c7201"
+            ]
+        ]
+    },
+    {
+        "id": "f115a2bc122c7201",
+        "type": "function",
+        "z": "48a7733923a33252",
+        "name": "get flow.File",
+        "func": "// Get the filename from the flow context\nlet filename = flow.get(\"File\");\n\n// check, if the filename is undefined that means it does not exist yet, nothing is selected yet\n// return: do not output anything\nif (filename === undefined) {\n    return;\n}\n\n// return the filename to the file-in node to delete\nmsg.filename = filename;\n\nif (msg.filename.replace(/^.*(\\\\|\\/|\\:)/, '')[0] !== \".\") {\n    // Only do this if this is a file, we don't delete folders\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 440,
+        "wires": [
+            [
+                "b25609b65f7426c8"
+            ]
+        ]
+    },
+    {
+        "id": "30c322a137fb9155",
+        "type": "file",
+        "z": "48a7733923a33252",
+        "name": "delete file",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 920,
+        "y": 440,
+        "wires": [
+            [
+                "91618269345c9b5a"
+            ]
+        ]
+    },
+    {
+        "id": "9618a7d3262da78d",
+        "type": "http in",
+        "z": "48a7733923a33252",
+        "name": "",
+        "url": "/download",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 560,
+        "wires": [
+            [
+                "aca8d6bf153a2f2e"
+            ]
+        ]
+    },
+    {
+        "id": "8aeaad20c7c71351",
+        "type": "http response",
+        "z": "48a7733923a33252",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 790,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "aca8d6bf153a2f2e",
+        "type": "function",
+        "z": "48a7733923a33252",
+        "name": "extract file",
+        "func": "msg.filename = msg.req.query.filename;\nmsg.contentdisposition = \"attachment; filename=\\\"\" + msg.req.query.filename.replace(/^.*(\\\\|\\/|\\:)/, '') + \"\\\"\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 560,
+        "wires": [
+            [
+                "4ab5604bd381f56f"
+            ]
+        ],
+        "outputLabels": [
+            "Folder selected"
+        ]
+    },
+    {
+        "id": "4ab5604bd381f56f",
+        "type": "file in",
+        "z": "48a7733923a33252",
+        "name": "",
+        "filename": "",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 480,
+        "y": 560,
+        "wires": [
+            [
+                "2fbdf1b2f1e51187"
+            ]
+        ]
+    },
+    {
+        "id": "2fbdf1b2f1e51187",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "name": "set headers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "application/octet-stream",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "headers.Content-Disposition",
+                "pt": "msg",
+                "to": "contentdisposition",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 560,
+        "wires": [
+            [
+                "8aeaad20c7c71351"
+            ]
+        ]
+    },
+    {
+        "id": "ac46716ba55a985b",
+        "type": "ui_button",
+        "z": "48a7733923a33252",
+        "name": "Graph",
+        "group": "160e81fb.f1c86e",
+        "order": 12,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "label": "",
+        "tooltip": "",
+        "color": "#FFFE00",
+        "bgcolor": "",
+        "className": "",
+        "icon": "show_chart",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 90,
+        "y": 500,
+        "wires": [
+            [
+                "95f454061a2fb879"
+            ]
+        ]
+    },
+    {
+        "id": "95f454061a2fb879",
+        "type": "function",
+        "z": "48a7733923a33252",
+        "name": "get flow.File",
+        "func": "// Get the filename from the flow context\nlet filename = flow.get(\"File\");\n\n// check, if the filename is undefined that means it does not exist yet, nothing is selected yet\n// return: do not output anything\nif (filename === undefined) {\n    return;\n}\n\n// return the filename to the file-in node to delete\nmsg.filename = filename;\n\nif (msg.filename.replace(/^.*(\\\\|\\/|\\:)/, '')[0] !== \".\") {\n    // Only do this if this is a file, we don't delete folders\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 500,
+        "wires": [
+            [
+                "56b9e648a82f0f9e"
+            ]
+        ]
+    },
+    {
+        "id": "56b9e648a82f0f9e",
+        "type": "file in",
+        "z": "48a7733923a33252",
+        "name": "",
+        "filename": "",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 480,
+        "y": 500,
+        "wires": [
+            [
+                "2fc2950c9cc1e983"
+            ]
+        ]
+    },
+    {
+        "id": "2fc2950c9cc1e983",
+        "type": "csv",
+        "z": "48a7733923a33252",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": false,
+        "include_null_values": false,
+        "x": 630,
+        "y": 500,
+        "wires": [
+            [
+                "57d4a10a48990a5b"
+            ]
+        ]
+    },
+    {
+        "id": "57d4a10a48990a5b",
+        "type": "function",
+        "z": "48a7733923a33252",
+        "name": "chart data",
+        "func": "var chart = [{\n    \"series\":[],\n    \"data\":[],\n    \"labels\":[msg.filename]\n}];\n\nlet columns = 0;\n\nfor(var series in msg.payload[0]) {\n    if(series!==\"time\") {\n        chart[0].series.push(series);\n        chart[0].data.push([]);\n        columns++;\n    }\n}\n\nfor (var j=0; j<msg.payload.length; j++) {\n   for(var i=0;i<columns;i++) {\n       chart[0].data[i].push({\"x\":msg.payload[j].time, \"y\":msg.payload[j][chart[0].series[i]]});\n   } \n}\n\nmsg.payload = chart;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 500,
+        "wires": [
+            [
+                "3995b2e8155a78af"
+            ]
+        ]
+    },
+    {
+        "id": "a4a7c1b41f99642e",
+        "type": "ui_toast",
+        "z": "48a7733923a33252",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 1,
+        "ok": "Yes",
+        "cancel": "No",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "ask",
+        "x": 630,
+        "y": 440,
+        "wires": [
+            [
+                "4df07b1e9c4c73b2"
+            ]
+        ]
+    },
+    {
+        "id": "b25609b65f7426c8",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "name": "set text",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "\"Delete \" & filename & \"?\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Confirmation",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 440,
+        "wires": [
+            [
+                "a4a7c1b41f99642e"
+            ]
+        ]
+    },
+    {
+        "id": "4df07b1e9c4c73b2",
+        "type": "switch",
+        "z": "48a7733923a33252",
+        "name": "yes?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Yes",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 790,
+        "y": 440,
+        "wires": [
+            [
+                "30c322a137fb9155"
+            ]
+        ]
+    },
+    {
+        "id": "874dcadb8b86c83d",
+        "type": "function",
+        "z": "48a7733923a33252",
+        "name": "set flow.Dir&Hidden",
+        "func": "let dir = flow.get(\"Dir\") || \"/\";\nflow.set(\"Dir\", dir);\n\nlet hidden = flow.get(\"Hidden\") || false;\nflow.set(\"Hidden\", hidden);\n\nif (msg.topic===\"parent\") {\n    var path = dir.split('/');\n    path.pop();\n    dir = path.join('/'); \n    if (dir===\"\") dir=\"/\";\n    flow.set(\"Dir\", dir);\n}\n\nif (msg.topic===\"change\") {\n    dir=msg.payload;    \n    flow.set(\"Dir\", dir);\n}\n\nif (msg.topic===\"hidden\") {\n    hidden=msg.payload;    \n    flow.set(\"Hidden\", hidden);\n}\n\n//if (msg.topic===\"refresh\") {\n//}\nnode.status({ fill: \"green\", shape: \"dot\", text: dir });\n\nmsg.payload = {\"start\":dir, \"hidden\": hidden};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "1c8f7941c9d116e6",
+                "05e5d89d8abad833"
+            ]
+        ]
+    },
+    {
+        "id": "5adbf59db2d4b64f",
+        "type": "ui_button",
+        "z": "48a7733923a33252",
+        "name": "Parent",
+        "group": "160e81fb.f1c86e",
+        "order": 4,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "label": "",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "arrow_upwards",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "parent",
+        "topicType": "str",
+        "x": 90,
+        "y": 160,
+        "wires": [
+            [
+                "874dcadb8b86c83d"
+            ]
+        ]
+    },
+    {
+        "id": "d560959631afbf82",
+        "type": "ui_button",
+        "z": "48a7733923a33252",
+        "name": "Home",
+        "group": "160e81fb.f1c86e",
+        "order": 6,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "label": "",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#51aa00",
+        "className": "",
+        "icon": "home",
+        "payload": "HOME",
+        "payloadType": "global",
+        "topic": "change",
+        "topicType": "str",
+        "x": 90,
+        "y": 100,
+        "wires": [
+            [
+                "874dcadb8b86c83d"
+            ]
+        ]
+    },
+    {
+        "id": "1f60efffec2661cc",
+        "type": "ui_switch",
+        "z": "48a7733923a33252",
+        "name": "Hidden",
+        "label": "",
+        "tooltip": "Show hidden files",
+        "group": "160e81fb.f1c86e",
+        "order": 14,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "hidden",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "check_box",
+        "oncolor": "#000000",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "check_box_outline_blank",
+        "offcolor": "#000000",
+        "animate": true,
+        "className": "",
+        "x": 100,
+        "y": 220,
+        "wires": [
+            [
+                "874dcadb8b86c83d"
+            ]
+        ]
+    },
+    {
+        "id": "f3b40cbd5c41ca85",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "name": "chdir",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "change",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 280,
+        "wires": [
+            [
+                "874dcadb8b86c83d"
+            ]
+        ]
+    },
+    {
+        "id": "0f87aa78c13d2d5c",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "name": "set flow.File",
+        "rules": [
+            {
+                "t": "set",
+                "p": "File",
+                "pt": "flow",
+                "to": "payload.name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "payload.name",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 140,
+        "wires": [
+            [
+                "4eccfb8e73e80732"
+            ]
+        ]
+    },
+    {
+        "id": "d0799928afba9280",
+        "type": "function",
+        "z": "48a7733923a33252",
+        "name": "table data",
+        "func": "for (var i = 0; i < msg.payload.length; i++) {\n//  msg.payload[i].stat.size = msg.payload[i].stat.size / 1024;\n    msg.payload[i].stat.created = msg.payload[i].stat.created.toISOString().slice(0, 19).replace('T', ' ');\n    msg.payload[i].stat.changed = msg.payload[i].stat.changed.toISOString().slice(0, 19).replace('T', ' ');\n    msg.payload[i].stat.accessed = msg.payload[i].stat.accessed.toISOString().slice(0, 19).replace('T', ' ');\n    msg.payload[i].stat.statusChanged = msg.payload[i].stat.statusChanged.toISOString().slice(0, 19).replace('T', ' ');\n//  msg.payload[i].fname = (msg.payload[i].stat.isFile?\"\":\"[\") + msg.payload[i].name.replace(/^.*(\\\\|\\/|\\:)/, '')+(msg.payload[i].stat.isFile?\"\":\"]\");\n    msg.payload[i].fname = (msg.payload[i].stat.isFile ? \"\" : \"<b>[\") + msg.payload[i].name.replace(/^.*(\\\\|\\/|\\:)/, '') + (msg.payload[i].stat.isFile ? \"\" : \"]</b>\");\n    if (msg.payload[i].fname.startsWith('.') || msg.payload[i].fname.startsWith('<b>[.'))\n        msg.payload[i].fname = \"<i>\" + msg.payload[i].fname + \"</i>\";\n//  msg.payload[i].link = msg.payload[i].stat.isDirectory ? \"\" : \"/download?filename=\" + msg.payload[i].name;\n    msg.payload[i].link = msg.payload[i].stat.isDirectory ? \"\" : \"<a href=\\\"/download?filename=\" + msg.payload[i].name + \"\\\"><img src=\\\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACf0lEQVR42mNkwAE0ApLF/wqIKwOZ/5k/vLxzY8Pc19jUMaILGPdsjfik4VDy5ieD0X+oPBPQEBF2htN8Nw50nynxXoPVADEzVw6himVLX/znCmLAAyQZv6142xEV/+rU7l8oBiitfrn2HRMPXDPQVgZWJgj797//DP+QHCv878uyu6Hi0XADJKuXR3438luGbJO7GAPDbP2/YHbqsc8MO7/wAVUzweW5zm0KetYauR5sgPCiJ2f/cgsa4TIg7fA7hl1vWRj+cfIDnQYxhPnL22Nv4+WsGZnldSR4+048AxrPCHOSuzgDg6nAf4ZUuX9gxbOvfWI49/4fw643TAy/OaCG/P//73ORmSgji56TDU/95sPItjuLMjDM1PvLwAZ18a+//xmyj31g2PcWKMDMzPCbnRfsnS/1nqaMzFrWtrzNuw6hhzbMEKBNYM37gZoZmRghbmRiZvjFxs3wqcrZjJFRQEKab86dx4yMjIyYhvxnYPnyjmH/G0awZogSKM3I+O9FmpY4WISn68h5FmVDfZAmTmYGBjvh/3BDmP7+YWD++xOs6cCL3wx/gBEMYv++dfrU63pfc7CtrFZB8dxFixaAwpGf5R9DtsRnRKwDxRih9NQ7fxl+MjCDDXjbEx/x48yOlTB1zFxFi9azWQf7gvzM+O8vA8uvL+DEBFIMcTHC+d8Or177fmpOGFDgH8LfrOx8XDkzl7Jah/iAFf//x8D2+xsDM5CGRTBU8/r3MwrjGP7+/oItM7GymvvFs/sX5DGrmWqDgo7t7w8Glr+///2+ffrS501TJ/44u3MJUN0fnLkRCtgYuQXkmMQVlBj+A93y8v7d/98+PgElCXSFAKXm39j74So1AAAAAElFTkSuQmCC\\\" /></a>\";\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "b8b88aab13c13447"
+            ]
+        ]
+    },
+    {
+        "id": "b8b88aab13c13447",
+        "type": "sort",
+        "z": "48a7733923a33252",
+        "name": "",
+        "order": "ascending",
+        "as_num": false,
+        "target": "payload",
+        "targetType": "msg",
+        "msgKey": "$lowercase(fname)\t",
+        "msgKeyType": "jsonata",
+        "seqKey": "payload",
+        "seqKeyType": "msg",
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "54cee00c2aab4588"
+            ]
+        ]
+    },
+    {
+        "id": "e02e46b423ddef65",
+        "type": "switch",
+        "z": "48a7733923a33252",
+        "name": "is file?",
+        "property": "payload.stat.isFile",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 140,
+        "wires": [
+            [
+                "0f87aa78c13d2d5c",
+                "2999856f3c6017d7"
+            ],
+            [
+                "f3b40cbd5c41ca85"
+            ]
+        ]
+    },
+    {
+        "id": "f696127a39b59722",
+        "type": "yaml",
+        "z": "48a7733923a33252",
+        "property": "payload",
+        "name": "",
+        "x": 770,
+        "y": 100,
+        "wires": [
+            [
+                "dcfa53334425c5c5"
+            ]
+        ]
+    },
+    {
+        "id": "dcfa53334425c5c5",
+        "type": "ui_template",
+        "z": "48a7733923a33252",
+        "group": "26e8fe8026c92abb",
+        "name": "Details",
+        "order": 2,
+        "width": 6,
+        "height": 6,
+        "format": "<textarea rows=\"21\">{{msg.payload}}</textarea>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 930,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "968d285a67eab4bb",
+        "type": "inject",
+        "z": "48a7733923a33252",
+        "name": "INIT",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "ui_control",
+                "v": "{\"tabulator\":{\"selectable\":1}}",
+                "vt": "json"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 40,
+        "wires": [
+            [
+                "54cee00c2aab4588",
+                "b3b5c93025760016"
+            ]
+        ]
+    },
+    {
+        "id": "4eccfb8e73e80732",
+        "type": "file in",
+        "z": "48a7733923a33252",
+        "name": "",
+        "filename": "",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 920,
+        "y": 200,
+        "wires": [
+            [
+                "bffe6dff2143e980"
+            ]
+        ]
+    },
+    {
+        "id": "4931b2b91991fb77",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "name": "clean",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload.link",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.fname",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 100,
+        "wires": [
+            [
+                "f696127a39b59722"
+            ]
+        ]
+    },
+    {
+        "id": "3995b2e8155a78af",
+        "type": "ui_chart",
+        "z": "48a7733923a33252",
+        "name": "",
+        "group": "26e8fe8026c92abb",
+        "order": 3,
+        "width": 6,
+        "height": 4,
+        "label": "CSV file",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "4",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 920,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "54cee00c2aab4588",
+        "type": "ui_table",
+        "z": "48a7733923a33252",
+        "group": "160e81fb.f1c86e",
+        "name": "",
+        "order": 18,
+        "width": 12,
+        "height": 10,
+        "columns": [
+            {
+                "field": "fname",
+                "title": "Name",
+                "width": "35%",
+                "align": "left",
+                "formatter": "html",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "stat.size",
+                "title": "Size",
+                "width": "15%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "stat.created",
+                "title": "Created",
+                "width": "22%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "stat.changed",
+                "title": "Changed",
+                "width": "22%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "link",
+                "title": "",
+                "width": "",
+                "align": "left",
+                "formatter": "html",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 1,
+        "cts": true,
+        "x": 490,
+        "y": 140,
+        "wires": [
+            [
+                "e02e46b423ddef65",
+                "4931b2b91991fb77"
+            ]
+        ]
+    },
+    {
+        "id": "aa26cdb6da42d2f5",
+        "type": "ui_form",
+        "z": "48a7733923a33252",
+        "name": "Editor",
+        "label": "",
+        "group": "4128a70510a0cd4e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "File name",
+                "value": "filename",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "",
+                "value": "content",
+                "type": "multiline",
+                "required": true,
+                "rows": 9
+            }
+        ],
+        "formValue": {
+            "filename": "",
+            "content": ""
+        },
+        "payload": "",
+        "submit": "Save",
+        "cancel": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 930,
+        "y": 320,
+        "wires": [
+            [
+                "7ec0ae66e287c97c"
+            ]
+        ]
+    },
+    {
+        "id": "bffe6dff2143e980",
+        "type": "function",
+        "z": "48a7733923a33252",
+        "name": "form data",
+        "func": "var cloned = RED.util.cloneMessage(msg);\nvar formdata = {payload:{}};\nformdata.payload.filename = cloned.filename;\nformdata.payload.content = cloned.payload;\nreturn formdata;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 260,
+        "wires": [
+            [
+                "aa26cdb6da42d2f5"
+            ]
+        ]
+    },
+    {
+        "id": "7ec0ae66e287c97c",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "name": "set msg",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.filename",
+                "pt": "msg",
+                "to": "filename",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload.content",
+                "pt": "msg",
+                "to": "content",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Confirmation",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "\"Save \" & filename & \"?\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 380,
+        "wires": [
+            [
+                "50d209d0b31f25a6"
+            ]
+        ]
+    },
+    {
+        "id": "50d209d0b31f25a6",
+        "type": "ui_toast",
+        "z": "48a7733923a33252",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 1,
+        "ok": "Yes",
+        "cancel": "No",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "confirm",
+        "x": 480,
+        "y": 380,
+        "wires": [
+            [
+                "d6dd05798b041c4a"
+            ]
+        ]
+    },
+    {
+        "id": "d6dd05798b041c4a",
+        "type": "switch",
+        "z": "48a7733923a33252",
+        "name": "yes?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Yes",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 380,
+        "wires": [
+            [
+                "c84fa79f2496e377"
+            ]
+        ]
+    },
+    {
+        "id": "5aec8815f6ae6c9c",
+        "type": "file",
+        "z": "48a7733923a33252",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 920,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c84fa79f2496e377",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "name": "content",
+        "rules": [
+            {
+                "t": "move",
+                "p": "content",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 380,
+        "wires": [
+            [
+                "5aec8815f6ae6c9c"
+            ]
+        ]
+    },
+    {
+        "id": "b3b5c93025760016",
+        "type": "exec",
+        "z": "48a7733923a33252",
+        "command": "pwd",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 270,
+        "y": 40,
+        "wires": [
+            [
+                "1a1a090377e2b43e"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "8096898980123bce",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "name": "get Dir",
+        "rules": [
+            {
+                "t": "set",
+                "p": "path",
+                "pt": "msg",
+                "to": "Dir",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "path & \"/\" & file.name",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 40,
+        "wires": [
+            [
+                "5af00f52190803f6"
+            ]
+        ]
+    },
+    {
+        "id": "5af00f52190803f6",
+        "type": "file",
+        "z": "48a7733923a33252",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 920,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c8f7941c9d116e6",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "name": "is dir",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.name",
+                "pt": "msg",
+                "to": "payload.start",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "2999856f3c6017d7"
+            ]
+        ]
+    },
+    {
+        "id": "2999856f3c6017d7",
+        "type": "ui_text",
+        "z": "48a7733923a33252",
+        "group": "160e81fb.f1c86e",
+        "order": 2,
+        "width": 12,
+        "height": 1,
+        "name": "",
+        "label": "Path:",
+        "format": "{{msg.payload.name}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 630,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "71ca9deecf8d99c0",
+        "type": "watch-directory",
+        "z": "48a7733923a33252",
+        "folder": "Dir",
+        "folderType": "flow",
+        "recursive": 0,
+        "typeEvent": "create",
+        "ignoreInitial": true,
+        "ignoredFiles": "",
+        "ignoredFilesType": "re",
+        "name": "create",
+        "x": 70,
+        "y": 280,
+        "wires": [
+            [
+                "91618269345c9b5a"
+            ]
+        ]
+    },
+    {
+        "id": "e945f13798bed93a",
+        "type": "watch-directory",
+        "z": "48a7733923a33252",
+        "folder": "Dir",
+        "folderType": "flow",
+        "recursive": 0,
+        "typeEvent": "update",
+        "ignoreInitial": true,
+        "ignoredFiles": "",
+        "ignoredFilesType": "re",
+        "name": "update",
+        "x": 90,
+        "y": 300,
+        "wires": [
+            [
+                "91618269345c9b5a"
+            ]
+        ]
+    },
+    {
+        "id": "c58e8827edbef0b8",
+        "type": "watch-directory",
+        "z": "48a7733923a33252",
+        "folder": "Dir",
+        "folderType": "flow",
+        "recursive": 0,
+        "typeEvent": "delete",
+        "ignoreInitial": true,
+        "ignoredFiles": "",
+        "ignoredFilesType": "re",
+        "name": "delete",
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "91618269345c9b5a"
+            ]
+        ]
+    },
+    {
+        "id": "05e5d89d8abad833",
+        "type": "fs-file-lister",
+        "z": "48a7733923a33252",
+        "name": "",
+        "start": "data",
+        "pattern": "*.*",
+        "folders": "*",
+        "hidden": false,
+        "lstype": "both",
+        "path": true,
+        "single": true,
+        "depth": 0,
+        "stat": true,
+        "showWarnings": false,
+        "x": 280,
+        "y": 200,
+        "wires": [
+            [
+                "d0799928afba9280"
+            ]
+        ]
+    },
+    {
+        "id": "c5268070.c55a3",
+        "type": "ui_template",
+        "z": "48a7733923a33252",
+        "group": "26e8fe8026c92abb",
+        "name": "upload",
+        "order": 4,
+        "width": 6,
+        "height": 1,
+        "format": "\n<body>\n<button class=\"md-raised md-button md-ink-ripple\" onclick=\"importData()\">Upload</button>    \n\n<script>\nlet restoreScope = scope;\n\nfunction importData() {\n  let input = document.createElement('input');\n  input.type = 'file';\n  input.id = 'restoreBtn';\n  input.onchange = _ => {\n    // you can use this method to get file and perform respective operations\n        let fReader = new FileReader();\n        fReader.readAsArrayBuffer(input.files[0]);\n        fReader.onloadend = function(event){\n        restoreScope.send({\n            file:{name:input.files[0].name},\n            payload:event.target.result\n          });}\n        };\n  input.click();\n}\n</script>\n</body>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 630,
+        "y": 60,
+        "wires": [
+            [
+                "8096898980123bce"
+            ]
+        ]
+    },
+    {
+        "id": "1a1a090377e2b43e",
+        "type": "change",
+        "z": "48a7733923a33252",
+        "g": "34047250a1f44ce1",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HOME",
+                "pt": "global",
+                "to": "$trim(payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 60,
+        "wires": [
+            [
+                "d560959631afbf82"
+            ]
+        ]
+    },
+    {
+        "id": "b382101fb64bb6cd",
+        "type": "debug",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "85770b738242d577",
+        "type": "inject",
+        "z": "f29ecd9eab0f0d83",
+        "d": true,
+        "name": "5s",
+        "props": [],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "b36e0ea9b8c2c5a8"
+            ]
+        ]
+    },
+    {
+        "id": "b36e0ea9b8c2c5a8",
+        "type": "function",
+        "z": "f29ecd9eab0f0d83",
+        "d": true,
+        "name": "system mon",
+        "func": "var freemem               = os.freemem();\nvar totalmem              = os.totalmem();\nvar os_uptime             = os.uptime();\nvar {user, system}        = process.cpuUsage();\nvar {heapUsed, heapTotal} = process.memoryUsage();\nvar p_uptime              = process.uptime();\nvar loadavg               = os.loadavg();\n\ncpuUsage(perc => node.send({\n    payload: {\n        cpu_usage:    perc,\n        cpu_user:     user / 1000 / 1000,\n        cpu_system:   system / 1000 / 1000,\n\n        used_heap_MB: round(heapUsed / 1024 / 1024),\n        heap_usage:   round(heapUsed / heapTotal * 100),\n        tot_heap_MB:  round(heapTotal / 1024 / 1024),\n        free_heap_MB: round((heapTotal - heapUsed) / 1024 / 1024),\n        \n        free_ram_GB:  round(freemem / 1024 / 1024 / 1024),\n        tot_ram_GB:   round(totalmem / 1024 / 1024 / 1024),\n        ram_usage:    round((1 - freemem / totalmem) * 100),\n        used_ram_GB:  round((totalmem - freemem) / 1024 / 1024 / 1024),\n\n        loadavg_1:    loadavg[0],\n        loadavg_5:    loadavg[1],\n        loadavg_15:   loadavg[2],\n\n        os_uptime_s:  os_uptime,\n        os_uptime:    timeConversion(os_uptime),\n        p_uptime_s:   p_uptime,\n        p_uptime:     timeConversion(p_uptime),\n\n        last_update: new Date()\n    }\n}))\n\n/**\n * Method used in node-os-utils\n * \n * @description Measure the CPU usage calculated between two different CPU usage samples\n * @param {function} cb A callback function the result is passed to\n * @param {number} [core=-1] The CPU core index to measure. When is not greater than -1 then it is \"averaged\" for all CPU cores.\n * @param {number} [sampleMs=1000]  The number of milliseconds between the CPU usage samples\n */\nfunction cpuUsage(cb, core, sampleMs) {\n    var deltaUsed;\n    var deltaIdle;\n    var timesKeys = [\"user\", \"nice\", \"sys\", \"irq\"];\n    var allCores = null === core || !(core > -1);\n\n    var byCore = (cpu, i) =>\n        allCores || core === i;\n\n    var bySampleKey = (sample, key) =>\n        sample.filter(byCore).reduce(\n            (sum, cpu) => sum + cpu.times[key], 0);\n\n    var sample0 = os.cpus();\n\n    setTimeout(function () {\n        var sample1 = os.cpus();\n\n        deltaUsed = timesKeys.reduce(\n            (diff, key) => diff + bySampleKey(sample1, key) - bySampleKey(sample0, key), 0);\n\n        deltaIdle = bySampleKey(sample1, \"idle\") - bySampleKey(sample0, \"idle\");\n\n        if (\"function\" === typeof cb) {\n            cb(100 * (deltaUsed / (deltaUsed + deltaIdle)));\n        }\n    }, sampleMs || 1000);\n}\n\nfunction round(n, d = 2) {\n    return Math.round(n * 10 ** d) / 10 ** d;\n}\n\nfunction timeConversion(seconds) {\n    var minutes = seconds / 60;\n    var hours = seconds / 3600;\n    var days = seconds / 86400;\n\n    if (seconds < 60) {\n        return seconds.toFixed(1) + \" Sec\";\n    } else if (minutes < 60) {\n        return minutes.toFixed(1) + \" Min\";\n    } else if (hours < 24) {\n        return hours.toFixed(1) + \" Hrs\";\n    } else {\n        return days.toFixed(1) + \" Days\"\n    }\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "os",
+                "module": "os"
+            },
+            {
+                "var": "process",
+                "module": "process"
+            }
+        ],
+        "x": 290,
+        "y": 120,
+        "wires": [
+            [
+                "d433dfb4813e729c",
+                "87e284b688c9bc1d",
+                "d5f8bbdc8a50d1c4",
+                "1bb52214bb93b59c",
+                "407393b06d188578",
+                "978f120d4b6d5d8d",
+                "7c204748fb1d30c6",
+                "9c89af026d6e876a",
+                "943a803ae4a09ae9"
+            ]
+        ]
+    },
+    {
+        "id": "d59207da68d0e961",
+        "type": "ui_chart",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "group": "ade1f84b9abbf285",
+        "order": 2,
+        "width": "6",
+        "height": "5",
+        "label": "Memory",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "6",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 840,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4b5a96f2a67089df",
+        "type": "ui_chart",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "group": "ade1f84b9abbf285",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Processor",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "6",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 840,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d433dfb4813e729c",
+        "type": "ui_text",
+        "z": "f29ecd9eab0f0d83",
+        "group": "a9912d64.97094",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Uptime os/node",
+        "format": "{{msg.payload.os_uptime}} / {{msg.payload.p_uptime}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 540,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "e475bf4d1347ce6d",
+        "type": "ui_text",
+        "z": "f29ecd9eab0f0d83",
+        "group": "a9912d64.97094",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Hostname (IP)",
+        "format": "{{msg.payload.hostname}} ({{msg.payload.address}})",
+        "layout": "row-right",
+        "className": "",
+        "x": 540,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "38fb665c04a2fa2b",
+        "type": "ui_text",
+        "z": "f29ecd9eab0f0d83",
+        "group": "a9912d64.97094",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Platform Arch",
+        "format": "{{msg.payload.platform}} {{msg.payload.arch}} {{msg.payload.endianness}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 540,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "12262ec3b4702e3b",
+        "type": "ui_text",
+        "z": "f29ecd9eab0f0d83",
+        "group": "a9912d64.97094",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Cloud Release",
+        "format": "{{msg.payload.release}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 540,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "93fcb0ebab0ad1fb",
+        "type": "ui_text",
+        "z": "f29ecd9eab0f0d83",
+        "group": "a9912d64.97094",
+        "order": 5,
+        "width": "0",
+        "height": "0",
+        "name": "CPU Model",
+        "label": "CPU #{{msg.payload.n_cores}}",
+        "format": "{{msg.payload.cpu_model}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 530,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "772de72b62e1e4e0",
+        "type": "ui_text",
+        "z": "f29ecd9eab0f0d83",
+        "group": "a9912d64.97094",
+        "order": 6,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "User info (GID:UID)",
+        "format": "{{msg.payload.username}} ({{msg.payload.gid}}:{{msg.payload.uid}})",
+        "layout": "row-spread",
+        "className": "",
+        "x": 550,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "990e8802adb04ed7",
+        "type": "ui_text",
+        "z": "f29ecd9eab0f0d83",
+        "group": "a9912d64.97094",
+        "order": 9,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Node version",
+        "format": "{{msg.payload.node_version}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 530,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "1bb52214bb93b59c",
+        "type": "ui_gauge",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "group": "b6cc1aae65862dae",
+        "order": 4,
+        "width": "6",
+        "height": "3",
+        "gtype": "gage",
+        "title": "CPU",
+        "label": "units",
+        "format": "{{msg.payload.cpu_usage | number:3}} %",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 510,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "87e284b688c9bc1d",
+        "type": "ui_gauge",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "group": "b6cc1aae65862dae",
+        "order": 4,
+        "width": "6",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Heap",
+        "label": "MB",
+        "format": "{{msg.payload.used_heap_MB| number:2}} / {{msg.payload.tot_heap_MB| number:2}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 510,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d5f8bbdc8a50d1c4",
+        "type": "ui_gauge",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "group": "b6cc1aae65862dae",
+        "order": 4,
+        "width": "6",
+        "height": "3",
+        "gtype": "gage",
+        "title": "RAM",
+        "label": "GB",
+        "format": "{{msg.payload.used_ram_GB| number:2}} / {{msg.payload.tot_ram_GB| number:2}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 510,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "357b6025664fd028",
+        "type": "inject",
+        "z": "f29ecd9eab0f0d83",
+        "d": true,
+        "name": "5min",
+        "props": [],
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "e5dc586dcb92b24a"
+            ]
+        ]
+    },
+    {
+        "id": "4a1850006419b797",
+        "type": "function",
+        "z": "f29ecd9eab0f0d83",
+        "name": "node-os-utils",
+        "func": "var freemem = os.freemem();\nvar totalmem = os.totalmem();\nvar os_uptime = os.uptime();\nvar { user, system } = process.cpuUsage();\nvar { heapUsed, heapTotal } = process.memoryUsage();\nvar p_uptime = process.uptime();\nvar loadavg = os.loadavg();\n\ncpuUsage(perc => node.send({\n    payload: {\n        cpu_usage:    perc,\n        cpu_user:     user / 1000 / 1000,\n        cpu_system:   system / 1000 / 1000,\n\n        used_heap_MB: round(heapUsed / 1024 / 1024),\n        heap_usage:   round(heapUsed / heapTotal * 100),\n        tot_heap_MB:  round(heapTotal / 1024 / 1024),\n        free_heap_MB: round((heapTotal - heapUsed) / 1024 / 1024),\n        \n        free_ram_GB:  round(freemem / 1024 / 1024 / 1024),\n        tot_ram_GB:   round(totalmem / 1024 / 1024 / 1024),\n        ram_usage:    round((1 - freemem / totalmem) * 100),\n        used_ram_GB:  round((totalmem - freemem) / 1024 / 1024 / 1024),\n        \n        loadavg_1:    loadavg[0],\n        loadavg_5:    loadavg[1],\n        loadavg_15:   loadavg[2],\n\n        os_uptime_s:  os_uptime,\n        os_uptime:    timeConversion(os_uptime),\n        p_uptime_s:   p_uptime,\n        p_uptime:     timeConversion(p_uptime),\n\n        arch: os.arch(),\n        cpus: os.cpus(),\n        cpu_model: os.cpus()[os.cpus().length - 1].model,\n        cpu_speed: os.cpus()[os.cpus().length - 1].speed,\n        n_cores: os.cpus().length,\n        endianness: os.endianness(),\n        homedir: os.homedir(),\n        hostname: os.hostname(),\n        network: os.networkInterfaces(),\n        address: os.networkInterfaces().eth0[0].address,\n        platform: os.platform(),\n        release: os.release(),\n        type: os.type(),\n        userInfo: os.userInfo(),\n        gid: os.userInfo().gid,\n        uid: os.userInfo().uid,\n        username: os.userInfo().username,\n        shell: os.userInfo().shell,\n        os_version: os.version(),\n\n        cwd: process.cwd(),\n        node_version: process.version,\n\n        last_update: new Date()\n    }\n}))\n\n/**\n * Method used in node-os-utils\n * \n * @description Measure the CPU usage calculated between two different CPU usage samples\n * @param {function} cb A callback function the result is passed to\n * @param {number} [core=-1] The CPU core index to measure. When is not greater than -1 then it is \"averaged\" for all CPU cores.\n * @param {number} [sampleMs=1000]  The number of milliseconds between the CPU usage samples\n */\nfunction cpuUsage(cb, core, sampleMs) {\n    var deltaUsed;\n    var deltaIdle;\n    var timesKeys = [\"user\", \"nice\", \"sys\", \"irq\"];\n    var allCores = null === core || !(core > -1);\n\n    var byCore = (cpu, i) =>\n        allCores || core === i;\n\n    var bySampleKey = (sample, key) =>\n        sample.filter(byCore).reduce(\n            (sum, cpu) => sum + cpu.times[key], 0);\n\n    var sample0 = os.cpus();\n\n    setTimeout(function () {\n        var sample1 = os.cpus();\n\n        deltaUsed = timesKeys.reduce(\n            (diff, key) => diff + bySampleKey(sample1, key) - bySampleKey(sample0, key), 0);\n\n        deltaIdle = bySampleKey(sample1, \"idle\") - bySampleKey(sample0, \"idle\");\n\n        if (\"function\" === typeof cb) {\n            cb(100 * (deltaUsed / (deltaUsed + deltaIdle)));\n        }\n    }, sampleMs || 1000);\n}\n\nfunction round(n, d = 2) {\n    return Math.round(n * 10 ** d) / 10 ** d;\n}\n\nfunction timeConversion(seconds) {\n    var minutes = seconds / 60;\n    var hours = seconds / 3600;\n    var days = seconds / 86400;\n\n    if (seconds < 60) {\n        return seconds.toFixed(1) + \" Sec\";\n    } else if (minutes < 60) {\n        return minutes.toFixed(1) + \" Min\";\n    } else if (hours < 24) {\n        return hours.toFixed(1) + \" Hrs\";\n    } else {\n        return days.toFixed(1) + \" Days\"\n    }\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "os",
+                "module": "os"
+            },
+            {
+                "var": "process",
+                "module": "process"
+            }
+        ],
+        "x": 290,
+        "y": 360,
+        "wires": [
+            [
+                "407393b06d188578",
+                "1bb52214bb93b59c",
+                "d5f8bbdc8a50d1c4",
+                "87e284b688c9bc1d",
+                "d433dfb4813e729c",
+                "7c204748fb1d30c6",
+                "9c89af026d6e876a",
+                "943a803ae4a09ae9",
+                "978f120d4b6d5d8d",
+                "e475bf4d1347ce6d",
+                "38fb665c04a2fa2b",
+                "12262ec3b4702e3b",
+                "93fcb0ebab0ad1fb",
+                "772de72b62e1e4e0",
+                "a72c3c707a0495a6",
+                "f66d1fae20c650a0",
+                "990e8802adb04ed7",
+                "716b83720f6ed7c3",
+                "b382101fb64bb6cd"
+            ]
+        ]
+    },
+    {
+        "id": "a72c3c707a0495a6",
+        "type": "ui_text",
+        "z": "f29ecd9eab0f0d83",
+        "group": "a9912d64.97094",
+        "order": 7,
+        "width": "0",
+        "height": "0",
+        "name": "Home (bash)",
+        "label": "Home (bash:{{msg.payload.shell}}) Current dir",
+        "format": "{{msg.payload.homedir}} {{msg.payload.cwd}} ",
+        "layout": "row-spread",
+        "className": "",
+        "x": 530,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f66d1fae20c650a0",
+        "type": "ui_text",
+        "z": "f29ecd9eab0f0d83",
+        "group": "a9912d64.97094",
+        "order": 8,
+        "width": "0",
+        "height": "0",
+        "name": "OS version",
+        "label": "{{msg.payload.type}} version",
+        "format": "{{msg.payload.os_version}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 530,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "e5dc586dcb92b24a",
+        "type": "function",
+        "z": "f29ecd9eab0f0d83",
+        "d": true,
+        "name": "system info",
+        "func": "msg.payload = {       \n    arch:         os.arch(),\n    cpus:         os.cpus(),\n    cpu_model:    os.cpus()[os.cpus().length - 1].model,\n    cpu_speed:    os.cpus()[os.cpus().length - 1].speed,\n    n_cpus:       os.cpus().length,\n    endianness:   os.endianness(),\n    homedir:      os.homedir(),\n    hostname:     os.hostname(),\n    network:      os.networkInterfaces(),\n    address:      os.networkInterfaces().eth0[0].address,\n    platform:     os.platform(),\n    release:      os.release(),\n    type:         os.type(),\n    userInfo:     os.userInfo(),\n    gid:          os.userInfo().gid,\n    uid:          os.userInfo().uid,\n    username:     os.userInfo().username,\n    shell:        os.userInfo().shell,\n    os_version:   os.version(),\n\n    cwd:          process.cwd(),\n    node_version: process.version,\n\n    last_update:  new Date()\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "os",
+                "module": "os"
+            },
+            {
+                "var": "process",
+                "module": "process"
+            }
+        ],
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "e475bf4d1347ce6d",
+                "38fb665c04a2fa2b",
+                "12262ec3b4702e3b",
+                "93fcb0ebab0ad1fb",
+                "772de72b62e1e4e0",
+                "a72c3c707a0495a6",
+                "f66d1fae20c650a0",
+                "990e8802adb04ed7"
+            ]
+        ]
+    },
+    {
+        "id": "407393b06d188578",
+        "type": "split",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 510,
+        "y": 40,
+        "wires": [
+            [
+                "e14bc855c64bcbec",
+                "1ff2be7d96afb5f0"
+            ]
+        ]
+    },
+    {
+        "id": "e14bc855c64bcbec",
+        "type": "switch",
+        "z": "f29ecd9eab0f0d83",
+        "name": "mem?",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "ram",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "heap",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 60,
+        "wires": [
+            [],
+            [
+                "d59207da68d0e961"
+            ]
+        ]
+    },
+    {
+        "id": "5a48bbed736ee220",
+        "type": "comment",
+        "z": "f29ecd9eab0f0d83",
+        "name": "README",
+        "info": "### Function nodes\n```node-os-utils``` =\n```system mon``` + \n```system info```\n\n### Swith node\n*mem* = *ram* + *heap*\n\n### UI Widget configuration via msg.ui_control\nhttps://github.com/node-red/node-red-dashboard/blob/master/config-fields.md",
+        "x": 100,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7c204748fb1d30c6",
+        "type": "ui_gauge",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "group": "f6e5eaea1a3d31cf",
+        "order": 1,
+        "width": "6",
+        "height": "2",
+        "gtype": "gage",
+        "title": "1 Minute",
+        "label": "load",
+        "format": "{{msg.payload.loadavg_1| number:2}}",
+        "min": 0,
+        "max": "4",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "1",
+        "seg2": "3",
+        "className": "",
+        "x": 840,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "9c89af026d6e876a",
+        "type": "ui_gauge",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "group": "f6e5eaea1a3d31cf",
+        "order": 2,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "5 Minutes",
+        "label": "load",
+        "format": "{{msg.payload.loadavg_5| number:2}}",
+        "min": 0,
+        "max": "4",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "1",
+        "seg2": "3",
+        "className": "",
+        "x": 840,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "943a803ae4a09ae9",
+        "type": "ui_gauge",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "group": "f6e5eaea1a3d31cf",
+        "order": 4,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "15 Minutes",
+        "label": "load",
+        "format": "{{msg.payload.loadavg_15| number:2}}",
+        "min": 0,
+        "max": "4",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "1",
+        "seg2": "3",
+        "className": "",
+        "x": 850,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "52c2417885093efb",
+        "type": "ui_chart",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "group": "f6e5eaea1a3d31cf",
+        "order": 0,
+        "width": "6",
+        "height": "4",
+        "label": "CPU Load Average",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "6",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": "",
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 870,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "978f120d4b6d5d8d",
+        "type": "split",
+        "z": "f29ecd9eab0f0d83",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 510,
+        "y": 420,
+        "wires": [
+            [
+                "4fef2b553738432c"
+            ]
+        ]
+    },
+    {
+        "id": "4fef2b553738432c",
+        "type": "switch",
+        "z": "f29ecd9eab0f0d83",
+        "name": "load?",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "n_cores",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "loadavg",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 420,
+        "wires": [
+            [
+                "72daa15a9e8dee07"
+            ],
+            [
+                "52c2417885093efb"
+            ]
+        ]
+    },
+    {
+        "id": "eeac84aba4122de6",
+        "type": "inject",
+        "z": "f29ecd9eab0f0d83",
+        "name": "5s",
+        "props": [],
+        "repeat": "15",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "x": 110,
+        "y": 360,
+        "wires": [
+            [
+                "4a1850006419b797"
+            ]
+        ]
+    },
+    {
+        "id": "716b83720f6ed7c3",
+        "type": "change",
+        "z": "f29ecd9eab0f0d83",
+        "name": "gauge",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ui_control.max",
+                "pt": "msg",
+                "to": "payload.n_cores * 4",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "ui_control.seg1",
+                "pt": "msg",
+                "to": "payload.n_cores *1.5",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "ui_control.seg2",
+                "pt": "msg",
+                "to": "payload.n_cores * 3",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 540,
+        "wires": [
+            [
+                "7c204748fb1d30c6",
+                "9c89af026d6e876a",
+                "943a803ae4a09ae9"
+            ]
+        ]
+    },
+    {
+        "id": "1ff2be7d96afb5f0",
+        "type": "switch",
+        "z": "f29ecd9eab0f0d83",
+        "name": "cpu?",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "cpu_sys",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "cpu_us",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 20,
+        "wires": [
+            [
+                "4b5a96f2a67089df"
+            ],
+            [
+                "4b5a96f2a67089df"
+            ]
+        ]
+    },
+    {
+        "id": "72daa15a9e8dee07",
+        "type": "change",
+        "z": "f29ecd9eab0f0d83",
+        "name": "warning",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "warning",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload * 2",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 420,
+        "wires": [
+            [
+                "52c2417885093efb"
+            ]
+        ]
+    }
+]

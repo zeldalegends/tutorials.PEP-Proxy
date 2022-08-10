@@ -49,7 +49,7 @@ waitForKeyrock () {
 	
 	while ! [ `docker inspect --format='{{.State.Health.Status}}' fiware-keyrock` == "healthy" ]
 	do 
-		echo -e "Keyrock HTTP state: " `curl -s -o /dev/null -w %{http_code} 'http://localhost:3005/version'` " (waiting for 200)"
+		echo -e "Keyrock HTTP state: " `curl -s -o /dev/null -w %{http_code} 'http://localhost:${KEYROCK_PORT}/version'` " (waiting for 200)"
 		sleep 5
 	done
 	echo -e " \033[1;32mdone\033[0m"
@@ -68,7 +68,7 @@ waitForOrion () {
 
 	while ! [ `docker inspect --format='{{.State.Health.Status}}' fiware-orion` == "healthy" ]
 	do
-	  echo -e "Context Broker HTTP state: " `curl -s -o /dev/null -w %{http_code} 'http://localhost:1026/version'` " (waiting for 200)"
+	  echo -e "Context Broker HTTP state: " `curl -s -o /dev/null -w %{http_code} 'http://localhost:${ORION_PORT}/version'` " (waiting for 200)"
 	  sleep 1
 	done
 }
@@ -78,7 +78,7 @@ waitForIoTAgent () {
 	while ! [ `docker inspect --format='{{.State.Health.Status}}' fiware-iot-agent` == "healthy" ]
 
 	do 
-	  echo -e "IoT Agent HTTP state: " `curl -s -o /dev/null -w %{http_code} 'http://localhost:4041/version'` " (waiting for 200)"
+	  echo -e "IoT Agent HTTP state: " `curl -s -o /dev/null -w %{http_code} 'http://localhost:${IOTA_NORTH_PORT}/version'` " (waiting for 200)"
 	  sleep 1
 	done
 }
@@ -109,6 +109,15 @@ addDatabaseIndex () {
 	db.entities.createIndex({"_id.id": 1});' > /dev/null
 	echo -e " \033[1;32mdone\033[0m"
 
+	printf "Adding appropriate \033[1mMongoDB\033[0m indexes for \033[1;34mOrion LD\033[0m  ..."
+	docker exec  db-mongo mongo --eval '
+	conn = new Mongo();db.createCollection("orionld");
+	db = conn.getDB("orionld");
+	db.createCollection("entities");
+	db.entities.createIndex({"_id.id": 1, "_id.type": 1}, {unique: true});
+	db.entities.createIndex({"_id.type": 1}); 
+	db.entities.createIndex({"_id.id": 1});' > /dev/null
+
 	printf "Adding appropriate \033[1mMongoDB\033[0m indexes for \033[1;36mIoT-Agent\033[0m  ..."
 	docker exec  db-mongo mongo --eval '
 	conn = new Mongo();
@@ -126,14 +135,14 @@ addDatabaseIndex () {
 startContainers () {
 	echo ""
 	export IDM_HTTPS_ENABLED="$1" 
-	${dockerCmd} -f docker-compose/$2 up -d --remove-orphans
+	${dockerCmd} -f docker-compose/$2 up -d --remove-orphans --build
 	echo ""
 }
 
 stoppingContainers () {
 	export $(cat .env | grep "#" -v)
 	echo "Stopping running containers"
-	${dockerCmd} -f docker-compose/southport.yml down -v --remove-orphans
+	${dockerCmd} -f docker-compose/orion.yml down -v --remove-orphans
 }
 
 command="$1"
@@ -151,7 +160,7 @@ case "${command}" in
 		echo -e "- \033[1;31mWilma\033[0m is a PEP Proxy around \033[1;34mOrion\033[0m"
 		startContainers false orion.yml
 		waitForKeyrock
-		export ORION_URL="http://orion:1026"
+		export ORION_URL="http://orion:${ORION_PORT}"
 		waitForMongo
 		addDatabaseIndex
 		waitForOrion
@@ -161,6 +170,7 @@ case "${command}" in
 		;;
 	"southport")
 		stoppingContainers
+		echo -e "\033[1;31mNOT SUPPORTED IN THIS BRANCH\033[0m."
 		echo -e "Starting containers: \033[1;34mOrion\033[0m, \033[1;36mIoT-Agent\033[0m, \033[1;31mKeyrock\033[0m, \033[1;31mWilma\033[0m, \033[1mTutorial\033[0m and \033[1mMongoDB\033[0m and \033[1mMySQL\033[0m databases."
 		echo -e "- \033[1;34mOrion\033[0m is the context broker"
 		echo -e "- \033[1;36mIoT-Agent\033[0m is configured for the UltraLight Protocol"
@@ -178,6 +188,7 @@ case "${command}" in
 		;;
 	"northport")
 		stoppingContainers
+		echo -e "\033[1;31mNOT SUPPORTED IN THIS BRANCH\033[0m."
 		echo -e "Starting containers: \033[1;34mOrion\033[0m, \033[1;36mIoT-Agent\033[0m, \033[1;31mKeyrock\033[0m, \033[1;31mWilma\033[0m, \033[1mTutorial\033[0m and \033[1mMongoDB\033[0m and \033[1mMySQL\033[0m databases."
 		echo -e "- \033[1;34mOrion\033[0m is the context broker"
 		echo -e "- \033[1;36mIoT-Agent\033[0m is configured for the UltraLight Protocol"
@@ -186,7 +197,7 @@ case "${command}" in
 		echo -e "- \033[1;31mWilma\033[0m as a PEP Proxy between \033[1;34mOrion\033[0m and the \033[1;36mIoT-Agent\033[0m"
 		startContainers false northport.yml
 		waitForKeyrock
-		export ORION_URL="http://orion-proxy:1027" 
+		export ORION_URL="http://orion-proxy:${ORION_PROXY_PORT}" 
 		waitForMongo
 		addDatabaseIndex
 		docker run --rm -v $(pwd)/import-data:/import-data \

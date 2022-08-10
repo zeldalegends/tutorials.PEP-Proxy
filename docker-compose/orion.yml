@@ -30,10 +30,27 @@ services:
     expose:
       - "${ORION_PORT}"
     ports:
-      - "${ORION_PORT}:${ORION_PORT}" # localhost:1026
+      - "${ORION_PUBLIC_PORT}:${ORION_PORT}" # localhost:1026
     command: -dbhost mongo-db -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion:${ORION_PORT}/version || exit 1
+      interval: 15s
+
+  orion-ld:
+    image: fiware/orion-ld:${ORION_LD_VERSION}
+    hostname: orion-ld
+    container_name: fiware-orion-ld
+    depends_on:
+      - mongo-db
+    networks:
+      - default
+    expose:
+      - "${ORION_LD_PORT}"
+    ports:
+      - "${ORION_LD_PUBLIC_PORT}:${ORION_LD_PORT}" # localhost:1028
+    command: -dbhost mongo-db -db orionld -logLevel DEBUG
+    healthcheck:
+      test: curl --fail -s http://orion-ld:${ORION_LD_PORT}/version || exit 1
       interval: 15s
 
   # IoT-Agent is configured for the UltraLight Protocol
@@ -126,8 +143,46 @@ services:
       - PEP_PROXY_AUTH_ENABLED=false
       - PEP_PROXY_IDM_SSL_ENABLED=false
       - PEP_PROXY_IDM_PORT=${KEYROCK_PORT}
-      - PEP_PROXY_APP_ID=tutorial-dckr-site-0000-xpresswebapp
-      - PEP_PROXY_USERNAME=pep_proxy_00000000-0000-0000-0000-000000000000
+      - PEP_PROXY_APP_ID=${KEYROCK_CLIENT_ID}
+      - PEP_PROXY_USERNAME=${WILMA_PEP_PROXY_USERNAME}
+      - PEP_PASSWORD=test
+      - PEP_PROXY_PDP=idm
+      - PEP_PROXY_MAGIC_KEY=1234
+      - PEP_PROXY_PUBLIC_PATHS=/version
+    healthcheck:
+      interval: 50s
+
+  # PEP Proxy for Orion LD
+  orion-ld-proxy:
+    #image: pep-slim
+    image: fiware/pep-proxy:${WILMA_VERSION}
+    container_name: fiware-orion-ld-proxy
+    hostname: orion-ld-proxy
+    networks:
+      - default
+    depends_on:
+      keyrock:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "${ORION_LD_PROXY_PORT}:${ORION_LD_PROXY_PORT}" # localhost:1029
+    expose:
+      - "${ORION_LD_PROXY_PORT}"
+    environment:
+      - DEBUG=pep-proxy:*
+      - PEP_PROXY_DEBUG=true
+      - PEP_PROXY_APP_HOST=orion-ld
+      - PEP_PROXY_APP_PORT=${ORION_LD_PORT}
+      - PEP_PROXY_PORT=${ORION_LD_PROXY_PORT}
+      - PEP_PROXY_IDM_HOST=keyrock
+      - PEP_PROXY_HTTPS_ENABLED=false
+      - PEP_PROXY_AUTH_ENABLED=false
+      - PEP_PROXY_IDM_SSL_ENABLED=false
+      - PEP_PROXY_IDM_PORT=${KEYROCK_PORT}
+      - PEP_PROXY_APP_ID=${KEYROCK_CLIENT_ID}
+      - PEP_PROXY_USERNAME=${WILMA_PEP_PROXY_USERNAME}
       - PEP_PASSWORD=test
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
@@ -176,21 +231,21 @@ services:
       - "KEYROCK_URL=http://localhost"
       - "KEYROCK_IP_ADDRESS=http://keyrock"
       - "KEYROCK_PORT=${KEYROCK_PORT}"
-      - "KEYROCK_CLIENT_ID=tutorial-dckr-site-0000-xpresswebapp"
-      - "KEYROCK_CLIENT_SECRET=tutorial-dckr-site-0000-clientsecret"
+      - "KEYROCK_CLIENT_ID=${KEYROCK_CLIENT_ID}"
+      - "KEYROCK_CLIENT_SECRET=${KEYROCK_CLIENT_SECRET}"
       - "CALLBACK_URL=http://localhost:${TUTORIAL_APP_PORT}/login"
 
   # Express sample service
   express-app:
     build: ../express-app/.
-    container_name: fiware-express
-    hostname: express
+    container_name: fiware-express-app
+    hostname: express-app
     networks:
       - default
     ports:
-      - "${EXPRESS_PORT}:${EXPRESS_PORT}" # localhost:8000
+      - "${EXPRESS_APP_PORT}:${EXPRESS_APP_PORT}" # localhost:8000
     healthcheck: 
-      test: curl -f http://express:${EXPRESS_PORT} || exit 1
+      test: curl -f http://express-app:${EXPRESS_APP_PORT} || exit 1
   
   # PEP Proxy for Express
   express-proxy:
@@ -214,15 +269,15 @@ services:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
       - PEP_PROXY_APP_HOST=express
-      - PEP_PROXY_APP_PORT=${EXPRESS_PORT}
+      - PEP_PROXY_APP_PORT=${EXPRESS_APP_PORT}
       - PEP_PROXY_PORT=${EXPRESS_PROXY_PORT}
       - PEP_PROXY_IDM_HOST=keyrock
       - PEP_PROXY_HTTPS_ENABLED=false
       - PEP_PROXY_AUTH_ENABLED=false
       - PEP_PROXY_IDM_SSL_ENABLED=false
       - PEP_PROXY_IDM_PORT=${KEYROCK_PORT}
-      - PEP_PROXY_APP_ID=tutorial-dckr-site-0000-xpresswebapp
-      - PEP_PROXY_USERNAME=pep_proxy_00000000-0000-0000-0000-000000000000
+      - PEP_PROXY_APP_ID=${KEYROCK_CLIENT_ID}
+      - PEP_PROXY_USERNAME=${WILMA_PEP_PROXY_USERNAME}
       - PEP_PASSWORD=test
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
@@ -230,6 +285,20 @@ services:
     healthcheck:
       interval: 50s
 
+  node-red:
+    build: ../node-red
+    image: fiware/node-red
+    container_name: fiware-node-red
+    hostname: node-red
+    networks:
+      - default
+    ports:
+      - "${NODE_RED_PORT}:${NODE_RED_PORT}" # localhost:1880
+    depends_on:
+      - orion
+      - orion-ld
+#   volumes:
+#     - node-red-data:/data
 
   # Databases
   mongo-db:
@@ -242,12 +311,16 @@ services:
       - "${MONGO_DB_PORT}"
     ports:
       - "${MONGO_DB_PORT}:${MONGO_DB_PORT}" # localhost:27017
+    command: --nojournal
     volumes:
-      - mongo-db:/data
+      - mongo-db-data:/data/db
+      - mongo-db-config:/data/configdb
+#     - ../mongo-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     healthcheck:
       test: |
-        host=`hostname --ip-address || echo '127.0.0.1'`; 
-        mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
+        mongo --quiet mongo-db/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
+#       host=`hostname --ip-address || echo '127.0.0.1'`; 
+#       mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
       interval: 5s
     
   mongo-express:
@@ -290,7 +363,9 @@ networks:
 
 volumes:
   mysql-db: ~
-  mongo-db: ~
+  mongo-db-data: ~
+  mongo-db-config: ~
+# node-red-data: ~
 
 secrets:
   my_secret_data:
