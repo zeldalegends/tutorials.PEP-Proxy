@@ -50,7 +50,7 @@ app.get('/test', (req, res) => {
 app.post('/ads', (req, res) => {
 	let low = req.query.low || 25;
 	let high = req.query.high || 75;
-	let response = "{id:\"" + req.body.sensor + "Test",type:\"Anomaly Detection\",result:" + (req.body.temperature > low & req.body.temperature < high ? "true" : "false") + "}"
+	let response = `{id:\"${req.body.sensor}Test,type:\"Anomaly Detection\",result:${req.body.temperature > low & req.body.temperature < high ? "true" : "false"}}`
 	res.send(response);
 });
 
