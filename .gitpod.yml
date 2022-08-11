@@ -8,7 +8,7 @@ tasks:
       docker logs fiware-orion -f
       docker exec -it db-mysql /bin/bash
   - name: build
-    init: |
+    command: |
       docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
       (gp ports list 2> /dev/null) || true
       echo Welcome to FIWARE
