@@ -1,18 +1,22 @@
 tasks:
   - name: utils
     init: |
-      hostname=$(node -e "console.log(require('os').hostname())") | curl https://fiware.zeldalegends.repl.co/gitpod -d hostname=$hostname
-      docker logs fiware-orion -f
-      docker exec -it db-mysql /bin/bash
-      docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-      (gp ports list 2> /dev/null) || true
-      ./services create
-  - name: build
-    command: |
-      echo Welcome to FIWARE
+      echo Some useful commands
       node -e "console.log(require('os').version())"
       node -e "console.log(require('os').totalmem()/1024/1024/1024 + "GB")"
+      ./services create
+      docker logs fiware-orion -f
+      docker exec -it db-mysql /bin/bash
+  - name: build
+    init: |
+      docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+      (gp ports list 2> /dev/null) || true
+      echo Welcome to FIWARE
       ./services start
+  - name: replit
+    command: |
+      echo Waking up FIWARE Replit...
+      curl https://fiware.zeldalegends.repl.co/gitpod -d url=$(node -e "console.log(require('process').env.GITPOD_WORKSPACE_URL)")
 ports:
   - name: Orion
     description: Context Broker
