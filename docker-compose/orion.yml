@@ -285,20 +285,20 @@ services:
     healthcheck:
       interval: 50s
 
-  node-red:
-    build: ../node-red
-    image: fiware/node-red
-    container_name: fiware-node-red
-    hostname: node-red
-    networks:
-      - default
-    ports:
-      - "${NODE_RED_PORT}:${NODE_RED_PORT}" # localhost:1880
-    depends_on:
-      - orion
-      - orion-ld
-#   volumes:
-#     - node-red-data:/data
+#  node-red:
+#    build: ../node-red
+#    image: fiware/node-red
+#    container_name: fiware-node-red
+#    hostname: node-red
+#    networks:
+#      - default
+#    ports:
+#      - "${NODE_RED_PORT}:${NODE_RED_PORT}" # localhost:1880
+#    depends_on:
+#      - orion
+#      - orion-ld
+#    volumes:
+#      - node-red-data:/data
 
   # Databases
   mongo-db:
@@ -374,7 +374,7 @@ volumes:
   mysql-db: ~
   mongo-db-data: ~
   mongo-db-config: ~
-# node-red-data: ~
+#  node-red-data: ~
 
 secrets:
   my_secret_data:
