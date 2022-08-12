@@ -287,7 +287,7 @@ services:
 
   # Sample Web App
   web-app:
-    image: node
+    image: node:${NODE_VERSION}
     container_name: fiware-web-app
     hostname: web-app
     networks:
