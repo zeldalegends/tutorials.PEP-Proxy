@@ -1,19 +1,33 @@
 tasks:
   - name: utils
     init: |
-      echo Some useful commands
+      echo -e "\033[1;44mSome useful commands\033[0m"
+      echo -e "\033[1;32mNode.js\033[0m"
       node -e "console.log(require('os').version())"
+      echo -e "\033[1;36mDocker\033[0m"
       docker logs fiware-orion -f
       docker exec -it db-mysql /bin/bash
       docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
       (gp ports list 2> /dev/null) || true
-      ./services create
+      echo -e "\033[1;31mMySQL\033[0m"
+      echo -e "\033[0;32mGenerate hash for access token\033[0m"
+      node -e "console.log(require('crypto').createHash('sha3-256').update('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx').digest('hex'))"
+      echo -e "\033[0;32mmMySQL dump and restore\033[0m"
+      echo "docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > mysql-data/backup.sql"
+      echo "cat ./mysql-data/backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm"
   - name: build
+    init: |
+      echo -e "\033[1;34mWelcome to FIWARE\033[0m"
+      docker compose pull
     command: |
-      echo Welcome to FIWARE
-      ./services start
-      echo Waking up FIWARE Replit...
+      docker compose down -v --remove-orphans
+      docker compose up -d --remove-orphans --build
+      while ! [ `docker inspect --format='{{.State.Health.Status}}' fiware-keyrock` == "healthy" ] echo -"Waiting for Keyrock..." & sleep 5
+      cat ./mysql-data/backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm
+      echo -e "\033[0;32mWaking up FIWARE Node-RED app on Replit...\033[0m"
       curl https://fiware.zeldalegends.repl.co/gitpod -d url=$(node -e "console.log(require('process').env.GITPOD_WORKSPACE_URL)")
+      docker compose logs -f
+
 ports:
   - name: Orion
     description: Context Broker
@@ -37,6 +51,10 @@ ports:
     description: Flow-programming automation
     port: 1880
     onOpen: notify
+  - name: Wilma (Node-RED)
+    description: Node-RED PEP Proxy
+    port: 1881
+    onOpen: ignore
     visibility: public
   - name: Tutorial App
     description: Web app displaying context data
@@ -64,12 +82,12 @@ ports:
     description: Ultralight HTTP measures
     port: 7896
     onOpen: ignore
-  - name: Express App
-    description: Web application
+  - name: Web App
+    description: Simple web service
     port: 8000
     onOpen: notify
-  - name: Wilma (Express)
-    description: Express PEP Proxy
+  - name: Wilma (Web App)
+    description: Web App PEP Proxy
     port: 8001
     onOpen: ignore
     visibility: public
