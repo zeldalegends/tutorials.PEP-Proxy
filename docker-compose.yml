@@ -311,7 +311,7 @@ services:
       - node-red-data:/data
 
   # PEP Proxy for Node-RED
-  express-proxy:
+  node-red-proxy:
     #image: pep-slim
     image: fiware/pep-proxy:8.1.0-distroless
     container_name: fiware-node-red-proxy
