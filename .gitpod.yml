@@ -13,8 +13,8 @@ tasks:
       echo -e "\033[0;32mGenerate hash for access token\033[0m"
       node -e "console.log(require('crypto').createHash('sha3-256').update('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx').digest('hex'))"
       echo -e "\033[0;32mmMySQL dump and restore\033[0m"
-      echo "docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > mysql-data/backup.sql"
-      echo "cat ./mysql-data/backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm"
+      docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > mysql-data/backup.sql
+      cat ./mysql-data/backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm
   - name: build
     init: |
       echo -e "\033[1;34mWelcome to FIWARE\033[0m"
