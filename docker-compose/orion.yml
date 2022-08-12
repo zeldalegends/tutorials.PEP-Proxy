@@ -308,7 +308,10 @@ services:
            if (req.url.startsWith('/v'))
              res.write('1.0.0, by Alerox 2022.');
            else
-             res.write('Usage: /test?d=device&t=temperature');
+             res.write('<html>' +
+               '<h1>Simple ADS</h1>' +
+               '<h3>by Alerox, 2022</h3>' +
+               'Usage <code>/test?d=device&t=temperature</code></html>');
          }
          res.end();
        }).listen(PORT);
