@@ -20,7 +20,7 @@ version: "3.9"
 services:
   # Orion is the context broker
   orion:
-    image: fiware/orion #:3.0.0
+    image: fiware/orion:3.0.0
     hostname: orion
     container_name: fiware-orion
     depends_on:
@@ -37,7 +37,7 @@ services:
       interval: 15s
 
   orion-ld:
-    image: fiware/orion-ld #:1.1.0
+    image: fiware/orion-ld:1.1.0
     hostname: orion-ld
     container_name: fiware-orion-ld
     depends_on:
@@ -55,7 +55,7 @@ services:
 
   # IoT-Agent is configured for the UltraLight Protocol
   iot-agent:
-    image: fiware/iotagent-ul #:1.20.0-distroless
+    image: fiware/iotagent-ul:1.20.0-distroless
     hostname: iot-agent
     container_name: fiware-iot-agent
     depends_on:
@@ -86,7 +86,7 @@ services:
 
   # Keyrock is an Identity Management Front-End
   keyrock:
-    image: fiware/idm #:8.1.0-distroless
+    image: fiware/idm:8.1.0-distroless
     #image: keyrock-slim
     container_name: fiware-keyrock
     hostname: keyrock
@@ -117,7 +117,7 @@ services:
   # PEP Proxy for Orion
   orion-proxy:
     #image: pep-slim
-    image: fiware/pep-proxy #:8.1.0-distroless
+    image: fiware/pep-proxy:8.1.0-distroless
     container_name: fiware-orion-proxy
     hostname: orion-proxy
     networks:
@@ -155,7 +155,7 @@ services:
   # PEP Proxy for Orion LD
   orion-ld-proxy:
     #image: pep-slim
-    image: fiware/pep-proxy #:8.1.0-distroless
+    image: fiware/pep-proxy:8.1.0-distroless
     container_name: fiware-orion-ld-proxy
     hostname: orion-ld-proxy
     networks:
@@ -240,8 +240,12 @@ services:
   # Result in payload.result
   web-app:
     image: node
+    container_name: fiware-web-app
+    hostname: web-app
+    networks:
+      - default
     ports:
-      - "8000:8000"
+      - "8000:8000" # localhost:8000
     command: node -e \
       "require('http').createServer(function(req, res) {
         var test = require('querystring').parse(req.url.replace('/test?',''));
@@ -250,13 +254,16 @@ services:
         res.write(JSON.stringify(test));
         res.end();
       }).listen(8000);"
-  
+    healthcheck: 
+      test: curl -f http://web-app:8000 || exit 1
+
+
   # PEP Proxy for Web App
   express-proxy:
     #image: pep-slim
-    image: fiware/pep-proxy #:8.1.0-distroless
-    container_name: fiware-webapp-proxy
-    hostname: webapp-proxy
+    image: fiware/pep-proxy:8.1.0-distroless
+    container_name: fiware-web-app-proxy
+    hostname: web-app-proxy
     networks:
       - default
     depends_on:
@@ -272,7 +279,7 @@ services:
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
-      - PEP_PROXY_APP_HOST=express
+      - PEP_PROXY_APP_HOST=web-app
       - PEP_PROXY_APP_PORT=8000
       - PEP_PROXY_PORT=8001
       - PEP_PROXY_IDM_HOST=keyrock
@@ -290,7 +297,7 @@ services:
       interval: 50s
 
   node-red:
-    image: nodered/node-red #:3.0.2
+    image: nodered/node-red:3.0.2
     container_name: fiware-node-red
     hostname: node-red
     networks:
@@ -306,9 +313,9 @@ services:
   # PEP Proxy for Node-RED
   express-proxy:
     #image: pep-slim
-    image: fiware/pep-proxy #:8.1.0-distroless
-    container_name: fiware-nodered-proxy
-    hostname: nodered-proxy
+    image: fiware/pep-proxy:8.1.0-distroless
+    container_name: fiware-node-red-proxy
+    hostname: node-red-proxy
     networks:
       - default
     depends_on:
@@ -324,7 +331,7 @@ services:
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
-      - PEP_PROXY_APP_HOST=express
+      - PEP_PROXY_APP_HOST=node-red
       - PEP_PROXY_APP_PORT=1880
       - PEP_PROXY_PORT=1881
       - PEP_PROXY_IDM_HOST=keyrock
@@ -343,7 +350,7 @@ services:
 
   # Databases
   mongo-db:
-    image: mongo #:4.4
+    image: mongo:4.4
     hostname: mongo-db
     container_name: db-mongo
     networks:
@@ -354,7 +361,7 @@ services:
       - "27017:27017" # localhost:27017
     command: --nojournal
     volumes:
-      - mongo-db-data:/data/db
+      - mongo-db:/data/db
 #     - mongo-db-config:/data/configdb
       - ./mongo-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     healthcheck:
@@ -366,7 +373,7 @@ services:
     
   mongo-express:
     restart: always
-    image: mongo-express #:1.0.0-alpha
+    image: mongo-express:1.0.0-alpha
     container_name: mongo-express
     depends_on:
       mongo-db:
@@ -415,10 +422,10 @@ networks:
 
 volumes:
   mysql-db: ~
-  mongo-db-data: ~
+  mongo-db: ~
 # mongo-db-config: ~
   node-red-data: ~
 
-secrets:
-  my_secret_data:
-    file: ./secrets.txt
+# secrets:
+#   my_secret_data:
+#     file: ./secrets.txt
