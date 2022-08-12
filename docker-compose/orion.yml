@@ -295,14 +295,24 @@ services:
     ports:
       - "${WEB_APP_PORT}:${WEB_APP_PORT}" # localhost:8002
     command: node -e \
-      "require('http').createServer(function(req, res) {
-        var test = require('querystring').parse(req.url.replace('/test?',''));
-        if(test.t>75) test.result='Possible short-circuit or spark-gap in device ' + test.d + '!';
-        if(test.t<25) test.result='Is device ' + test.d + ' shut down?';
-        res.write(JSON.stringify(test));
-        res.end();
-      }).listen(${WEB_APP_PORT});
-      console.log("Server started on port " + ${WEB_APP_PORT});"
+      "const PORT=${WEB_APP_PORT};
+       var http=require('http');
+       var parser=require('querystring');
+       http.createServer(function(req, res) {
+         if (req.url.startsWith('/test?')) {
+           var test = parser.parse(req.url.replace('/test?', ''));
+           if (test.t > 75) test._result = 'Possible short-circuit or spark-gap in device ' + test.d + '.';
+           if (test.t < 25) test._result = 'Is device ' + test.d + ' shut down?';
+           res.write(JSON.stringify(test));
+         } else {
+           if (req.url.startsWith('/v'))
+             res.write('1.0.0, by Alerox 2022.');
+           else
+             res.write('Usage: /test?d=device&t=temperature');
+         }
+         res.end();
+       }).listen(PORT);
+       console.log(`Server started on port ${PORT}`);"
     healthcheck: 
       test: curl -f http://web-app:${WEB_APP_PORT} || exit 1
   
