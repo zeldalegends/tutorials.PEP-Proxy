@@ -83,8 +83,7 @@ services:
     ports:
       - "8082:8082" # localhost:8002
     command: node -e \
-      "const PORT=8082;
-       var http=require('http');
+      "var http=require('http');
        var parser=require('querystring');
        http.createServer(function(req, res) {
          if (req.url.startsWith('/test?')) {
@@ -102,13 +101,14 @@ services:
                'Usage <code>/test?d=device&t=temperature</code></html>');
          }
          res.end();
-       }).listen(PORT);
+       }).listen(8082);
        console.log('USEFUL COMMANDS');
        console.log('cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm');
        console.log('docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql');
        console.log('(gp ports list 2> /dev/null) || true');
+       console.log(`docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'`);"
        console.log('');
-       console.log(`Server started on port ${PORT}`);"
+       console.log(`Server started on port 8082`);"
   
   web-app-proxy:
     image: fiware/pep-proxy:8.1.0-distroless
