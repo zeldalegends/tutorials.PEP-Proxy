@@ -1,0 +1,68 @@
+services:
+  orion:
+    image: fiware/orion:3.0.0
+    hostname: orion
+    ports:
+      - "1026:1026" # localhost:1026
+    command: -dbhost mongo-db -logLevel DEBUG
+
+  orion-ld:
+    image: fiware/orion-ld:1.1.0
+    hostname: orion-ld
+    ports:
+      - "1028:1026" # localhost:1028
+    command: -dbhost mongo-db -db orionld -logLevel DEBUG
+
+  node-red:
+    image: nodered/node-red
+    hostname: node-red
+    ports:
+      - "1880:1880" # localhost:1880
+
+  web-app:
+    image: node:16-alpine
+    hostname: web-app
+    ports:
+      - "8082:8082" # localhost:8002
+    command: node -e \
+      "var http=require('http');
+       var parser=require('querystring');
+       http.createServer(function(req, res) {
+         if (req.url.startsWith('/test?')) {
+           var test = parser.parse(req.url.replace('/test?', ''));
+           if (test.t > 75) test._result = 'Possible short-circuit or spark-gap in device ' + test.d + '.';
+           if (test.t < 25) test._result = 'Is device ' + test.d + ' shut down?';
+           res.write(JSON.stringify(test));
+         } else {
+           if (req.url.startsWith('/v'))
+             res.write('1.0.0, by Alerox 2022.');
+           else
+             res.write('<html>' +
+               '<h1>Simple ADS</h1>' +
+               '<h3>by Alerox, 2022</h3>' +
+               'Usage <code>/test?d=device&t=temperature</code></html>');
+         }
+         res.end();
+       }).listen(8082);
+       console.log('USEFUL COMMANDS');
+       console.log('cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm');
+       console.log('docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql');
+       console.log('(gp ports list 2> /dev/null) || true');
+       console.log('docker ps --format \'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}\'');
+       console.log();
+       console.log(`Server started on port 8082`);"
+
+  mongo-db:
+    image: mongo:4.4
+    hostname: mongo-db
+    ports:
+      - "27017:27017" # localhost:27017
+    command: --nojournal
+    
+  mongo-express:
+    image: mongo-express:1.0.0-alpha
+    hostname: mongo-express
+    ports:
+      - "8081:8081" # localhost:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo-db
