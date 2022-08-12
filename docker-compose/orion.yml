@@ -144,7 +144,7 @@ services:
       - PEP_PROXY_IDM_SSL_ENABLED=false
       - PEP_PROXY_IDM_PORT=${KEYROCK_PORT}
       - PEP_PROXY_APP_ID=${KEYROCK_CLIENT_ID}
-      - PEP_PROXY_USERNAME=${WILMA_PEP_PROXY_USERNAME}
+      - PEP_PROXY_USERNAME=${PEP_PROXY_USERNAME}
       - PEP_PASSWORD=test
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
@@ -182,7 +182,7 @@ services:
       - PEP_PROXY_IDM_SSL_ENABLED=false
       - PEP_PROXY_IDM_PORT=${KEYROCK_PORT}
       - PEP_PROXY_APP_ID=${KEYROCK_CLIENT_ID}
-      - PEP_PROXY_USERNAME=${WILMA_PEP_PROXY_USERNAME}
+      - PEP_PROXY_USERNAME=${PEP_PROXY_USERNAME}
       - PEP_PASSWORD=test
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
@@ -235,7 +235,7 @@ services:
       - "KEYROCK_CLIENT_SECRET=${KEYROCK_CLIENT_SECRET}"
       - "CALLBACK_URL=http://localhost:${TUTORIAL_APP_PORT}/login"
 
-  # Express sample service
+  # Sample Express App
   express-app:
     build: ../express-app/.
     container_name: fiware-express-app
@@ -247,12 +247,12 @@ services:
     healthcheck: 
       test: curl -f http://express-app:${EXPRESS_APP_PORT} || exit 1
   
-  # PEP Proxy for Express
-  express-proxy:
+  # PEP Proxy for Express App
+  express-app-proxy:
     #image: pep-slim
     image: fiware/pep-proxy:${WILMA_VERSION}
-    container_name: fiware-express-proxy
-    hostname: express-proxy
+    container_name: fiware-express-app-proxy
+    hostname: express-app-proxy
     networks:
       - default
     depends_on:
@@ -262,22 +262,22 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "${EXPRESS_PROXY_PORT}:${EXPRESS_PROXY_PORT}" # localhost:8001
+      - "${EXPRESS_APP_PROXY_PORT}:${EXPRESS_APP_PROXY_PORT}" # localhost:8001
     expose:
-      - "${EXPRESS_PROXY_PORT}"
+      - "${EXPRESS_APP_PROXY_PORT}"
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
-      - PEP_PROXY_APP_HOST=express
+      - PEP_PROXY_APP_HOST=express-app
       - PEP_PROXY_APP_PORT=${EXPRESS_APP_PORT}
-      - PEP_PROXY_PORT=${EXPRESS_PROXY_PORT}
+      - PEP_PROXY_PORT=${EXPRESS_APP_PROXY_PORT}
       - PEP_PROXY_IDM_HOST=keyrock
       - PEP_PROXY_HTTPS_ENABLED=false
       - PEP_PROXY_AUTH_ENABLED=false
       - PEP_PROXY_IDM_SSL_ENABLED=false
       - PEP_PROXY_IDM_PORT=${KEYROCK_PORT}
       - PEP_PROXY_APP_ID=${KEYROCK_CLIENT_ID}
-      - PEP_PROXY_USERNAME=${WILMA_PEP_PROXY_USERNAME}
+      - PEP_PROXY_USERNAME=${PEP_PROXY_USERNAME}
       - PEP_PASSWORD=test
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
@@ -285,20 +285,119 @@ services:
     healthcheck:
       interval: 50s
 
-#  node-red:
-#    build: ../node-red
-#    image: fiware/node-red
-#    container_name: fiware-node-red
-#    hostname: node-red
-#    networks:
-#      - default
-#    ports:
-#      - "${NODE_RED_PORT}:${NODE_RED_PORT}" # localhost:1880
-#    depends_on:
-#      - orion
-#      - orion-ld
-#    volumes:
-#      - node-red-data:/data
+  # Sample Web App
+  web-app:
+    image: node
+    container_name: fiware-web-app
+    hostname: web-app
+    networks:
+      - default
+    ports:
+      - "${WEB_APP_PORT}:${WEB_APP_PORT}" # localhost:8002
+    command: node -e \
+      "require('http').createServer(function(req, res) {
+        var test = require('querystring').parse(req.url.replace('/test?',''));
+        if(test.t>75) test.result='Possible short-circuit or spark-gap in device ' + test.d + '!';
+        if(test.t<25) test.result='Is device ' + test.d + ' shut down?';
+        res.write(JSON.stringify(test));
+        res.end();
+      }).listen(${WEB_APP_PORT});
+      console.log("Server started on port " + ${WEB_APP_PORT});"
+    healthcheck: 
+      test: curl -f http://web-app:${WEB_APP_PORT} || exit 1
+  
+  # PEP Proxy for Web App
+  web-app-proxy:
+    #image: pep-slim
+    image: fiware/pep-proxy:${WILMA_VERSION}
+    container_name: fiware-web-app-proxy
+    hostname: web-app-proxy
+    networks:
+      - default
+    depends_on:
+      keyrock:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "${WEB_APP_PROXY_PORT}:${WEB_APP_PROXY_PORT}" # localhost:8003
+    expose:
+      - "${WEB_APP_PROXY_PORT}"
+    environment:
+      - DEBUG=pep-proxy:*
+      - PEP_PROXY_DEBUG=true
+      - PEP_PROXY_APP_HOST=web-app
+      - PEP_PROXY_APP_PORT=${WEB_APP_PORT}
+      - PEP_PROXY_PORT=${WEB_APP_PROXY_PORT}
+      - PEP_PROXY_IDM_HOST=keyrock
+      - PEP_PROXY_HTTPS_ENABLED=false
+      - PEP_PROXY_AUTH_ENABLED=false
+      - PEP_PROXY_IDM_SSL_ENABLED=false
+      - PEP_PROXY_IDM_PORT=${KEYROCK_PORT}
+      - PEP_PROXY_APP_ID=${KEYROCK_CLIENT_ID}
+      - PEP_PROXY_USERNAME=${PEP_PROXY_USERNAME}
+      - PEP_PASSWORD=test
+      - PEP_PROXY_PDP=idm
+      - PEP_PROXY_MAGIC_KEY=1234
+      - PEP_PROXY_PUBLIC_PATHS=/version
+    healthcheck:
+      interval: 50s
+
+  # Node-RED for flow-programming automation
+  node-red:
+    build: ../node-red
+    image: fiware/node-red
+    container_name: fiware-node-red
+    hostname: node-red
+    networks:
+      - default
+    ports:
+      - "${NODE_RED_PORT}:${NODE_RED_PORT}" # localhost:1880
+    depends_on:
+     - orion
+      - orion-ld
+    volumes:
+      - node-red-data:/data
+
+  # PEP Proxy for Node-RED
+  node-red-proxy:
+    #image: pep-slim
+    image: fiware/pep-proxy:${WILMA_VERSION}
+    container_name: fiware-node-red-proxy
+    hostname: node-red-proxy
+    networks:
+      - default
+    depends_on:
+      keyrock:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "${NODE_RED_PROXY_PORT}:${NODE_RED_PROXY_PORT}" # localhost:1881
+    expose:
+      - "${NODE_RED_PROXY_PORT}"
+    environment:
+      - DEBUG=pep-proxy:*
+      - PEP_PROXY_DEBUG=true
+      - PEP_PROXY_APP_HOST=node-red
+      - PEP_PROXY_APP_PORT=${NODE_RED_PORT}
+      - PEP_PROXY_PORT=${NODE_RED_PROXY_PORT}
+      - PEP_PROXY_IDM_HOST=keyrock
+      - PEP_PROXY_HTTPS_ENABLED=false
+      - PEP_PROXY_AUTH_ENABLED=false
+      - PEP_PROXY_IDM_SSL_ENABLED=false
+      - PEP_PROXY_IDM_PORT=${KEYROCK_PORT}
+      - PEP_PROXY_APP_ID=${KEYROCK_CLIENT_ID}
+      - PEP_PROXY_USERNAME=${PEP_PROXY_USERNAME}
+      - PEP_PASSWORD=test
+      - PEP_PROXY_PDP=idm
+      - PEP_PROXY_MAGIC_KEY=1234
+      - PEP_PROXY_PUBLIC_PATHS=/version
+    healthcheck:
+      interval: 50s
+
 
   # Databases
   mongo-db:
@@ -313,7 +412,7 @@ services:
       - "${MONGO_DB_PORT}:${MONGO_DB_PORT}" # localhost:27017
     command: --nojournal
     volumes:
-      - mongo-db-data:/data/db
+      - mongo-db:/data/db
       - mongo-db-config:/data/configdb
 #     - ../mongo-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     healthcheck:
@@ -344,6 +443,7 @@ services:
       retries: 20
 
   mysql-db:
+  # cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm
     restart: always
     image: mysql:${MYSQL_DB_VERSION}
     hostname: mysql-db
@@ -372,9 +472,9 @@ networks:
 
 volumes:
   mysql-db: ~
-  mongo-db-data: ~
+  mongo-db: ~
   mongo-db-config: ~
-#  node-red-data: ~
+  node-red-data: ~
 
 secrets:
   my_secret_data:
