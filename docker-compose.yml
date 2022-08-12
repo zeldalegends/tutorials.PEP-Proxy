@@ -355,8 +355,8 @@ services:
     command: --nojournal
     volumes:
       - mongo-db-data:/data/db
-      - mongo-db-config:/data/configdb
-     - ./mongo-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+#     - mongo-db-config:/data/configdb
+      - ./mongo-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     healthcheck:
       test: |
         mongo --quiet mongo-db/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
@@ -416,7 +416,7 @@ networks:
 volumes:
   mysql-db: ~
   mongo-db-data: ~
-  mongo-db-config: ~
+# mongo-db-config: ~
   node-red-data: ~
 
 secrets:
