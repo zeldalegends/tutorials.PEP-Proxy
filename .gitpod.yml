@@ -22,12 +22,10 @@ tasks:
     command: |
       docker compose down -v --remove-orphans
       docker compose up -d --remove-orphans --build
-      while ! [ `docker inspect --format='{{.State.Health.Status}}' fiware-keyrock` == "healthy" ] echo -"Waiting for Keyrock..." & sleep 5
       cat ./mysql-data/backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm
       echo -e "\033[0;32mWaking up FIWARE Node-RED app on Replit...\033[0m"
       curl https://fiware.zeldalegends.repl.co/gitpod -d url=$(node -e "console.log(require('process').env.GITPOD_WORKSPACE_URL)")
       docker compose logs -f
-
 ports:
   - name: Orion
     description: Context Broker
