@@ -16,8 +16,8 @@ relevant to authenticating other services are described in detail.
 [Postman documentation](https://fiware.github.io/tutorials.PEP-Proxy/) for these calls is also available.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6b143a6b3ad8bcba69cf)
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/zeldalegends/tutorials.PEP-Proxy/tree/custom-aio)
-[![Try in PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/zeldalegends/tutorials.PEP-Proxy/custom-aio/docker-compose/docker-compose.yml)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/zeldalegends/tutorials.PEP-Proxy/tree/AIO)
+[![Try in PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/zeldalegends/tutorials.PEP-Proxy/AIO/docker-compose/docker-compose.yml)
 
 -   このチュートリアルは[日本語](README.ja.md)でもご覧いただけます。
 
