@@ -8,8 +8,8 @@ tasks:
       echo -e "\033[0;32mGenerate hash for access token\033[0m"
       node -e "console.log(require('crypto').createHash('sha3-256').update('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx').digest('hex'))"
       echo -e "\033[0;32mmMySQL dump and restore\033[0m"
-      docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > mysql-data/backup.sql
-      cat ./mysql-data/backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm
+      docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql
+      cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm
       echo -e "\033[1;36mDocker\033[0m"
       docker exec -it db-mysql /bin/bash
       docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
