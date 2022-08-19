@@ -1,0 +1,8 @@
+{
+    "a46f63f7bc8183e7": {
+        "privateKey": "${ETHEREUM_PRIVATE_KEY}"
+    },
+    "93b18379800c0f5a": {
+        "keyPrivate": "${ETHEREUM_PRIVATE_KEY}"
+    }
+}
