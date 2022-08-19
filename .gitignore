@@ -35,4 +35,5 @@ jspm_packages/
 .eslintcache
 *.tgz
 .next
-run.bat
+
+setenv.bat
