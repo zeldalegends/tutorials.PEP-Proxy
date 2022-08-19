@@ -61,7 +61,7 @@ services:
     ports:
         - "${LD_CONTEXT_PORT}:${APACHE_SERVER_PORT}"
     volumes:
-        - ../data-models:/usr/local/apache2/htdocs/
+        - ./data-models:/usr/local/apache2/htdocs/
     healthcheck:
       test: (wget --server-response --spider --quiet  http://ld-context/ngsi-context.jsonld 2>&1 | awk 'NR==1{print $$2}'|  grep -q -e "200") || exit 1
 
@@ -249,7 +249,7 @@ services:
 
   # Sample Express App
   express-app:
-    build: ../express-app/.
+    build: ./express-app/.
     container_name: fiware-express-app
     hostname: express-app
     networks:
@@ -371,7 +371,7 @@ services:
 
   # Node-RED for flow-programming automation
   node-red:
-    build: ../node-red
+    build: ./node-red
     image: fiware/node-red
     container_name: fiware-node-red
     hostname: node-red
@@ -436,7 +436,7 @@ services:
     volumes:
       - mongo-db:/data/db
       - mongo-db-config:/data/configdb
-#     - ../mongo-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+#     - ./mongo-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     healthcheck:
       test: |
         mongo --quiet mongo-db/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
@@ -481,7 +481,7 @@ services:
       - "MYSQL_ROOT_HOST=%" # Allow any container to access this database
     volumes:
       - mysql-db:/var/lib/mysql
-      - ../mysql-data:/docker-entrypoint-initdb.d/:ro
+      - ./mysql-data:/docker-entrypoint-initdb.d/:ro
     secrets:
       - my_secret_data
     healthcheck:
@@ -500,4 +500,4 @@ volumes:
 
 secrets:
   my_secret_data:
-    file: ../secrets.txt
+    file: ./secrets.txt
