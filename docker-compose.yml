@@ -494,7 +494,7 @@ services:
       interval: 25s
 
   mongo-express:
-    restart: always
+    restart: on-failure
     image: mongo-express #:1.0.0-alpha
     container_name: mongo-express
     depends_on:
@@ -516,7 +516,7 @@ services:
   mysql-db:
   # docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql # backup
   # cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm # restore
-#   restart: always
+    restart: on-failure
     image: mysql:5 #:5.7 # compliant with the provided dump
     hostname: mysql-db
     container_name: db-mysql
