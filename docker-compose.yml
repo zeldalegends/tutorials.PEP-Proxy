@@ -65,53 +65,36 @@ services:
     healthcheck:
       test: (wget --server-response --spider --quiet  http://ld-context/ngsi-context.jsonld 2>&1 | awk 'NR==1{print $$2}'|  grep -q -e "200") || exit 1
 
-  iot-agent:
-    image: fiware/iotagent-json:1.24.0-distroless
-    hostname: iot-agent
-    container_name: fiware-iot-agent
-    depends_on:
-      - mongo-db
-      - orion
-    networks:
-      - default
-    ports:
-      - "4041:4041" # localhost:4041
-      - "7896:7896" # localhost:7896
-    environment:
-      - IOTA_CB_HOST=orion-proxy # name of the context broker to update context
-      - IOTA_CB_PORT=1027 # port the context broker listens on to update context
-      - IOTA_NORTH_PORT=4041
-      - IOTA_REGISTRY_TYPE=mongodb #Whether to hold IoT device info in memory or in a database
-      - IOTA_LOG_LEVEL=DEBUG # The log level of the IoT Agent
-#     - IOTA_DEFAULT_EXPRESSION_LANGUAGE=jexl
-      - IOTA_TIMESTAMP=true # Supply timestamp information with each measurement
-      - IOTA_CB_NGSI_VERSION=v2 # use NGSIv2 when sending updates for active attributes
-      - IOTA_AUTOCAST=true # Ensure Ultralight number values are read as numbers not strings
-      - IOTA_MONGO_HOST=mongo-db # The host name of MongoDB
-      - IOTA_MONGO_PORT=27017 # The port mongoDB is listening on
-      - IOTA_MONGO_DB=iotagentjson # The name of the database used in mongoDB
+#  # IoT-Agent is configured for the UltraLight Protocol
+#  iot-agent:
+#    image: fiware/iotagent-ul #:1.20.0-distroless
+#    hostname: iot-agent
+#    container_name: fiware-iot-agent
+#    depends_on:
+#      - mongo-db
+#      - orion
+#    networks:
+#      - default
+#    ports:
+#      - "4041:4041" # localhost:4041
+#      - "7896:7896" # localhost:7896
+#    environment:
+#      - IOTA_CB_HOST=orion # name of the context broker to update context
+#      - IOTA_CB_PORT=1026 # port the context broker listens on to update context
+#      - IOTA_NORTH_PORT=4041
+#      - IOTA_REGISTRY_TYPE=mongodb #Whether to hold IoT device info in memory or in a database
+#      - IOTA_LOG_LEVEL=DEBUG # The log level of the IoT Agent
+#      - IOTA_TIMESTAMP=true # Supply timestamp information with each measurement
+#      - IOTA_CB_NGSI_VERSION=v2 # use NGSIv2 when sending updates for active attributes
+#      - IOTA_AUTOCAST=true # Ensure Ultralight number values are read as numbers not strings
+#      - IOTA_MONGO_HOST=mongo-db # The host name of MongoDB
+#      - IOTA_MONGO_PORT=27017 # The port mongoDB is listening on
+#      - IOTA_MONGO_DB=iotagentul # The name of the database used in mongoDB
+#      - IOTA_HTTP_PORT=7896 # The port used for device traffic over HTTP
+#      - IOTA_PROVIDER_URL=http://iot-agent:4041
+#    healthcheck:
+#      interval: 15s
 
-#     - IOTA_HTTP_PORT=7896 # The port used for device traffic over HTTP
-      - IOTA_MQTT_HOST=mosquitto # The host name of the MQTT Broker
-      - IOTA_MQTT_PORT=1883 # The port the MQTT Broker is listening on to receive topics
-#     - IOTA_DEFAULT_RESOURCE=/iot/json
-      - IOTA_DEFAULT_RESOURCE= # Default is blank. I'm using MQTT so I don't need a resource
-      - IOTA_PROVIDER_URL=http://iot-agent:4041
-      - IOTA_DEFAULT_TRANSPORT=MQTT
-      
-      - IOTA_AUTH_ENABLED=true
-      - IOTA_AUTH_TYPE=oauth2
-      - IOTA_AUTH_HEADER=Authorization
-      - IOTA_AUTH_HOST=keyrock
-      - IOTA_AUTH_PORT=3005
-      - IOTA_AUTH_URL=http://keyrock:3005
-      - IOTA_AUTH_CLIENT_ID=tutorial-dckr-site-0000-xpresswebapp
-      - IOTA_AUTH_CLIENT_SECRET=tutorial-dckr-host-0000-clientsecret
-      - IOTA_AUTH_PERMANENT_TOKEN=true
-      - IOTA_AUTH_TOKEN_PATH=/oauth2/token
-
-    healthcheck:
-      interval: 15s
 
   # Keyrock is an Identity Management Front-End
   keyrock:
@@ -390,20 +373,20 @@ services:
   node-red:
     build: ./node-red
   # image: fiware/node-red
-    container_name: node-red-agent
+    container_name: node-red
     hostname: node-red
     networks:
       - default
     ports:
       - "1880:1880" # localhost:1880
-    volumes:
-     - node-red-data:/data
+#   volumes:
+#     - node-red-data:/data
 
   # PEP Proxy for Node-RED
   node-red-proxy:
     #image: pep-slim
     image: fiware/pep-proxy #:8.1.0-distroless
-    container_name: node-red-agent-proxy
+    container_name: node-red-proxy
     hostname: node-red-proxy
     networks:
       - default
@@ -508,23 +491,6 @@ services:
       timeout: 20s
       retries: 10
 
-
-  # Other services
-  mosquitto:
-    image: eclipse-mosquitto:1.6.15
-    hostname: mosquitto
-    container_name: mosquitto
-    expose:
-      - "1883"
-      - "9001"
-    ports:
-      - "1883:1883" # localhost:1883
-      - "9001:9001" # localhost:9001
-    volumes:
-      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-    networks:
-      - default
-
 networks:
   default:
 
@@ -532,7 +498,7 @@ volumes:
   mysql-db: ~
   mongo-db: ~
   mongo-db-config: ~
-  node-red-data: ~
+# node-red-data: ~
 
 secrets:
   my_secret_data:
