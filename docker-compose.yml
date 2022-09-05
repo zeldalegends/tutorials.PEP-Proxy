@@ -20,22 +20,23 @@ version: "3.9"
 services:
   # Orion is the context broker
   orion:
-    image: fiware/orion #:3.0.0
+    image: fiware/orion #:3.7.0
     hostname: orion
     container_name: fiware-orion
     depends_on:
       - mongo-db
     networks:
       - default
-#    expose:
-#      - "1026"
-#    ports:
-#      - "1026:1026" # localhost:1026
+#   ports:
+#     - "1026:1026" # localhost:1026
+    expose:
+      - "1026"
     command: -dbhost mongo-db -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion:1026/version || exit 1
       interval: 15s
 
+  # Orion LD is another context broker
   orion-ld:
     image: fiware/orion-ld:1.0.1
     hostname: orion-ld
@@ -44,24 +45,26 @@ services:
       - mongo-db
     networks:
       - default
-#    expose:
-#      - "1026"
-#    ports:
-#      - "1028:1026" # localhost:1028
+#   ports:
+#     - "1028:1026" # localhost:1028
+    expose:
+      - "1026"
     command: -dbhost mongo-db -db orionld -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion-ld:1026/version || exit 1
       interval: 15s
 
-  # @context file server
+  # Apache server for @context files
   ld-context:
     image: httpd #:alpine
     hostname: ld-context
     container_name: fiware-ld-context
     ports:
-        - "80:80" # localhost[:80]
+      - "80:80" # localhost:80
+    expose:
+      - "80"
     volumes:
-        - ./public:/usr/local/apache2/htdocs/
+      - ./public:/usr/local/apache2/htdocs/
     healthcheck:
       test: (wget --server-response --spider --quiet  http://ld-context/ngsi-context.jsonld 2>&1 | awk 'NR==1{print $$2}'|  grep -q -e "200") || exit 1
 
@@ -95,7 +98,51 @@ services:
 #    healthcheck:
 #      interval: 15s
 
-
+  iot-agent:
+    image: fiware/iotagent-json #:1.24.0-distroless
+    hostname: iot-agent
+    container_name: fiware-iot-agent
+    depends_on:
+      - mongo-db
+      - orion
+    networks:
+      - default
+    ports:
+      - "4041:4041" # localhost:4041
+      - "7896:7896" # localhost:7896
+    environment:
+      - IOTA_CB_HOST=orion-proxy # name of the context broker to update context
+      - IOTA_CB_PORT=1027 # port the context broker listens on to update context
+      - IOTA_NORTH_PORT=4041
+      - IOTA_REGISTRY_TYPE=mongodb #Whether to hold IoT device info in memory or in a database
+      - IOTA_LOG_LEVEL=DEBUG # The log level of the IoT Agent
+#     - IOTA_DEFAULT_EXPRESSION_LANGUAGE=jexl
+      - IOTA_TIMESTAMP=true # Supply timestamp information with each measurement
+      - IOTA_CB_NGSI_VERSION=v2 # use NGSIv2 when sending updates for active attributes
+      - IOTA_AUTOCAST=true # Ensure Ultralight number values are read as numbers not strings
+      - IOTA_MONGO_HOST=mongo-db # The host name of MongoDB
+      - IOTA_MONGO_PORT=27017 # The port mongoDB is listening on
+      - IOTA_MONGO_DB=iotagentjson # The name of the database used in mongoDB
+#     - IOTA_HTTP_PORT=7896 # The port used for device traffic over HTTP
+      - IOTA_MQTT_HOST=mosquitto # The host name of the MQTT Broker
+      - IOTA_MQTT_PORT=1883 # The port the MQTT Broker is listening on to receive topics
+#     - IOTA_DEFAULT_RESOURCE=/iot/json
+      - IOTA_DEFAULT_RESOURCE= # Default is blank. I'm using MQTT so I don't need a resource
+      - IOTA_PROVIDER_URL=http://iot-agent:4041
+      - IOTA_DEFAULT_TRANSPORT=MQTT
+      - IOTA_AUTH_ENABLED=true
+      - IOTA_AUTH_TYPE=oauth2
+      - IOTA_AUTH_HEADER=Authorization
+      - IOTA_AUTH_HOST=keyrock
+      - IOTA_AUTH_PORT=3005
+      - IOTA_AUTH_URL=http://keyrock:3005
+      - IOTA_AUTH_CLIENT_ID=tutorial-dckr-site-0000-xpresswebapp
+      - IOTA_AUTH_CLIENT_SECRET=tutorial-dckr-host-0000-clientsecret
+      - IOTA_AUTH_PERMANENT_TOKEN=true
+      - IOTA_AUTH_TOKEN_PATH=/oauth2/token
+    healthcheck:
+      interval: 15s
+      
   # Keyrock is an Identity Management Front-End
   keyrock:
     image: fiware/idm #:8.1.0-distroless
@@ -108,6 +155,8 @@ services:
       - mysql-db
     ports:
       - "3005:3005" # localhost:3005
+    expose:
+      - "3005"
     environment:
       - DEBUG=idm:*
       - IDM_DB_HOST=mysql-db
@@ -373,20 +422,20 @@ services:
   node-red:
     build: ./node-red
   # image: fiware/node-red
-    container_name: node-red-agent
+    container_name: node-red
     hostname: node-red
     networks:
       - default
     ports:
       - "1880:1880" # localhost:1880
-    volumes:
-     - node-red-data:/data
+#   volumes:
+#     - node-red-data:/data
 
   # PEP Proxy for Node-RED
   node-red-proxy:
     #image: pep-slim
     image: fiware/pep-proxy #:8.1.0-distroless
-    container_name: node-red-agent-proxy
+    container_name: node-red-proxy
     hostname: node-red-proxy
     networks:
       - default
@@ -423,15 +472,15 @@ services:
 
   # Databases
   mongo-db:
-    image: mongo #:4.4
+    image: mongo:5 #:5.0.11 # compliant with Orion LD
     hostname: mongo-db
     container_name: db-mongo
     networks:
       - default
-    expose:
-      - "27017"
     ports:
       - "27017:27017" # localhost:27017
+    expose:
+      - "27017"
     command: --nojournal
     volumes:
       - mongo-db:/data/db
@@ -443,7 +492,7 @@ services:
 #       host=`hostname --ip-address || echo '127.0.0.1'`; 
 #       mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
       interval: 25s
-    
+
   mongo-express:
     restart: always
     image: mongo-express #:1.0.0-alpha
@@ -467,16 +516,16 @@ services:
   mysql-db:
   # docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql # backup
   # cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm # restore
-    restart: always
-    image: mysql:5.7 # compliant with the provided dump
+#   restart: always
+    image: mysql:5 #:5.7 # compliant with the provided dump
     hostname: mysql-db
     container_name: db-mysql
     networks:
       - default
-    expose:
-      - "3306"
     ports:
       - "3306:3306" # localhost:3306
+    expose:
+      - "3306"
     environment:
       - "MYSQL_ROOT_PASSWORD_FILE=/run/secrets/my_secret_data"
 #     - "MYSQL_ROOT_PASSWORD=secret"
@@ -491,6 +540,23 @@ services:
       timeout: 20s
       retries: 10
 
+
+  # Other services
+  mosquitto:
+    image: eclipse-mosquitto:1.6.15
+    hostname: mosquitto
+    container_name: mosquitto
+    networks:
+      - default
+    ports:
+      - "1883:1883" # localhost:1883
+      - "9001:9001" # localhost:9001
+    expose:
+      - "1883"
+      - "9001"
+    volumes:
+      - mosquitto-config:/mosquitto/config
+
 networks:
   default:
 
@@ -498,7 +564,8 @@ volumes:
   mysql-db: ~
   mongo-db: ~
   mongo-db-config: ~
-  node-red-data: ~
+  mosquitto-config: ~
+# node-red-data: ~
 
 secrets:
   my_secret_data:
