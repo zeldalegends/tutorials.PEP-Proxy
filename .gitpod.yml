@@ -24,8 +24,8 @@ tasks:
       echo Waking up FIWARE Node-RED app on Replit...
       curl https://fiware.zeldalegends.repl.co/gitpod -d url=$(node -e "console.log(require('process').env.GITPOD_WORKSPACE_URL)")
 ports:
-  - name: LD Context
-    description: Apache Server for static JSON LD @context files
+  - name: Apache Server
+    description: Static JSON LD @context files
     port: 80
     onOpen: ignore
   - name: Orion
