@@ -15,8 +15,8 @@ tasks:
       docker logs fiware-orion -f
       docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
       (gp ports list 2> /dev/null) || true
-      docker-compose pull
   - name: build
+    init: docker-compose pull
     command: |
       echo Welcome to FIWARE
       docker-compose down -v --remove-orphans
