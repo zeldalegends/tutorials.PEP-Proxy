@@ -27,10 +27,10 @@ services:
       - mongo-db
     networks:
       - default
-#   ports:
-#     - "1026:1026" # localhost:1026
     expose:
       - "1026"
+#   ports:
+#     - "1026:1026" # localhost:1026
     command: -dbhost mongo-db -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion:1026/version || exit 1
@@ -38,17 +38,17 @@ services:
 
   # Orion LD is another context broker
   orion-ld:
-    image: fiware/orion-ld:1.0.1
+    image: fiware/orion-ld:1.0.1 #:1.1.0 # latest stable version
     hostname: orion-ld
     container_name: fiware-orion-ld
     depends_on:
       - mongo-db
     networks:
       - default
-#   ports:
-#     - "1028:1026" # localhost:1028
     expose:
       - "1026"
+#   ports:
+#     - "1028:1026" # localhost:1028
     command: -dbhost mongo-db -db orionld -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion-ld:1026/version || exit 1
@@ -56,13 +56,13 @@ services:
 
   # Apache server for @context files
   ld-context:
-    image: httpd #:alpine
+    image: httpd:alpine
     hostname: ld-context
     container_name: fiware-ld-context
-    ports:
-      - "80:80" # localhost:80
     expose:
       - "80"
+    ports:
+      - "80:80" # localhost:80
     volumes:
       - ./public:/usr/local/apache2/htdocs/
     healthcheck:
@@ -104,9 +104,13 @@ services:
     container_name: fiware-iot-agent
     depends_on:
       - mongo-db
+      - mosquitto
       - orion
     networks:
       - default
+    expose:
+      - "4041"
+      - "7896" 
     ports:
       - "4041:4041" # localhost:4041
       - "7896:7896" # localhost:7896
@@ -147,20 +151,21 @@ services:
   keyrock:
     image: fiware/idm #:8.1.0-distroless
     #image: keyrock-slim
-    container_name: fiware-keyrock
     hostname: keyrock
-    networks:
-      - default
+    container_name: fiware-keyrock
     depends_on:
       - mysql-db
-    ports:
-      - "3005:3005" # localhost:3005
+    networks:
+      - default
     expose:
       - "3005"
+    ports:
+      - "3005:3005" # localhost:3005
     environment:
       - DEBUG=idm:*
       - IDM_DB_HOST=mysql-db
       - IDM_DB_PASS_FILE=/run/secrets/my_secret_data
+#     - IDM_DB_PASS=secret
       - IDM_DB_USER=root
       - IDM_HOST=http://localhost:3005
       - IDM_PORT=3005
@@ -179,20 +184,20 @@ services:
   orion-proxy:
     #image: pep-slim
     image: fiware/pep-proxy #:8.1.0-distroless
-    container_name: fiware-orion-proxy
     hostname: orion-proxy
-    networks:
-      - default
+    container_name: fiware-orion-proxy
     depends_on:
       keyrock:
         condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
-    ports:
-      - "1027:1027" # localhost:1027
+    networks:
+      - default
     expose:
       - "1027"
+    ports:
+      - "1027:1027" # localhost:1027
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
@@ -217,20 +222,20 @@ services:
   orion-ld-proxy:
     #image: pep-slim
     image: fiware/pep-proxy #:8.1.0-distroless
-    container_name: fiware-orion-ld-proxy
     hostname: orion-ld-proxy
-    networks:
-      - default
+    container_name: fiware-orion-ld-proxy
     depends_on:
       keyrock:
         condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
-    ports:
-      - "1029:1029" # localhost:1029
+    networks:
+      - default
     expose:
       - "1029"
+    ports:
+      - "1029:1029" # localhost:1029
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
@@ -299,8 +304,8 @@ services:
    # Sample Express App
   express-app:
     build: ./express-app/.
-    container_name: fiware-express-app
     hostname: express-app
+    container_name: fiware-express-app
     networks:
       - default
     ports:
@@ -312,20 +317,20 @@ services:
   express-app-proxy:
     #image: pep-slim
     image: fiware/pep-proxy #:8.1.0-distroless
-    container_name: fiware-express-app-proxy
     hostname: express-app-proxy
-    networks:
-      - default
+    container_name: fiware-express-app-proxy
     depends_on:
       keyrock:
         condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
-    ports:
-      - "8001:8001" # localhost:8001
+    networks:
+      - default
     expose:
       - "8001"
+    ports:
+      - "8001:8001" # localhost:8001
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
@@ -422,10 +427,12 @@ services:
   node-red:
     build: ./node-red
   # image: fiware/node-red
-    container_name: node-red
     hostname: node-red
+    container_name: node-red
     networks:
       - default
+    expose:
+      - "1880"
     ports:
       - "1880:1880" # localhost:1880
 #   volumes:
@@ -435,20 +442,20 @@ services:
   node-red-proxy:
     #image: pep-slim
     image: fiware/pep-proxy #:8.1.0-distroless
-    container_name: node-red-proxy
     hostname: node-red-proxy
-    networks:
-      - default
+    container_name: node-red-proxy
     depends_on:
       keyrock:
         condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
-    ports:
-      - "1881:1881" # localhost:1881
+    networks:
+      - default
     expose:
       - "1881"
+    ports:
+      - "1881:1881" # localhost:1881
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
@@ -477,10 +484,10 @@ services:
     container_name: db-mongo
     networks:
       - default
-    ports:
-      - "27017:27017" # localhost:27017
     expose:
       - "27017"
+#   ports:
+#     - "27017:27017" # localhost:27017
     command: --nojournal
     volumes:
       - mongo-db:/data/db
@@ -493,26 +500,6 @@ services:
 #       mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
       interval: 25s
 
-  mongo-express:
-    restart: on-failure
-    image: mongo-express #:1.0.0-alpha
-    container_name: mongo-express
-    depends_on:
-      mongo-db:
-        condition: service_healthy
-    hostname: mongo-express
-    networks:
-      - default
-    ports:
-      - "8081:8081" # localhost:8081
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=mongo-db
-    healthcheck:
-      test: "curl -f localhost:8081 || exit 1"
-      interval: 25s
-      timeout: 5s
-      retries: 20
-
   mysql-db:
   # docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql # backup
   # cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm # restore
@@ -522,14 +509,14 @@ services:
     container_name: db-mysql
     networks:
       - default
-    ports:
-      - "3306:3306" # localhost:3306
     expose:
       - "3306"
+#   ports:
+#     - "3306:3306" # localhost:3306
     environment:
-      - "MYSQL_ROOT_PASSWORD_FILE=/run/secrets/my_secret_data"
-#     - "MYSQL_ROOT_PASSWORD=secret"
-      - "MYSQL_ROOT_HOST=%" # Allow any container to access this database
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/my_secret_data
+#     - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_ROOT_HOST=% # Allow any container to access this database
     volumes:
       - mysql-db:/var/lib/mysql
       - ./mysql-data:/docker-entrypoint-initdb.d/:ro
@@ -543,19 +530,47 @@ services:
 
   # Other services
   mosquitto:
-    image: eclipse-mosquitto:1.6.15
+  # docker run -it --rm --name mqtt-subscriber --network fiware_default efrecon/mqtt-client sub -h mosquitto -t "/#"
+  # docker run -it --rm --name mqtt-publisher --network fiware_default efrecon/mqtt-client pub -h mosquitto -m "Hi!" -t "/test"
+    image: eclipse-mosquitto #:1.6.15
     hostname: mosquitto
     container_name: mosquitto
     networks:
       - default
-    ports:
-      - "1883:1883" # localhost:1883
-      - "9001:9001" # localhost:9001
     expose:
       - "1883"
       - "9001"
+    ports:
+      - "1883:1883" # localhost:1883
+      - "9001:9001" # localhost:9001
     volumes:
-      - mosquitto-config:/mosquitto/config
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    healthcheck:
+      test: ["CMD-SHELL", "curl", "-f", "http://localhost:1883" ]
+      interval: 10s
+      timeout: 10s
+      retries: 6
+
+  mongo-express:
+    restart: on-failure
+    image: mongo-express #:1.0.0-alpha
+    hostname: mongo-express
+    container_name: mongo-express
+    depends_on:
+      mongo-db:
+        condition: service_healthy
+    networks:
+      - default
+    ports:
+      - "8081:8081" # localhost:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo-db
+    healthcheck:
+      test: "curl -f localhost:8081 || exit 1"
+      interval: 25s
+      timeout: 5s
+      retries: 20
+
 
 networks:
   default:
@@ -564,7 +579,6 @@ volumes:
   mysql-db: ~
   mongo-db: ~
   mongo-db-config: ~
-  mosquitto-config: ~
 # node-red-data: ~
 
 secrets:
