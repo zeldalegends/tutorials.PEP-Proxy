@@ -16,11 +16,12 @@ tasks:
       docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
       (gp ports list 2> /dev/null) || true
   - name: build
-    init: docker-compose pull
-    command: |
+    init: |
       echo Welcome to FIWARE
-      docker-compose down -v --remove-orphans
-      docker-compose up -d --remove-orphans --build
+      docker compose pull
+    command: |
+      docker compose down -v --remove-orphans
+      docker compose up -d --remove-orphans --build
       echo Waking up FIWARE Node-RED app on Replit...
       curl https://fiware.zeldalegends.repl.co/gitpod -d url=$(node -e "console.log(require('process').env.GITPOD_WORKSPACE_URL)")
 ports:
