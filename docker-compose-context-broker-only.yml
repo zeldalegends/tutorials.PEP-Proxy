@@ -7,17 +7,15 @@ services:
     command: -dbhost mongo
 
   orion-ld:
-    image: fiware/orion-ld:1.0.1 # stable version
+    image: fiware/orion-ld #:1.0.1
     hostname: orion-ld
     ports:
       - "1028:1026" # localhost:1028
     command: -dbhost mongo -db orionld
 
   mongo:
-    image: mongo:5 #:5.0.11
+    image: mongo:5 #:4.4
     hostname: mongo
-    ports:
-      - "27017:27017" # localhost:27017
     command: --nojournal
 
 #  node-red:
