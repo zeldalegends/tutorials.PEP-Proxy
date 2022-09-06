@@ -24,7 +24,7 @@ tasks:
       docker compose pull
     command: |
       docker compose down -v --remove-orphans
-      docker compose up -d --remove-orphans --build
+      docker compose up -d --remove-orphans --build -p fiware
       echo Waking up FIWARE Node-RED app on Replit...
       curl https://fiware.zeldalegends.repl.co/gitpod -d url=$(node -e "console.log(require('process').env.GITPOD_WORKSPACE_URL)")
 ports:
