@@ -6,6 +6,9 @@ tasks:
       echo -e "\033[1;44mSome useful commands\033[0m"
       echo -e "\033[1;32mNode.js\033[0m"
       node -e "console.log(require('os').version())"
+      echo -e "\033[1;33mGitpod\033[0m"
+      (gp ports list 2> /dev/null) || true
+      gp top
       echo -e "\033[1;31mMySQL\033[0m"
       echo -e "\033[0;32mGenerate hash for access token\033[0m"
       node -e "console.log(require('crypto').createHash('sha3-256').update('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx').digest('hex'))"
@@ -19,9 +22,6 @@ tasks:
       docker exec -it db-mysql /bin/bash
       docker logs fiware-orion -f
       docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-      echo -e "\033[1;33mGitpod\033[0m"
-      (gp ports list 2> /dev/null) || true
-      gp top
   - name: build
     init: docker compose pull # runs during prebuild
     command: |
