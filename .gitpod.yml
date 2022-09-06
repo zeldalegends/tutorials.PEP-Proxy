@@ -1,6 +1,7 @@
 tasks:
   - name: utils
     init: |
+      docker pull efrecon/mqtt-client
       echo -e "\033[1;44mSome useful commands\033[0m"
       echo -e "\033[1;32mNode.js\033[0m"
       node -e "console.log(require('os').version())"
