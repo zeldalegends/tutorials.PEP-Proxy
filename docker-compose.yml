@@ -76,8 +76,8 @@ services:
     env_file:
       - ./grafana/grafana.env
     volumes:
-#     - grafana_data:/var/lib/grafana
-      - ./grafana/.db:/var/lib/grafana
+      - grafana_data:/var/lib/grafana
+#     - ./grafana/.db:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/etc/dashboards
     healthcheck:
@@ -694,12 +694,12 @@ services:
 networks:
   default:
 
-# volumes:
-#   grafana_data: ~ 
+volumes:
+  grafana_data: ~ 
 #   influx-data: ~
 #   mysql-data: ~
 #   mongo-data: ~
-#   mongo-config: ~
+#   mongoconfig: ~
 #   node-red-data: ~
 
 # secrets:
