@@ -214,7 +214,7 @@ services:
     container_name: fiware-iot-agent
     depends_on:
       - mongo-db
-      - mosquitto
+      - mqtt
       - orion
     networks:
       - default
@@ -238,7 +238,7 @@ services:
       - IOTA_MONGO_PORT=27017 # The port mongoDB is listening on
       - IOTA_MONGO_DB=iotagentjson # The name of the database used in mongoDB
 #     - IOTA_HTTP_PORT=7896 # The port used for device traffic over HTTP
-      - IOTA_MQTT_HOST=mosquitto # The host name of the MQTT Broker
+      - IOTA_MQTT_HOST=mqtt # The host name of the MQTT Broker
       - IOTA_MQTT_PORT=1883 # The port the MQTT Broker is listening on to receive topics
 #     - IOTA_DEFAULT_RESOURCE=/iot/json
       - IOTA_DEFAULT_RESOURCE= # Default is blank. I'm using MQTT so I don't need a resource
