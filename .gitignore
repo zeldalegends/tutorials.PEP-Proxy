@@ -36,4 +36,5 @@ jspm_packages/
 *.tgz
 .next
 
+setenv.bat
 .db
