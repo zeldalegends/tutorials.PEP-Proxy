@@ -37,3 +37,5 @@ jspm_packages/
 .next
 
 setenv.bat
+.db
+data

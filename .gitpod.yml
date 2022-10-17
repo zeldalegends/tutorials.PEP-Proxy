@@ -127,3 +127,18 @@ ports:
     description: Database for Orion + IoT Agent
     port: 27017
     onOpen: ignore
+  - name: Grafana
+    description: Grafana dashboards
+    port: 3000
+    onOpen: ignore
+    visibility: public
+  - name: Influx
+    description: Time series database
+    port: 8086
+    onOpen: ignore
+    visibility: public
+  - name: Ganache
+    description: Blockchain with Truffle
+    port: 7545
+    onOpen: ignore
+    visibility: public

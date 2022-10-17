@@ -119,7 +119,7 @@ services:
 #     - 7000:7000 # http://localhost:7000
 #     - 9042:9042 # http://localhost:9042
     volumes:
-      - ./cassandra:/var/lib/cassandra 
+      - ./cassandra/.db:/var/lib/cassandra/data
     healthcheck:
     #  test: [ "CMD", "cqlsh", "--username", "cassandra", "--password", "cassandra", "--keyspace", "test" ]
     #  test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
