@@ -549,6 +549,8 @@ services:
       - 1880
     ports:
       - 1880:1880 # http://localhost:1880
+    environment:
+      - TZ=Europe/Amsterdam
 #   volumes:
 #     - node-red-data:/data
 
