@@ -18,6 +18,116 @@
 #
 version: "3.9"
 services:
+  influx-db:
+    restart: always
+    image: influxdb #:2.4.0-alpine
+    hostname: influx-db
+    container_name: db-influx
+    networks:
+      - default
+    expose:
+      - 8086
+    ports:
+      - 8086:8086 # http://localhost:8086
+    env_file:
+      - ./influx/influxdb.env
+    volumes:
+#     - influx-data:/var/lib/influxdb2
+      - ./influx/.db:/var/lib/influxdb2
+      - ./influx/config.yml:/etc/influxdb2/config.yml
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8086/ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  telegraf:
+    restart: always
+    image: telegraf #:1.24.2
+    hostname: telegraf
+    container_name: telegraf
+    depends_on:
+      - influx-db
+    networks:
+      - default
+#   expose:
+#     - 8125/udp
+    ports:
+      - 8125:8125/udp
+    env_file:
+      - ./telegraf/telegraf.env
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+
+  grafana:
+    restart: always
+    image: grafana/grafana-enterprise #:9.2.0
+    hostname: grafana
+    container_name: grafana
+    depends_on:
+      - influx-db
+    networks:
+      - default
+    expose:
+      - 3000
+    ports:
+      - 3000:3000 # http://localhost:3000
+    env_file:
+      - ./grafana/grafana.env
+    volumes:
+#     - grafana_data:/var/lib/grafana
+      - ./grafana/.db:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/etc/dashboards
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  ganache:
+    image: trufflesuite/ganache #:v7.4.4
+    hostname: ganache
+    container_name: truffle-ganache
+    networks:
+      - default
+    expose:
+      - 7545
+    ports:
+      - 7545:7545 # http://localhost:7545
+    command: --database.dbPath /db --server.host 0.0.0.0  --server.port 7545 --wallet.mnemonic "visit carpet logic blame furnace confirm rebel deliver medal mean illness error"
+    volumes:
+      - ./ganache/.db:/db    
+    healthcheck:
+      test: curl -sf -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' localhost:8545
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  cassandra:
+    image: cassandra #:4.0
+    hostname: cassandra
+    container_name: db-cassandra
+    networks:
+      - default
+#   expose:
+#     - 7000
+#     - 9042
+#   ports:
+#     - 7000:7000 # http://localhost:7000
+#     - 9042:9042 # http://localhost:9042
+    volumes:
+      - ./cassandra:/var/lib/cassandra 
+    healthcheck:
+    #  test: [ "CMD", "cqlsh", "--username", "cassandra", "--password", "cassandra", "--keyspace", "test" ]
+    #  test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
+      test: cqlsh -u cassandra -p cassandra -k test
+      interval: 5s
+      timeout: 10s
+      retries: 6
+
   # Orion is the context broker
   orion:
     image: fiware/orion #:3.7.0
@@ -28,9 +138,9 @@ services:
     networks:
       - default
     expose:
-      - "1026"
-#   ports:
-#     - "1026:1026" # localhost:1026
+      - 1026
+    ports:
+      - 1026:1026 # http://localhost:1026
     command: -dbhost mongo-db -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion:1026/version || exit 1
@@ -46,9 +156,9 @@ services:
     networks:
       - default
     expose:
-      - "1026"
-#   ports:
-#     - "1028:1026" # localhost:1028
+      - 1026
+    ports:
+      - 1028:1026 # http://localhost:1028
     command: -dbhost mongo-db -db orionld -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion-ld:1026/version || exit 1
@@ -60,9 +170,9 @@ services:
     hostname: ld-context
     container_name: fiware-ld-context
     expose:
-      - "80"
+      - 80
     ports:
-      - "80:80" # localhost:80
+      - 80:80 # http://localhost
     volumes:
       - ./public:/usr/local/apache2/htdocs/
     healthcheck:
@@ -79,8 +189,8 @@ services:
 #    networks:
 #      - default
 #    ports:
-#      - "4041:4041" # localhost:4041
-#      - "7896:7896" # localhost:7896
+#      - "4041:4041" # http://localhost:4041
+#      - "7896:7896" # http://localhost:7896
 #    environment:
 #      - IOTA_CB_HOST=orion # name of the context broker to update context
 #      - IOTA_CB_PORT=1026 # port the context broker listens on to update context
@@ -112,8 +222,8 @@ services:
       - "4041"
       - "7896" 
     ports:
-      - "4041:4041" # localhost:4041
-      - "7896:7896" # localhost:7896
+      - "4041:4041" # http://localhost:4041
+      - "7896:7896" # http://localhost:7896
     environment:
       - IOTA_CB_HOST=orion-proxy # name of the context broker to update context
       - IOTA_CB_PORT=1027 # port the context broker listens on to update context
@@ -158,14 +268,14 @@ services:
     networks:
       - default
     expose:
-      - "3005"
+      - 3005
     ports:
-      - "3005:3005" # localhost:3005
+      - 3005:3005 # http://localhost:3005
     environment:
       - DEBUG=idm:*
       - IDM_DB_HOST=mysql-db
-      - IDM_DB_PASS_FILE=/run/secrets/my_secret_data
-#     - IDM_DB_PASS=secret
+#     - IDM_DB_PASS_FILE=/run/secrets/my_secret_data
+      - IDM_DB_PASS=secret
       - IDM_DB_USER=root
       - IDM_HOST=http://localhost:3005
       - IDM_PORT=3005
@@ -174,8 +284,8 @@ services:
       - IDM_ADMIN_USER=alice
       - IDM_ADMIN_EMAIL=alice-the-admin@test.com
       - IDM_ADMIN_PASS=test
-    secrets:
-      - my_secret_data
+#   secrets:
+#     - my_secret_data
     healthcheck:
       interval: 25s
 
@@ -195,9 +305,9 @@ services:
     networks:
       - default
     expose:
-      - "1027"
+      - 1027
     ports:
-      - "1027:1027" # localhost:1027
+      - 1027:1027 # http://localhost:1027
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
@@ -233,9 +343,9 @@ services:
     networks:
       - default
     expose:
-      - "1029"
+      - 1029
     ports:
-      - "1029:1029" # localhost:1029
+      - 1029:1029 # http://localhost:1029
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
@@ -274,11 +384,11 @@ services:
 #          - tutorial
 #          - context-provider
 #    expose:
-#      - "3000"
-#      - "3001"
+#      - 3000
+#      - 3001
 #    ports:
-#      - "3000:3000" # localhost:3000
-#      - "3001:3001" # localhost:3001
+#      - 3000:3000 # http://localhost:3000
+#      - 3001:3001 # http://localhost:3001
 #    environment:
 #      - "MONGO_URL=mongodb://mongo-db:27017"
 #      - "DEBUG=tutorial:*"
@@ -308,8 +418,10 @@ services:
     container_name: fiware-express-app
     networks:
       - default
+    expose:
+      - 8000
     ports:
-      - "8000:8000" # localhost:8000
+      - 8000:8000 # http://localhost:8000
     healthcheck: 
       test: curl -f http://express-app:8000 || exit 1
   
@@ -328,9 +440,9 @@ services:
     networks:
       - default
     expose:
-      - "8001"
+      - 8001
     ports:
-      - "8001:8001" # localhost:8001
+      - 8001:8001 # http://localhost:8001
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
@@ -358,8 +470,10 @@ services:
 #    hostname: web-app
 #    networks:
 #      - default
+#    expose:
+#      - 8082
 #    ports:
-#      - "8082:8082" # localhost:8002
+#      - 8082:8082 # http://localhost:8002
 #    command: node -e \
 #      "const PORT=8082;
 #       var http=require('http');
@@ -399,10 +513,10 @@ services:
 #    deploy:
 #      restart_policy:
 #        condition: on-failure
-#    ports:
-#      - "8083:8083" # localhost:8003
 #    expose:
-#      - "8083"
+#      - 8083
+#    ports:
+#      - 8083:8083 # http://localhost:8003
 #    environment:
 #      - DEBUG=pep-proxy:*
 #      - PEP_PROXY_DEBUG=true
@@ -432,9 +546,9 @@ services:
     networks:
       - default
     expose:
-      - "1880"
+      - 1880
     ports:
-      - "1880:1880" # localhost:1880
+      - 1880:1880 # http://localhost:1880
 #   volumes:
 #     - node-red-data:/data
 
@@ -453,9 +567,9 @@ services:
     networks:
       - default
     expose:
-      - "1881"
+      - 1881
     ports:
-      - "1881:1881" # localhost:1881
+      - 1881:1881 # http://localhost:1881
     environment:
       - DEBUG=pep-proxy:*
       - PEP_PROXY_DEBUG=true
@@ -485,14 +599,16 @@ services:
     networks:
       - default
     expose:
-      - "27017"
-#   ports:
-#     - "27017:27017" # localhost:27017
+      - 27017
+    ports:
+      - 27017:27017 # http://localhost:27017
     command: --nojournal
     volumes:
-      - mongo-db:/data/db
-      - mongo-db-config:/data/configdb
-      - ./mongo-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+#     - mongo-data:/data/db
+      - ./mongo/.db:/data/db
+#     - mongo-config:/data/configdb
+      - ./mongo:/data/configdb
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     healthcheck:
       test: |
         mongo --quiet mongo-db/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
@@ -510,18 +626,19 @@ services:
     networks:
       - default
     expose:
-      - "3306"
-#   ports:
-#     - "3306:3306" # localhost:3306
+      - 3306
+    ports:
+      - 3306:3306 # http://localhost:3306
     environment:
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/my_secret_data
-#     - MYSQL_ROOT_PASSWORD=secret
+#     - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/my_secret_data
+      - MYSQL_ROOT_PASSWORD=secret
       - MYSQL_ROOT_HOST=% # Allow any container to access this database
     volumes:
-      - mysql-db:/var/lib/mysql
-      - ./mysql-data:/docker-entrypoint-initdb.d/:ro
-    secrets:
-      - my_secret_data
+#     - mysql-data:/var/lib/mysql
+      - ./mysql/.db:/var/lib/mysql
+      - ./mysql/backup.sql:/docker-entrypoint-initdb.d/backup.sql:ro
+#   secrets:
+#     - my_secret_data
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
@@ -529,20 +646,20 @@ services:
 
 
   # Other services
-  mosquitto:
-  # docker run -it --rm --name mqtt-subscriber --network fiware_default efrecon/mqtt-client sub -h mosquitto -t "/#"
-  # docker run -it --rm --name mqtt-publisher --network fiware_default efrecon/mqtt-client pub -h mosquitto -m "Hi!" -t "/test"
+  mqtt:
+  # docker run -it --rm --name mqtt-sub --network fiware_default efrecon/mqtt-client sub -h mqtt -t "test/#"
+  # docker run -it --rm --name mqtt-pub --network fiware_default efrecon/mqtt-client pub -h mqtt -m '{"value":123}' -t "test/A/1"
     image: eclipse-mosquitto #:1.6.15
-    hostname: mosquitto
-    container_name: mosquitto
+    hostname: mqtt
+    container_name: mqtt-broker
     networks:
       - default
     expose:
-      - "1883"
-      - "9001"
+      - 1883
+      - 9001
     ports:
-      - "1883:1883" # localhost:1883
-      - "9001:9001" # localhost:9001
+      - 1883:1883 # http://localhost:1883
+      - 9001:9001 # http://localhost:9001
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     healthcheck:
@@ -561,8 +678,10 @@ services:
         condition: service_healthy
     networks:
       - default
+    expose:
+      - 8081
     ports:
-      - "8081:8081" # localhost:8081
+      - 8081:8081 # http://localhost:8081
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo-db
     healthcheck:
@@ -575,12 +694,14 @@ services:
 networks:
   default:
 
-volumes:
-  mysql-db: ~
-  mongo-db: ~
-  mongo-db-config: ~
-# node-red-data: ~
+# volumes:
+#   grafana_data: ~ 
+#   influx-data: ~
+#   mysql-data: ~
+#   mongo-data: ~
+#   mongo-config: ~
+#   node-red-data: ~
 
-secrets:
-  my_secret_data:
-    file: ./secrets.txt
+# secrets:
+#   my_secret_data:
+#     file: ./secrets.txt

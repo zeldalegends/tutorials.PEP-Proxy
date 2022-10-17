@@ -1,5 +1,515 @@
 [
     {
+        "id": "586836202346c807",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "023d0b1a0f355a68",
+        "type": "group",
+        "z": "586836202346c807",
+        "name": "Deploy contracts",
+        "style": {
+            "fill": "#ffefbf",
+            "label": true
+        },
+        "nodes": [
+            "8d9273372fbeaa0b",
+            "73f5b4033d3fe1c7",
+            "4bc4792033db6463",
+            "4cc52142b1cfcb45",
+            "a69df7b48de15f71",
+            "edd7090d42ff2697",
+            "449c5fe65122148e",
+            "3e44d163de9a97c7",
+            "a0dc6ec1ce848220"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 972,
+        "h": 242
+    },
+    {
+        "id": "c973eae2bf2f2e8e",
+        "type": "group",
+        "z": "586836202346c807",
+        "name": "Make transactions",
+        "style": {
+            "fill": "#bfdbef",
+            "label": true
+        },
+        "nodes": [
+            "df410ceb76643ad0",
+            "37958fdaf6cac99b",
+            "8f348fc076dde448",
+            "f4d0d7ee88617fa5",
+            "a688d75bc4ef4927",
+            "6896c992707b9bc2",
+            "64c2842532a16d78",
+            "1017657d2a0f7df3",
+            "bd1a4c7d2cc06b3c",
+            "7ae183ad6ff11f6e"
+        ],
+        "x": 34,
+        "y": 279,
+        "w": 972,
+        "h": 242
+    },
+    {
+        "id": "63ac671491a13a4b",
+        "type": "ethers-credentials",
+        "name": "0x89a47029b7168a240BD49bd446F79cee6cad11D4",
+        "chainId": "1337",
+        "rpc": "f48988c5bc162b95",
+        "credentialType": "privatekey"
+    },
+    {
+        "id": "f48988c5bc162b95",
+        "type": "ethers-rpc",
+        "name": "Ganache",
+        "rpc": "http://ganache:8545"
+    },
+    {
+        "id": "423d08a2f79941be",
+        "type": "ethers-contract",
+        "name": "Counter",
+        "bytecode": "608060405234801561001057600080fd5b506101f2806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80633fb5c1cb146100465780638381f58a14610062578063d09de08a14610080575b600080fd5b610060600480360381019061005b91906100ee565b61008a565b005b61006a610094565b604051610077919061012a565b60405180910390f35b61008861009a565b005b8060008190555050565b60005481565b6000808154809291906100ac90610174565b9190505550565b600080fd5b6000819050919050565b6100cb816100b8565b81146100d657600080fd5b50565b6000813590506100e8816100c2565b92915050565b600060208284031215610104576101036100b3565b5b6000610112848285016100d9565b91505092915050565b610124816100b8565b82525050565b600060208201905061013f600083018461011b565b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b600061017f826100b8565b91507fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff82036101b1576101b0610145565b5b60018201905091905056fea264697066735822122096af5b974390f7a354af24d560e4e2e9de07a64feacb4c10925ca1550d68745864736f6c63430008110033",
+        "bytecodeType": "str",
+        "abi": "[{\"inputs\":[],\"name\":\"increment\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"number\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newNumber\",\"type\":\"uint256\"}],\"name\":\"setNumber\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+        "abiType": "json"
+    },
+    {
+        "id": "df410ceb76643ad0",
+        "type": "ethers-write-contract",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "increment",
+        "contract": "423d08a2f79941be",
+        "ethCredentials": "63ac671491a13a4b",
+        "method": "increment",
+        "contractAddress": "contract",
+        "contractAddressType": "flow",
+        "params": "[]",
+        "paramsType": "json",
+        "payment": "",
+        "paymentType": "str",
+        "hierarchicalDeterministicWalletIndex": 0,
+        "hierarchicalDeterministicWalletIndexType": "num",
+        "output": "payload",
+        "outputType": "msg",
+        "x": 300,
+        "y": 360,
+        "wires": [
+            [
+                "37958fdaf6cac99b",
+                "8f348fc076dde448",
+                "7ae183ad6ff11f6e"
+            ]
+        ]
+    },
+    {
+        "id": "37958fdaf6cac99b",
+        "type": "ethers-read-contract",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "number",
+        "contract": "423d08a2f79941be",
+        "rpc": "f48988c5bc162b95",
+        "method": "number",
+        "contractAddress": "contract",
+        "contractAddressType": "flow",
+        "params": "[]",
+        "paramsType": "json",
+        "output": "payload",
+        "outputType": "msg",
+        "x": 540,
+        "y": 480,
+        "wires": [
+            [
+                "f4d0d7ee88617fa5"
+            ]
+        ]
+    },
+    {
+        "id": "8d9273372fbeaa0b",
+        "type": "ethers-deploy",
+        "z": "586836202346c807",
+        "g": "023d0b1a0f355a68",
+        "name": "Counter.sol",
+        "contract": "423d08a2f79941be",
+        "ethCredentials": "63ac671491a13a4b",
+        "hierarchicalDeterministicWalletIndex": 0,
+        "hierarchicalDeterministicWalletIndexType": "num",
+        "params": "[]",
+        "paramsType": "json",
+        "output": "payload",
+        "outputType": "msg",
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "4bc4792033db6463"
+            ]
+        ]
+    },
+    {
+        "id": "73f5b4033d3fe1c7",
+        "type": "inject",
+        "z": "586836202346c807",
+        "g": "023d0b1a0f355a68",
+        "name": "Deploy",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "8d9273372fbeaa0b",
+                "a0dc6ec1ce848220",
+                "3e44d163de9a97c7"
+            ]
+        ]
+    },
+    {
+        "id": "4bc4792033db6463",
+        "type": "change",
+        "z": "586836202346c807",
+        "g": "023d0b1a0f355a68",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "contract",
+                "pt": "flow",
+                "to": "payload.contractAddress",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 220,
+        "wires": [
+            [
+                "4cc52142b1cfcb45",
+                "37958fdaf6cac99b",
+                "8f348fc076dde448",
+                "7ae183ad6ff11f6e"
+            ]
+        ]
+    },
+    {
+        "id": "4cc52142b1cfcb45",
+        "type": "debug",
+        "z": "586836202346c807",
+        "g": "023d0b1a0f355a68",
+        "name": "Address",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload.contractAddress",
+        "statusType": "msg",
+        "x": 800,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8f348fc076dde448",
+        "type": "debug",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "# blocks",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload.blockNumber",
+        "statusType": "msg",
+        "x": 800,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "f4d0d7ee88617fa5",
+        "type": "debug",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "[ Result ]",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "$parseInteger(payload._hex,'0')",
+        "statusType": "jsonata",
+        "x": 800,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "a69df7b48de15f71",
+        "type": "debug",
+        "z": "586836202346c807",
+        "g": "023d0b1a0f355a68",
+        "name": "Bytecode",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "bytecode.object",
+        "statusType": "msg",
+        "x": 800,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "edd7090d42ff2697",
+        "type": "debug",
+        "z": "586836202346c807",
+        "g": "023d0b1a0f355a68",
+        "name": "ABI",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "abi",
+        "targetType": "msg",
+        "statusVal": "$lookup(abi, \"name\")\t",
+        "statusType": "jsonata",
+        "x": 790,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "449c5fe65122148e",
+        "type": "comment",
+        "z": "586836202346c807",
+        "g": "023d0b1a0f355a68",
+        "name": "Contract",
+        "info": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.13;\n\ncontract Counter {\n    uint256 public number;\n\n    function setNumber(uint256 newNumber) public {\n        number = newNumber;\n    }\n\n    function increment() public {\n        number++;\n    }\n}",
+        "x": 920,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "a688d75bc4ef4927",
+        "type": "comment",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "Blockchain",
+        "info": "https://getfoundry.sh/",
+        "x": 920,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "3e44d163de9a97c7",
+        "type": "change",
+        "z": "586836202346c807",
+        "g": "023d0b1a0f355a68",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "abi",
+                "pt": "msg",
+                "to": "[     {         \"inputs\": [],         \"name\": \"increment\",         \"outputs\": [],         \"stateMutability\": \"nonpayable\",         \"type\": \"function\"     },     {         \"inputs\": [],         \"name\": \"number\",         \"outputs\": [             {                 \"internalType\": \"uint256\",                 \"name\": \"\",                 \"type\": \"uint256\"             }         ],         \"stateMutability\": \"view\",         \"type\": \"function\"     },     {         \"inputs\": [             {                 \"internalType\": \"uint256\",                 \"name\": \"newNumber\",                 \"type\": \"uint256\"             }         ],         \"name\": \"setNumber\",         \"outputs\": [],         \"stateMutability\": \"nonpayable\",         \"type\": \"function\"     } ]",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 160,
+        "wires": [
+            [
+                "edd7090d42ff2697"
+            ]
+        ]
+    },
+    {
+        "id": "a0dc6ec1ce848220",
+        "type": "change",
+        "z": "586836202346c807",
+        "g": "023d0b1a0f355a68",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "bytecode",
+                "pt": "msg",
+                "to": "{\"functionDebugData\":{},\"generatedSources\":[],\"linkReferences\":{},\"object\":\"608060405234801561001057600080fd5b506101f2806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80633fb5c1cb146100465780638381f58a14610062578063d09de08a14610080575b600080fd5b610060600480360381019061005b91906100ee565b61008a565b005b61006a610094565b604051610077919061012a565b60405180910390f35b61008861009a565b005b8060008190555050565b60005481565b6000808154809291906100ac90610174565b9190505550565b600080fd5b6000819050919050565b6100cb816100b8565b81146100d657600080fd5b50565b6000813590506100e8816100c2565b92915050565b600060208284031215610104576101036100b3565b5b6000610112848285016100d9565b91505092915050565b610124816100b8565b82525050565b600060208201905061013f600083018461011b565b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b600061017f826100b8565b91507fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff82036101b1576101b0610145565b5b60018201905091905056fea264697066735822122096af5b974390f7a354af24d560e4e2e9de07a64feacb4c10925ca1550d68745864736f6c63430008110033\",\"opcodes\":\"PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x1F2 DUP1 PUSH2 0x20 PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x41 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x3FB5C1CB EQ PUSH2 0x46 JUMPI DUP1 PUSH4 0x8381F58A EQ PUSH2 0x62 JUMPI DUP1 PUSH4 0xD09DE08A EQ PUSH2 0x80 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x60 PUSH1 0x4 DUP1 CALLDATASIZE SUB DUP2 ADD SWAP1 PUSH2 0x5B SWAP2 SWAP1 PUSH2 0xEE JUMP JUMPDEST PUSH2 0x8A JUMP JUMPDEST STOP JUMPDEST PUSH2 0x6A PUSH2 0x94 JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH2 0x77 SWAP2 SWAP1 PUSH2 0x12A JUMP JUMPDEST PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST PUSH2 0x88 PUSH2 0x9A JUMP JUMPDEST STOP JUMPDEST DUP1 PUSH1 0x0 DUP2 SWAP1 SSTORE POP POP JUMP JUMPDEST PUSH1 0x0 SLOAD DUP2 JUMP JUMPDEST PUSH1 0x0 DUP1 DUP2 SLOAD DUP1 SWAP3 SWAP2 SWAP1 PUSH2 0xAC SWAP1 PUSH2 0x174 JUMP JUMPDEST SWAP2 SWAP1 POP SSTORE POP JUMP JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH1 0x0 DUP2 SWAP1 POP SWAP2 SWAP1 POP JUMP JUMPDEST PUSH2 0xCB DUP2 PUSH2 0xB8 JUMP JUMPDEST DUP2 EQ PUSH2 0xD6 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP JUMP JUMPDEST PUSH1 0x0 DUP2 CALLDATALOAD SWAP1 POP PUSH2 0xE8 DUP2 PUSH2 0xC2 JUMP JUMPDEST SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x104 JUMPI PUSH2 0x103 PUSH2 0xB3 JUMP JUMPDEST JUMPDEST PUSH1 0x0 PUSH2 0x112 DUP5 DUP3 DUP6 ADD PUSH2 0xD9 JUMP JUMPDEST SWAP2 POP POP SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH2 0x124 DUP2 PUSH2 0xB8 JUMP JUMPDEST DUP3 MSTORE POP POP JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 ADD SWAP1 POP PUSH2 0x13F PUSH1 0x0 DUP4 ADD DUP5 PUSH2 0x11B JUMP JUMPDEST SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH32 0x4E487B7100000000000000000000000000000000000000000000000000000000 PUSH1 0x0 MSTORE PUSH1 0x11 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT JUMPDEST PUSH1 0x0 PUSH2 0x17F DUP3 PUSH2 0xB8 JUMP JUMPDEST SWAP2 POP PUSH32 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF DUP3 SUB PUSH2 0x1B1 JUMPI PUSH2 0x1B0 PUSH2 0x145 JUMP JUMPDEST JUMPDEST PUSH1 0x1 DUP3 ADD SWAP1 POP SWAP2 SWAP1 POP JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 SWAP7 0xAF JUMPDEST SWAP8 NUMBER SWAP1 0xF7 LOG3 SLOAD 0xAF 0x24 0xD5 PUSH1 0xE4 0xE2 0xE9 0xDE SMOD 0xA6 0x4F 0xEA 0xCB 0x4C LT SWAP3 0x5C LOG1 SSTORE 0xD PUSH9 0x745864736F6C634300 ADDMOD GT STOP CALLER \",\"sourceMap\":\"68:202:0:-:0;;;;;;;;;;;;;;;;;;;\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 100,
+        "wires": [
+            [
+                "a69df7b48de15f71"
+            ]
+        ]
+    },
+    {
+        "id": "6896c992707b9bc2",
+        "type": "ethers-write-contract",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "setNumber",
+        "contract": "423d08a2f79941be",
+        "ethCredentials": "63ac671491a13a4b",
+        "method": "setNumber",
+        "contractAddress": "contract",
+        "contractAddressType": "flow",
+        "params": "payload",
+        "paramsType": "msg",
+        "payment": "",
+        "paymentType": "str",
+        "hierarchicalDeterministicWalletIndex": 0,
+        "hierarchicalDeterministicWalletIndexType": "num",
+        "output": "payload",
+        "outputType": "msg",
+        "x": 310,
+        "y": 480,
+        "wires": [
+            [
+                "37958fdaf6cac99b",
+                "8f348fc076dde448",
+                "7ae183ad6ff11f6e"
+            ]
+        ]
+    },
+    {
+        "id": "64c2842532a16d78",
+        "type": "inject",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "Next",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "df410ceb76643ad0"
+            ]
+        ]
+    },
+    {
+        "id": "1017657d2a0f7df3",
+        "type": "inject",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "Random",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[$round($random()*256)]",
+        "payloadType": "jsonata",
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "6896c992707b9bc2"
+            ]
+        ]
+    },
+    {
+        "id": "bd1a4c7d2cc06b3c",
+        "type": "inject",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "Reset",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "NOTA: Input sempre di tipo stringa",
+        "payload": "0",
+        "payloadType": "str",
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "6896c992707b9bc2"
+            ]
+        ]
+    },
+    {
+        "id": "7ae183ad6ff11f6e",
+        "type": "debug",
+        "z": "586836202346c807",
+        "g": "c973eae2bf2f2e8e",
+        "name": "$ gas (ETH)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "$parseInteger(payload.effectiveGasPrice._hex,'0') / 1000000000000000000",
+        "statusType": "jsonata",
+        "x": 810,
+        "y": 420,
+        "wires": []
+    },
+    {
         "id": "d52625fe4d11e746",
         "type": "tab",
         "label": "Test",
