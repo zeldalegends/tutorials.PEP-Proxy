@@ -2,7 +2,6 @@
 tasks:
   - name: utils
     init: |
-      docker pull efrecon/mqtt-client
       echo -e "\033[1;44mSome useful commands\033[0m"
       echo -e "\033[1;32mNode.js\033[0m"
       node -e "console.log(require('os').version())"
@@ -16,8 +15,8 @@ tasks:
       echo "docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql"
       echo "cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm"
       echo -e "\033[1;34mMQTT\033[0m"
-      docker run -it --rm --name mqtt-sub --network fiware_default efrecon/mqtt-client sub -h mosquitto -t "telegraf/#"
-      docker run -it --rm --name mqtt-pub --network fiware_default efrecon/mqtt-client pub -h mosquitto -m '{"id":"TT001","temperature":24}' -t "telegraf/sensor/01"
+      docker exec mqtt-broker mosquitto_sub -t "telegraf/#"
+      docker exec mqtt-broker mosquitto_pub -t "telegraf/sensor/01" -m '{"id":"TT001","temperature":24}'
       echo -e "\033[1;36mDocker\033[0m"
       docker exec -it db-mysql /bin/bash
       (gp ports list 2> /dev/null) || true
@@ -28,11 +27,11 @@ tasks:
       sudo chown -R 472:472 grafana/.db
       sudo chown -R 1000:1000 node-red/data
       echo Welcome to FIWARE
-      docker compose -p fiware down -v --remove-orphans
-      docker compose -p fiware up -d --remove-orphans --build
+      docker compose down -v --remove-orphans
+      docker compose up -d --remove-orphans --build
       echo Waking up FIWARE Node-RED app on Replit...
       curl https://fiware.zeldalegends.repl.co/gitpod -d url=$(node -e "console.log(require('process').env.GITPOD_WORKSPACE_URL)")
-      docker compose -p fiware logs fiware-orion -f
+      docker compose logs fiware-orion -f
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:

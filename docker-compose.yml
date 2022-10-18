@@ -90,7 +90,7 @@ services:
       - GF_INSTALL_PLUGINS=grafana-clock-panel # ,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=grafana
-    user: "0"
+#   user: "0"
     volumes:
 #     - grafana_data:/var/lib/grafana
       - ./grafana/.db:/var/lib/grafana
@@ -660,8 +660,8 @@ services:
 
   # Other services
   mosquitto:
-  # docker run -it --rm --name mqtt-sub --network fiware_default efrecon/mqtt-client sub -h mosquitto -t "test/#"
-  # docker run -it --rm --name mqtt-pub --network fiware_default efrecon/mqtt-client pub -h mosquitto -m '{"value":123}' -t "test/A/1"
+  # docker exec mqtt-broker mosquitto_sub -t 'test/#'
+  # docker exec mqtt-broker mosquitto_pub -t 'test/a/b' -m '{"value":123}'
     image: eclipse-mosquitto #:1.6.15
     hostname: mosquitto
     container_name: mqtt-broker
@@ -676,7 +676,7 @@ services:
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     healthcheck:
-      test: ["CMD-SHELL", "timeout -t 5 mosquitto_sub -t '$$SYS/#' -C 1 | grep -v Error || exit 1"]
+      test: timeout -t 5 mosquitto_sub -t '$SYS/#' -C 1 | grep -v Error || exit 1
       interval: 10s
       timeout: 10s
       retries: 6
