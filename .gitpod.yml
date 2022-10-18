@@ -15,12 +15,12 @@ tasks:
       echo "docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql"
       echo "cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm"
       echo -e "\033[1;34mMQTT\033[0m"
-      docker exec mqtt-broker mosquitto_sub -t "telegraf/#"
       docker exec mqtt-broker mosquitto_pub -t "telegraf/sensor/01" -m '{"id":"TT001","temperature":24}'
+      docker exec mqtt-broker mosquitto_sub -t "telegraf/#"
       echo -e "\033[1;36mDocker\033[0m"
       docker exec -it db-mysql /bin/bash
       (gp ports list 2> /dev/null) || true
-      docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+      docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | grep "unhealthy"
   - name: build
     init: docker compose pull # runs during prebuild
     command: |

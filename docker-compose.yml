@@ -17,15 +17,17 @@
 # see: https://github.com/FIWARE/helm-charts/
 #
 version: "3.9"
+
 services:
+
   influx-db:
     image: influxdb #:2.4.0-alpine
     hostname: influx-db
     container_name: db-influx
     networks:
       - default
-    expose:
-      - 8086
+#   expose:
+#     - 8086
     ports:
       - 8086:8086 # http://localhost:8086
 #   env_file:
@@ -58,8 +60,10 @@ services:
     networks:
       - default
 #   expose:
+#     - 8125
 #     - 8125/udp
-#   ports:
+    ports:
+      - 8125:8125 # http://localhost:8125 # healthcheck
 #     - 8125:8125/udp
 #   env_file:
 #     - ./telegraf/telegraf.env
@@ -69,6 +73,8 @@ services:
       - INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    healthcheck:
+      test: curl -f http://localhost:8125 || exit 1
 
   grafana:
     image: grafana/grafana-enterprise #:9.2.0
@@ -79,8 +85,8 @@ services:
         condition: service_healthy
     networks:
       - default
-    expose:
-      - 3000
+#   expose:
+#     - 3000
     ports:
       - 3000:3000 # http://localhost:3000
 #   env_file:
@@ -109,8 +115,8 @@ services:
     container_name: truffle-ganache
     networks:
       - default
-    expose:
-      - 7545
+#   expose:
+#     - 7545
     ports:
       - 7545:7545 # http://localhost:7545
     command: --database.dbPath /db --server.host 0.0.0.0  --server.port 7545 --wallet.mnemonic "visit carpet logic blame furnace confirm rebel deliver medal mean illness error"
@@ -146,8 +152,8 @@ services:
       - mongo-db
     networks:
       - default
-    expose:
-      - 1026
+#   expose:
+#     - 1026
     ports:
       - 1026:1026 # http://localhost:1026
     command: -dbhost mongo-db -logLevel DEBUG
@@ -164,8 +170,8 @@ services:
       - mongo-db
     networks:
       - default
-    expose:
-      - 1026
+#   expose:
+#     - 1026
     ports:
       - 1028:1026 # http://localhost:1028
     command: -dbhost mongo-db -db orionld -logLevel DEBUG
@@ -178,15 +184,15 @@ services:
     image: httpd:alpine
     hostname: ld-context
     container_name: fiware-ld-context
-    expose:
-      - 80
+#   expose:
+#     - 80
     ports:
       - 80:80 # http://localhost
     volumes:
       - ./public:/usr/local/apache2/htdocs/
     healthcheck:
-      test: (wget --server-response --spider --quiet  http://ld-context/ngsi-context.jsonld 2>&1 | awk 'NR==1{print $$2}'|  grep -q -e "200") || exit 1
-
+#     test: (wget --server-response --spider --quiet  http://ld-context/ngsi-context.jsonld 2>&1 | awk 'NR==1{print $$2}'|  grep -q -e "200") || exit 1
+      test: curl -f http://localhost || exit 1
 #  # IoT-Agent is configured for the UltraLight Protocol
 #  iot-agent:
 #    image: fiware/iotagent-ul #:1.20.0-distroless
@@ -197,9 +203,12 @@ services:
 #      - orion
 #    networks:
 #      - default
+#    expose:
+#      - 4041
+#      - 7896
 #    ports:
-#      - "4041:4041" # http://localhost:4041
-#      - "7896:7896" # http://localhost:7896
+#      - 4041:4041 # http://localhost:4041
+#      - 7896:7896 # http://localhost:7896
 #    environment:
 #      - IOTA_CB_HOST=orion # name of the context broker to update context
 #      - IOTA_CB_PORT=1026 # port the context broker listens on to update context
@@ -227,12 +236,12 @@ services:
       - orion
     networks:
       - default
-    expose:
-      - "4041"
-      - "7896" 
+#   expose:
+#     - 4041
+#     - 7896 
     ports:
-      - "4041:4041" # http://localhost:4041
-      - "7896:7896" # http://localhost:7896
+      - 4041:4041 # http://localhost:4041
+      - 7896:7896 # http://localhost:7896
     environment:
       - IOTA_CB_HOST=orion-proxy # name of the context broker to update context
       - IOTA_CB_PORT=1027 # port the context broker listens on to update context
@@ -276,8 +285,8 @@ services:
       - mysql-db
     networks:
       - default
-    expose:
-      - 3005
+#   expose:
+#     - 3005
     ports:
       - 3005:3005 # http://localhost:3005
     environment:
@@ -308,13 +317,15 @@ services:
     depends_on:
       keyrock:
         condition: service_started
+      orion:
+        condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
     networks:
       - default
-    expose:
-      - 1027
+#   expose:
+#     - 1027
     ports:
       - 1027:1027 # http://localhost:1027
     environment:
@@ -346,13 +357,15 @@ services:
     depends_on:
       keyrock:
         condition: service_started
+      orion-ld:
+        condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
     networks:
       - default
-    expose:
-      - 1029
+#   expose:
+#     - 1029
     ports:
       - 1029:1029 # http://localhost:1029
     environment:
@@ -424,32 +437,34 @@ services:
   express-app:
     build: ./express-app/.
     hostname: express-app
-    container_name: fiware-express-app
+    container_name: express-app
     networks:
       - default
-    expose:
-      - 8000
+#   expose:
+#     - 8000
     ports:
       - 8000:8000 # http://localhost:8000
     healthcheck: 
-      test: curl -f http://express-app:8000 || exit 1
+      test: curl -f http://localhost:8000/test || exit 1
   
   # PEP Proxy for Express App
   express-app-proxy:
     #image: pep-slim
     image: fiware/pep-proxy #:8.1.0-distroless
     hostname: express-app-proxy
-    container_name: fiware-express-app-proxy
+    container_name: express-app-proxy
     depends_on:
       keyrock:
+        condition: service_started
+      express-app:
         condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
     networks:
       - default
-    expose:
-      - 8001
+#   expose:
+#     - 8001
     ports:
       - 8001:8001 # http://localhost:8001
     environment:
@@ -506,7 +521,7 @@ services:
 #       }).listen(PORT);
 #       console.log('Server started on port ' + PORT);"
 #    healthcheck: 
-#      test: curl -f http://web-app:8082 || exit 1
+#      test: curl -f http://localhost:8082 || exit 1
   
 #  # PEP Proxy for Web App
 #  web-app-proxy:
@@ -518,6 +533,8 @@ services:
 #      - default
 #    depends_on:
 #      keyrock:
+#        condition: service_started
+#      web-app:
 #        condition: service_started
 #    deploy:
 #      restart_policy:
@@ -554,13 +571,13 @@ services:
     container_name: node-red
     networks:
       - default
-    expose:
-      - 1880
+#   expose:
+#     - 1880
     ports:
       - 1880:1880 # http://localhost:1880
     environment:
       - TZ=Europe/Amsterdam
-#   volumes:
+    volumes:
 #     - node-red-data:/data
       - ./node-red/data:/data
 
@@ -573,13 +590,15 @@ services:
     depends_on:
       keyrock:
         condition: service_started
+      node-red:
+        condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
     networks:
       - default
-    expose:
-      - 1881
+#   expose:
+#     - 1881
     ports:
       - 1881:1881 # http://localhost:1881
     environment:
@@ -610,8 +629,8 @@ services:
     container_name: db-mongo
     networks:
       - default
-    expose:
-      - 27017
+#   expose:
+#     - 27017
     ports:
       - 27017:27017 # http://localhost:27017
     command: --nojournal
@@ -637,8 +656,8 @@ services:
     container_name: db-mysql
     networks:
       - default
-    expose:
-      - 3306
+#   expose:
+#     - 3306
     ports:
       - 3306:3306 # http://localhost:3306
     environment:
@@ -660,29 +679,29 @@ services:
 
   # Other services
   mosquitto:
-  # docker exec mqtt-broker mosquitto_sub -t 'test/#'
-  # docker exec mqtt-broker mosquitto_pub -t 'test/a/b' -m '{"value":123}'
+  # docker exec mqtt-broker mosquitto_pub -t "telegraf/sensor/01" -m '{"id":"TT001","temperature":24}'
+  # docker exec mqtt-broker mosquitto_sub -t "telegraf/#"
     image: eclipse-mosquitto #:1.6.15
     hostname: mosquitto
     container_name: mqtt-broker
     networks:
       - default
-    expose:
-      - 1883
-      - 9001
+#   expose:
+#     - 1883
+#     - 9001
     ports:
       - 1883:1883 # http://localhost:1883
       - 9001:9001 # http://localhost:9001
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     healthcheck:
-      test: timeout -t 5 mosquitto_sub -t '$SYS/#' -C 1 | grep -v Error || exit 1
+      test: timeout 5 mosquitto_sub -t '$$SYS/#' -C 1 | grep -v Error || exit 1
       interval: 10s
       timeout: 10s
       retries: 6
 
   mongo-express:
-    restart: on-failure
+#   restart: on-failure
     image: mongo-express #:1.0.0-alpha
     hostname: mongo-express
     container_name: mongo-express
@@ -691,8 +710,8 @@ services:
         condition: service_healthy
     networks:
       - default
-    expose:
-      - 8081
+#   expose:
+#     - 8081
     ports:
       - 8081:8081 # http://localhost:8081
     environment:
