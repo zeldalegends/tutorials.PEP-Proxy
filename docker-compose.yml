@@ -70,8 +70,6 @@ services:
       - INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-    healthcheck:
-      - interval: 15s
 
   grafana:
     restart: always
