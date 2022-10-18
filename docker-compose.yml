@@ -29,8 +29,15 @@ services:
       - 8086
     ports:
       - 8086:8086 # http://localhost:8086
-    env_file:
-      - ./influx/influxdb.env
+#   env_file:
+#     - ./influx/influxdb.env
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin
+      - DOCKER_INFLUXDB_INIT_ORG=myorganization
+      - DOCKER_INFLUXDB_INIT_BUCKET=mybucket
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
     volumes:
 #     - influx-data:/var/lib/influxdb2
       - ./influx/.db:/var/lib/influxdb2
@@ -55,8 +62,12 @@ services:
 #     - 8125/udp
     ports:
       - 8125:8125/udp
-    env_file:
-      - ./telegraf/telegraf.env
+#   env_file:
+#     - ./telegraf/telegraf.env
+    environment:
+      - INFLUXDB_INIT_ORG=myorganization
+      - INFLUXDB_INIT_BUCKET=mybucket
+      - INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
@@ -73,11 +84,16 @@ services:
       - 3000
     ports:
       - 3000:3000 # http://localhost:3000
-    env_file:
-      - ./grafana/grafana.env
+#   env_file:
+#     - ./grafana/grafana.env
+    environment:
+      - GF_DEFAULT_INSTANCE_NAME=setup
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
-      - grafana_data:/var/lib/grafana
-#     - ./grafana/.db:/var/lib/grafana
+#     - grafana_data:/var/lib/grafana
+      - ./grafana/.db:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/etc/dashboards
     healthcheck:
@@ -696,8 +712,8 @@ services:
 networks:
   default:
 
-volumes:
-  grafana_data: ~ 
+# volumes:
+#   grafana_data: ~ 
 #   influx-data: ~
 #   mysql-data: ~
 #   mongo-data: ~
