@@ -43,11 +43,11 @@ services:
       - ./influx/.db:/var/lib/influxdb2
       - ./influx/config.yml:/etc/influxdb2/config.yml
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8086/ping"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 40s
+      test: curl -f http://localhost:8086/ping || exit 1
+#     interval: 10s
+#     timeout: 10s
+#     retries: 5
+#     start_period: 40s
 
   telegraf:
     restart: always
@@ -60,8 +60,8 @@ services:
       - default
 #   expose:
 #     - 8125/udp
-    ports:
-      - 8125:8125/udp
+#   ports:
+#     - 8125:8125/udp
 #   env_file:
 #     - ./telegraf/telegraf.env
     environment:
@@ -70,6 +70,8 @@ services:
       - INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    healthcheck:
+      - interval: 15s
 
   grafana:
     restart: always
@@ -99,11 +101,11 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/etc/dashboards
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 40s
+      test: curl -f http://localhost:3000 || exit 1
+#     interval: 10s
+#     timeout: 10s
+#     retries: 5
+#     start_period: 40s
 
   ganache:
     image: trufflesuite/ganache #:v7.4.4
@@ -120,9 +122,9 @@ services:
       - ./ganache/.db:/db    
     healthcheck:
       test: curl -sf -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' localhost:8545
-      interval: 5s
-      timeout: 5s
-      retries: 5
+#     interval: 5s
+#     timeout: 5s
+#     retries: 5
 
   cassandra:
     image: cassandra #:4.0
@@ -142,9 +144,9 @@ services:
     #  test: [ "CMD", "cqlsh", "--username", "cassandra", "--password", "cassandra", "--keyspace", "test" ]
     #  test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
       test: cqlsh -u cassandra -p cassandra -k test
-      interval: 5s
-      timeout: 10s
-      retries: 6
+#     interval: 5s
+#     timeout: 10s
+#     retries: 6
 
   # Orion is the context broker
   orion:
@@ -160,9 +162,9 @@ services:
     ports:
       - 1026:1026 # http://localhost:1026
     command: -dbhost mongo-db -logLevel DEBUG
-    healthcheck:
-      test: curl --fail -s http://orion:1026/version || exit 1
-      interval: 15s
+#   healthcheck:
+#     test: curl --fail -s http://orion:1026/version || exit 1
+#     interval: 15s
 
   # Orion LD is another context broker
   orion-ld:
@@ -180,7 +182,7 @@ services:
     command: -dbhost mongo-db -db orionld -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion-ld:1026/version || exit 1
-      interval: 15s
+#     interval: 15s
 
   # Apache server for @context files
   ld-context:
@@ -223,8 +225,8 @@ services:
 #      - IOTA_MONGO_DB=iotagentul # The name of the database used in mongoDB
 #      - IOTA_HTTP_PORT=7896 # The port used for device traffic over HTTP
 #      - IOTA_PROVIDER_URL=http://iot-agent:4041
-#    healthcheck:
-#      interval: 15s
+##   healthcheck:
+##     interval: 15s
 
   iot-agent:
     image: fiware/iotagent-json #:1.24.0-distroless
@@ -272,8 +274,8 @@ services:
       - IOTA_AUTH_CLIENT_SECRET=tutorial-dckr-host-0000-clientsecret
       - IOTA_AUTH_PERMANENT_TOKEN=true
       - IOTA_AUTH_TOKEN_PATH=/oauth2/token
-    healthcheck:
-      interval: 15s
+#   healthcheck:
+#     interval: 15s
       
   # Keyrock is an Identity Management Front-End
   keyrock:
@@ -304,8 +306,8 @@ services:
       - IDM_ADMIN_PASS=test
 #   secrets:
 #     - my_secret_data
-    healthcheck:
-      interval: 25s
+#   healthcheck:
+#     interval: 25s
 
 
   # PEP Proxy for Orion
@@ -343,8 +345,8 @@ services:
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
       - PEP_PROXY_PUBLIC_PATHS=/version
-    healthcheck:
-      interval: 50s
+#   healthcheck:
+#     interval: 50s
 
   # PEP Proxy for Orion LD
   orion-ld-proxy:
@@ -381,8 +383,8 @@ services:
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
       - PEP_PROXY_PUBLIC_PATHS=/version
-    healthcheck:
-      interval: 50s
+#   healthcheck:
+#     interval: 50s
 
 #  # Tutorial acts as a series of dummy IoT Sensors over HTTP
 #  tutorial:
@@ -478,8 +480,8 @@ services:
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
       - PEP_PROXY_PUBLIC_PATHS=/version
-    healthcheck:
-      interval: 50s
+#   healthcheck:
+#     interval: 50s
 
 #  # Sample Web App
 #  web-app:
@@ -552,8 +554,8 @@ services:
 #      - PEP_PROXY_PDP=idm
 #      - PEP_PROXY_MAGIC_KEY=1234
 #      - PEP_PROXY_PUBLIC_PATHS=/version
-#    healthcheck:
-#      interval: 50s
+##   healthcheck:
+##     interval: 50s
 
   # Node-RED for flow-programming automation
   node-red:
@@ -607,8 +609,8 @@ services:
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
       - PEP_PROXY_PUBLIC_PATHS=/version
-    healthcheck:
-      interval: 50s
+#   healthcheck:
+#     interval: 50s
 
 
   # Databases
@@ -634,7 +636,7 @@ services:
         mongo --quiet mongo-db/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
 #       host=`hostname --ip-address || echo '127.0.0.1'`; 
 #       mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
-      interval: 25s
+#     interval: 25s
 
   mysql-db:
   # docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql # backup
@@ -660,9 +662,10 @@ services:
 #   secrets:
 #     - my_secret_data
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
+      #test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: mysqladmin ping -h localhost
+#     timeout: 20s
+#     retries: 10
 
 
   # Other services
@@ -683,10 +686,10 @@ services:
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     healthcheck:
-      test: ["CMD-SHELL", "curl", "-f", "http://localhost:1883" ]
-      interval: 10s
-      timeout: 10s
-      retries: 6
+      test: curl -f http://localhost:1883 || exit 1
+#     interval: 10s
+#     timeout: 10s
+#     retries: 6
 
   mongo-express:
     restart: on-failure
@@ -705,10 +708,10 @@ services:
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo-db
     healthcheck:
-      test: "curl -f localhost:8081 || exit 1"
-      interval: 25s
-      timeout: 5s
-      retries: 20
+      test: curl -f http://localhost:8081 || exit 1
+#     interval: 25s
+#     timeout: 5s
+#     retries: 20
 
 
 networks:
