@@ -90,7 +90,7 @@ services:
       - GF_INSTALL_PLUGINS=grafana-clock-panel # ,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=grafana
-#   user: "0"
+    user: "0"
     volumes:
 #     - grafana_data:/var/lib/grafana
       - ./grafana/.db:/var/lib/grafana
@@ -562,6 +562,7 @@ services:
       - TZ=Europe/Amsterdam
 #   volumes:
 #     - node-red-data:/data
+      - ./node-red/data:/data
 
   # PEP Proxy for Node-RED
   node-red-proxy:
