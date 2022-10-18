@@ -19,7 +19,6 @@
 version: "3.9"
 services:
   influx-db:
-    restart: always
     image: influxdb #:2.4.0-alpine
     hostname: influx-db
     container_name: db-influx
@@ -44,18 +43,18 @@ services:
       - ./influx/config.yml:/etc/influxdb2/config.yml
     healthcheck:
       test: curl -f http://localhost:8086/ping || exit 1
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 40s
+#     interval: 10s
+#     timeout: 10s
+#     retries: 5
+#     start_period: 40s
 
   telegraf:
-    restart: always
     image: telegraf #:1.24.2
     hostname: telegraf
     container_name: telegraf
     depends_on:
-      - influx-db
+      influx-db: 
+        condition: service_healthy
     networks:
       - default
 #   expose:
@@ -72,7 +71,6 @@ services:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
   grafana:
-    restart: always
     image: grafana/grafana-enterprise #:9.2.0
     hostname: grafana
     container_name: grafana
@@ -89,17 +87,17 @@ services:
 #     - ./grafana/grafana.env
     environment:
       - GF_DEFAULT_INSTANCE_NAME=setup
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
+      - GF_INSTALL_PLUGINS=grafana-clock-panel # ,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=grafana
-    user: "0"
+#   user: "0"
     volumes:
 #     - grafana_data:/var/lib/grafana
       - ./grafana/.db:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/etc/dashboards
     healthcheck:
-      test: curl -f http://localhost:3000 || exit 1
+      test: curl -f http://localhost:3000/api/health || exit 1
       interval: 10s
       timeout: 10s
       retries: 5
@@ -173,7 +171,7 @@ services:
     command: -dbhost mongo-db -db orionld -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion-ld:1026/version || exit 1
-      interval: 15s
+#     interval: 15s
 
   # Apache server for @context files
   ld-context:

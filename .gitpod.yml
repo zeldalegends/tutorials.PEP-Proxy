@@ -26,8 +26,8 @@ tasks:
   - name: build
     init: docker compose pull # runs during prebuild
     command: |
-      echo sudo chown -R 472:472 grafana/.db
-      echo sudo chown -R 1000:1000 node-red/data
+      sudo chown -R 472:472 grafana/.db
+      sudo chown -R 1000:1000 node-red/data
       echo Welcome to FIWARE
       docker compose -p fiware down -v --remove-orphans
       docker compose -p fiware up -d --remove-orphans --build
