@@ -34,7 +34,7 @@ services:
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=influxdb
       - DOCKER_INFLUXDB_INIT_ORG=myorganization
       - DOCKER_INFLUXDB_INIT_BUCKET=mybucket
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
@@ -77,7 +77,8 @@ services:
     hostname: grafana
     container_name: grafana
     depends_on:
-      - influx-db
+      influx-db:
+        condition: service_healthy
     networks:
       - default
     expose:
@@ -90,7 +91,8 @@ services:
       - GF_DEFAULT_INSTANCE_NAME=setup
       - GF_INSTALL_PLUGINS=grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
       - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
+    user: "0"
     volumes:
 #     - grafana_data:/var/lib/grafana
       - ./grafana/.db:/var/lib/grafana
@@ -230,7 +232,7 @@ services:
     container_name: fiware-iot-agent
     depends_on:
       - mongo-db
-      - mqtt
+      - mosquitto
       - orion
     networks:
       - default
@@ -664,11 +666,11 @@ services:
 
 
   # Other services
-  mqtt:
-  # docker run -it --rm --name mqtt-sub --network fiware_default efrecon/mqtt-client sub -h mqtt -t "test/#"
-  # docker run -it --rm --name mqtt-pub --network fiware_default efrecon/mqtt-client pub -h mqtt -m '{"value":123}' -t "test/A/1"
+  mosquitto:
+  # docker run -it --rm --name mqtt-sub --network fiware_default efrecon/mqtt-client sub -h mosquitto -t "test/#"
+  # docker run -it --rm --name mqtt-pub --network fiware_default efrecon/mqtt-client pub -h mosquitto -m '{"value":123}' -t "test/A/1"
     image: eclipse-mosquitto #:1.6.15
-    hostname: mqtt
+    hostname: mosquitto
     container_name: mqtt-broker
     networks:
       - default

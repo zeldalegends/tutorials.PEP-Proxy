@@ -17,8 +17,8 @@ tasks:
       echo "docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql"
       echo "cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm"
       echo -e "\033[1;34mMQTT\033[0m"
-      docker run -it --rm --name mqtt-sub --network fiware_default efrecon/mqtt-client sub -h mqtt -t "telegraf/#"
-      docker run -it --rm --name mqtt-pub --network fiware_default efrecon/mqtt-client pub -h mqtt -m '{"id":"TT001","temperature":24}' -t "telegraf/sensor/01"
+      docker run -it --rm --name mqtt-sub --network fiware_default efrecon/mqtt-client sub -h mosquitto -t "telegraf/#"
+      docker run -it --rm --name mqtt-pub --network fiware_default efrecon/mqtt-client pub -h mosquitto -m '{"id":"TT001","temperature":24}' -t "telegraf/sensor/01"
       echo -e "\033[1;36mDocker\033[0m"
       docker exec -it db-mysql /bin/bash
       docker compose -p fiware logs fiware-orion -f
@@ -26,8 +26,8 @@ tasks:
   - name: build
     init: docker compose pull # runs during prebuild
     command: |
-      sudo chown -R 472:472 grafana/.db
-      sudo chown -R 1000:1000 node-red/data
+      echo sudo chown -R 472:472 grafana/.db
+      echo sudo chown -R 1000:1000 node-red/data
       echo Welcome to FIWARE
       docker compose -p fiware down -v --remove-orphans
       docker compose -p fiware up -d --remove-orphans --build
@@ -39,27 +39,31 @@ ports:
   - description: JSON LD @context files
     port: 80
     onOpen: ignore
+    visibility: public
   - description: Orion Context Broker
     port: 1026
-    onOpen: notify
+    onOpen: ignore
   - description: Wilma PEP Proxy (Orion)
     port: 1027
     onOpen: ignore
     visibility: public
   - description: Orion-LD Context Broker
     port: 1028
-    onOpen: notify
+    onOpen: ignore
   - description: Wilma PEP Proxy (Orion-LD)
     port: 1029
     onOpen: ignore
     visibility: public
-  - description: Node-RED
-    port: 1880
-    onOpen: notify
-  - description: Wilma PEP Proxy (Node-RED)
-    port: 1881
+  - description: Keyrock Identity Manager
+    port: 3005
     onOpen: ignore
     visibility: public
+  - description: IoT Agent (North Port)
+    port: 4041
+    onOpen: ignore
+  - description: IoT Agent (South Port)
+    port: 7896
+    onOpen: ignore
   - description: Mosquitto MQTT Broker
     port: 1883
     onOpen: ignore
@@ -68,6 +72,28 @@ ports:
     port: 9001
     onOpen: ignore
     visibility: public
+  - description: Node-RED
+    port: 1880
+    onOpen: ignore
+    visibility: public
+  - description: Wilma PEP Proxy (Node-RED)
+    port: 1881
+    onOpen: ignore
+    visibility: public
+  - description: Express application
+    port: 8000
+    onOpen: ignore
+  - description: Wilma PEP Proxy (Express App)
+    port: 8001
+    onOpen: ignore
+    visibility: public
+#  - description: Simple web application
+#    port: 8082
+#    onOpen: ignore
+#  - description: Wilma PEP Proxy (Web App)
+#    port: 8083
+#    onOpen: ignore
+#    visibility: public
 #  - description: Tutorial App context data
 #    port: 3000
 #    onOpen: open-preview
@@ -75,40 +101,10 @@ ports:
 #  - description: Tutorial Devices over HTTP
 #    port: 3001
 #    onOpen: ignore
-  - description: Keyrock Identity Manager
-    port: 3005
-    onOpen: open-preview
-    visibility: public
-  - description: MySQL Database
-    port: 3306
-    onOpen: ignore
-  - description: IoT Agent (North Port)
-    port: 4041
-    onOpen: ignore
-  - description: IoT Agent (South Port)
-    port: 7896
-    onOpen: ignore
-  - description: Simple Express application
-    port: 8000
-    onOpen: notify
-  - description: Wilma PEP Proxy (Express App)
-    port: 8001
+  - description: Ganache Truffle private chain
+    port: 7545
     onOpen: ignore
     visibility: public
-#  - description: Simple web application
-#    port: 8082
-#    onOpen: notify
-#  - description: Wilma PEP Proxy (Web App)
-#    port: 8083
-#    onOpen: ignore
-#    visibility: public
-  - description: MongoExpress
-    port: 8081
-    onOpen: ignore
-    visibility: public
-  - description: MongoDB
-    port: 27017
-    onOpen: ignore
   - description: Grafana
     port: 3000
     onOpen: ignore
@@ -116,8 +112,13 @@ ports:
   - description: InfluxDB
     port: 8086
     onOpen: ignore
-    visibility: public
-  - description: Ganache Truffle private chain
-    port: 7545
+  - description: MongoDB
+    port: 27017
+    onOpen: ignore
+  - description: MongoExpress
+    port: 8081
     onOpen: ignore
     visibility: public
+  - description: MySQL Database
+    port: 3306
+    onOpen: ignore
