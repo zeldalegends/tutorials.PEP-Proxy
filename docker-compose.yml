@@ -44,10 +44,10 @@ services:
       - ./influx/config.yml:/etc/influxdb2/config.yml
     healthcheck:
       test: curl -f http://localhost:8086/ping || exit 1
-#     interval: 10s
-#     timeout: 10s
-#     retries: 5
-#     start_period: 40s
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
   telegraf:
     restart: always
@@ -100,10 +100,10 @@ services:
       - ./grafana/dashboards:/etc/dashboards
     healthcheck:
       test: curl -f http://localhost:3000 || exit 1
-#     interval: 10s
-#     timeout: 10s
-#     retries: 5
-#     start_period: 40s
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
   ganache:
     image: trufflesuite/ganache #:v7.4.4
@@ -117,12 +117,7 @@ services:
       - 7545:7545 # http://localhost:7545
     command: --database.dbPath /db --server.host 0.0.0.0  --server.port 7545 --wallet.mnemonic "visit carpet logic blame furnace confirm rebel deliver medal mean illness error"
     volumes:
-      - ./ganache/.db:/db    
-    healthcheck:
-      test: curl -sf -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' localhost:8545
-#     interval: 5s
-#     timeout: 5s
-#     retries: 5
+      - ./ganache/.db:/db
 
   cassandra:
     image: cassandra #:4.0
@@ -139,12 +134,10 @@ services:
     volumes:
       - ./cassandra/.db:/var/lib/cassandra/data
     healthcheck:
-    #  test: [ "CMD", "cqlsh", "--username", "cassandra", "--password", "cassandra", "--keyspace", "test" ]
-    #  test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
-      test: cqlsh -u cassandra -p cassandra -k test
-#     interval: 5s
-#     timeout: 10s
-#     retries: 6
+      test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
 
   # Orion is the context broker
   orion:
@@ -180,7 +173,7 @@ services:
     command: -dbhost mongo-db -db orionld -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion-ld:1026/version || exit 1
-#     interval: 15s
+      interval: 15s
 
   # Apache server for @context files
   ld-context:
@@ -634,7 +627,7 @@ services:
         mongo --quiet mongo-db/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
 #       host=`hostname --ip-address || echo '127.0.0.1'`; 
 #       mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
-#     interval: 25s
+      interval: 25s
 
   mysql-db:
   # docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql # backup
@@ -662,8 +655,8 @@ services:
     healthcheck:
       #test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       test: mysqladmin ping -h localhost
-#     timeout: 20s
-#     retries: 10
+      timeout: 20s
+      retries: 10
 
 
   # Other services
@@ -684,10 +677,10 @@ services:
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     healthcheck:
-      test: curl -f http://localhost:1883 || exit 1
-#     interval: 10s
-#     timeout: 10s
-#     retries: 6
+      test: ["CMD-SHELL", "timeout -t 5 mosquitto_sub -t '$$SYS/#' -C 1 | grep -v Error || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 6
 
   mongo-express:
     restart: on-failure
@@ -707,9 +700,9 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongo-db
     healthcheck:
       test: curl -f http://localhost:8081 || exit 1
-#     interval: 25s
-#     timeout: 5s
-#     retries: 20
+      interval: 25s
+      timeout: 5s
+      retries: 20
 
 
 networks:
