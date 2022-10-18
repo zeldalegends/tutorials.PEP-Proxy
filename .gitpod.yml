@@ -56,8 +56,7 @@ ports:
   - description: Node-RED
     port: 1880
     onOpen: notify
-  - name: 
-    description: Wilma PEP Proxy (Node-RED)
+  - description: Wilma PEP Proxy (Node-RED)
     port: 1881
     onOpen: ignore
     visibility: public
