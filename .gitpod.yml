@@ -35,21 +35,21 @@ tasks:
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
-  - description: JSON LD @context files
+  - description: NGSI-LD @context files
     port: 80
     onOpen: ignore
     visibility: public
   - description: Orion Context Broker
     port: 1026
     onOpen: ignore
-  - description: Wilma PEP Proxy (Orion)
+  - description: PEP Proxy (Orion)
     port: 1027
     onOpen: ignore
     visibility: public
   - description: Orion-LD Context Broker
     port: 1028
     onOpen: ignore
-  - description: Wilma PEP Proxy (Orion-LD)
+  - description: PEP Proxy (Orion-LD)
     port: 1029
     onOpen: ignore
     visibility: public
@@ -75,21 +75,21 @@ ports:
     port: 1880
     onOpen: ignore
     visibility: public
-  - description: Wilma PEP Proxy (Node-RED)
+  - description: PEP Proxy (Node-RED)
     port: 1881
     onOpen: ignore
     visibility: public
-  - description: Express application
+  - description: Express web application
     port: 8000
     onOpen: ignore
-  - description: Wilma PEP Proxy (Express App)
+  - description: PEP Proxy (Express App)
     port: 8001
     onOpen: ignore
     visibility: public
 #  - description: Simple web application
 #    port: 8082
 #    onOpen: ignore
-#  - description: Wilma PEP Proxy (Web App)
+#  - description: PEP Proxy (Web App)
 #    port: 8083
 #    onOpen: ignore
 #    visibility: public
@@ -100,17 +100,22 @@ ports:
 #  - description: Tutorial Devices over HTTP
 #    port: 3001
 #    onOpen: ignore
-  - description: Ganache Truffle private chain
+  - description: Truffle Suite's Ganache
     port: 7545
     onOpen: ignore
     visibility: public
-  - description: Grafana
+  - description: Grafana Enterprise
     port: 3000
     onOpen: ignore
     visibility: public
   - description: InfluxDB
     port: 8086
     onOpen: ignore
+    visibility: public
+  - description: Telegraf healthcheck
+    port: 8125
+    onOpen: ignore
+    visibility: public
   - description: MongoDB
     port: 27017
     onOpen: ignore
