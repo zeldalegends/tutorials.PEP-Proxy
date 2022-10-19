@@ -53,24 +53,6 @@ ports:
     port: 1029
     onOpen: ignore
     visibility: public
-  - description: Keyrock Identity Manager
-    port: 3005
-    onOpen: ignore
-    visibility: public
-  - description: IoT Agent (North Port)
-    port: 4041
-    onOpen: ignore
-  - description: IoT Agent (South Port)
-    port: 7896
-    onOpen: ignore
-  - description: Mosquitto MQTT Broker
-    port: 1883
-    onOpen: ignore
-    visibility: public
-  - description: MQTT over Websocket
-    port: 9001
-    onOpen: ignore
-    visibility: public
   - description: Node-RED
     port: 1880
     onOpen: ignore
@@ -79,6 +61,31 @@ ports:
     port: 1881
     onOpen: ignore
     visibility: public
+  - description: Mosquitto MQTT Broker
+    port: 1883
+    onOpen: ignore
+    visibility: public
+  - description: Grafana Enterprise
+    port: 3000
+    onOpen: ignore
+    visibility: public
+  - description: Keyrock Identity Manager
+    port: 3005
+    onOpen: ignore
+    visibility: public
+  - description: MySQL Database
+    port: 3306
+    onOpen: ignore
+  - description: IoT Agent (North Port)
+    port: 4041
+    onOpen: ignore
+  - description: Truffle Suite's Ganache
+    port: 7545
+    onOpen: ignore
+    visibility: public
+  - description: IoT Agent (South Port)
+    port: 7896
+    onOpen: ignore
   - description: Express web application
     port: 8000
     onOpen: ignore
@@ -86,26 +93,8 @@ ports:
     port: 8001
     onOpen: ignore
     visibility: public
-#  - description: Simple web application
-#    port: 8082
-#    onOpen: ignore
-#  - description: PEP Proxy (Web App)
-#    port: 8083
-#    onOpen: ignore
-#    visibility: public
-#  - description: Tutorial App context data
-#    port: 3000
-#    onOpen: open-preview
-#    visibility: public
-#  - description: Tutorial Devices over HTTP
-#    port: 3001
-#    onOpen: ignore
-  - description: Truffle Suite's Ganache
-    port: 7545
-    onOpen: ignore
-    visibility: public
-  - description: Grafana Enterprise
-    port: 3000
+  - description: MongoExpress
+    port: 8081
     onOpen: ignore
     visibility: public
   - description: InfluxDB
@@ -116,13 +105,27 @@ ports:
     port: 8125
     onOpen: ignore
     visibility: public
+  - description: MQTT over Websocket
+    port: 9001
+    onOpen: ignore
+    visibility: public
   - description: MongoDB
     port: 27017
     onOpen: ignore
-  - description: MongoExpress
-    port: 8081
-    onOpen: ignore
-    visibility: public
-  - description: MySQL Database
-    port: 3306
-    onOpen: ignore
+
+#  - description: Simple web application
+#    port: 8082
+#    onOpen: ignore
+#    visibility: private
+#  - description: PEP Proxy (Web App)
+#    port: 8083
+#    onOpen: ignore
+#    visibility: public
+
+#  - description: Tutorial App context data
+#    port: 3000
+#    onOpen: ignore | notify | open-browser | open-preview
+#    visibility: public
+#  - description: Tutorial Devices over HTTP
+#    port: 3001
+#    onOpen: ignore

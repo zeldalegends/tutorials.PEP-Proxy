@@ -1,148 +1,6 @@
-# WARNING: Do not deploy this tutorial configuration directly to a production environment
-#
-# The tutorial docker-compose files have not been written for production deployment and will not 
-# scale. A proper architecture has been sacrificed to keep the narrative focused on the learning 
-# goals, they are just used to deploy everything onto a single Docker machine. All FIWARE components 
-# are running at full debug and extra ports have been exposed to allow for direct calls to services. 
-# They also contain various obvious security flaws - passwords in plain text, no load balancing,
-# no use of HTTPS and so on. 
-# 
-# This is all to avoid the need of multiple machines, generating certificates, encrypting secrets
-# and so on, purely so that a single docker-compose file can be read as an example to build on, 
-# not use directly. 
-# 
-# When deploying to a production environment, please refer to the Helm Repository
-# for FIWARE Components in order to scale up to a proper architecture:
-# 
-# see: https://github.com/FIWARE/helm-charts/
-#
 version: "3.9"
 
 services:
-
-  influx-db:
-    image: influxdb #:2.4.0-alpine
-    hostname: influx-db
-    container_name: db-influx
-    networks:
-      - default
-#   expose:
-#     - 8086
-    ports:
-      - 8086:8086 # http://localhost:8086
-#   env_file:
-#     - ./influx/influxdb.env
-    environment:
-      - DOCKER_INFLUXDB_INIT_MODE=setup
-      - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=influxdb
-      - DOCKER_INFLUXDB_INIT_ORG=myorganization
-      - DOCKER_INFLUXDB_INIT_BUCKET=mybucket
-      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
-    volumes:
-#     - influx-data:/var/lib/influxdb2
-      - ./influx/.db:/var/lib/influxdb2
-      - ./influx/config.yml:/etc/influxdb2/config.yml
-    healthcheck:
-      test: curl -f http://localhost:8086/ping || exit 1
-#     interval: 10s
-#     timeout: 10s
-#     retries: 5
-#     start_period: 40s
-
-  telegraf:
-    image: telegraf #:1.24.2
-    hostname: telegraf
-    container_name: telegraf
-    depends_on:
-      influx-db: 
-        condition: service_healthy
-    networks:
-      - default
-#   expose:
-#     - 8125
-#     - 8125/udp
-    ports:
-      - 8125:8125 # http://localhost:8125 # healthcheck
-#     - 8125:8125/udp
-#   env_file:
-#     - ./telegraf/telegraf.env
-    environment:
-      - INFLUXDB_INIT_ORG=myorganization
-      - INFLUXDB_INIT_BUCKET=mybucket
-      - INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
-    volumes:
-      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-    healthcheck:
-      test: curl -f http://localhost:8125 || exit 1
-
-  grafana:
-    image: grafana/grafana-enterprise #:9.2.0
-    hostname: grafana
-    container_name: grafana
-    depends_on:
-      influx-db:
-        condition: service_healthy
-    networks:
-      - default
-#   expose:
-#     - 3000
-    ports:
-      - 3000:3000 # http://localhost:3000
-#   env_file:
-#     - ./grafana/grafana.env
-    environment:
-      - GF_DEFAULT_INSTANCE_NAME=setup
-      - GF_INSTALL_PLUGINS=grafana-clock-panel # ,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=grafana
-#   user: "0"
-    volumes:
-#     - grafana_data:/var/lib/grafana
-      - ./grafana/.db:/var/lib/grafana
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/dashboards:/etc/dashboards
-    healthcheck:
-      test: curl -f http://localhost:3000/api/health || exit 1
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 40s
-
-  ganache:
-    image: trufflesuite/ganache #:v7.4.4
-    hostname: ganache
-    container_name: truffle-ganache
-    networks:
-      - default
-#   expose:
-#     - 7545
-    ports:
-      - 7545:7545 # http://localhost:7545
-    command: --database.dbPath /db --server.host 0.0.0.0  --server.port 7545 --wallet.mnemonic "visit carpet logic blame furnace confirm rebel deliver medal mean illness error"
-    volumes:
-      - ./ganache/.db:/db
-
-  cassandra:
-    image: cassandra #:4.0
-    hostname: cassandra
-    container_name: db-cassandra
-    networks:
-      - default
-#   expose:
-#     - 7000
-#     - 9042
-#   ports:
-#     - 7000:7000 # http://localhost:7000
-#     - 9042:9042 # http://localhost:9042
-    volumes:
-      - ./cassandra/.db:/var/lib/cassandra/data
-    healthcheck:
-      test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
-      interval: 5s
-      timeout: 10s
-      retries: 6
-
   # Orion is the context broker
   orion:
     image: fiware/orion #:3.7.0
@@ -152,8 +10,8 @@ services:
       - mongo-db
     networks:
       - default
-#   expose:
-#     - 1026
+    expose:
+      - 1026
     ports:
       - 1026:1026 # http://localhost:1026
     command: -dbhost mongo-db -logLevel DEBUG
@@ -163,36 +21,39 @@ services:
 
   # Orion LD is another context broker
   orion-ld:
-    image: fiware/orion-ld:1.0.1 #:1.1.0 # latest stable version
+    image: fiware/orion-ld:1.1.1 # latest stable (1.0.1 latest succesfullt tested) 
     hostname: orion-ld
     container_name: fiware-orion-ld
     depends_on:
       - mongo-db
     networks:
       - default
-#   expose:
-#     - 1026
+    expose:
+      - 1026
     ports:
       - 1028:1026 # http://localhost:1028
     command: -dbhost mongo-db -db orionld -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion-ld:1026/version || exit 1
-#     interval: 15s
+      interval: 15s
 
-  # Apache server for @context files
+  # Apache server for NGSI-LD @context files
   ld-context:
     image: httpd:alpine
     hostname: ld-context
     container_name: fiware-ld-context
-#   expose:
-#     - 80
+    networks:
+      - default
+    expose:
+      - 80
     ports:
       - 80:80 # http://localhost
     volumes:
       - ./public:/usr/local/apache2/htdocs/
     healthcheck:
-#     test: (wget --server-response --spider --quiet  http://ld-context/ngsi-context.jsonld 2>&1 | awk 'NR==1{print $$2}'|  grep -q -e "200") || exit 1
       test: curl -f http://localhost || exit 1
+      interval: 15s
+
 #  # IoT-Agent is configured for the UltraLight Protocol
 #  iot-agent:
 #    image: fiware/iotagent-ul #:1.20.0-distroless
@@ -223,9 +84,10 @@ services:
 #      - IOTA_MONGO_DB=iotagentul # The name of the database used in mongoDB
 #      - IOTA_HTTP_PORT=7896 # The port used for device traffic over HTTP
 #      - IOTA_PROVIDER_URL=http://iot-agent:4041
-##   healthcheck:
-##     interval: 15s
+#    healthcheck:
+#      interval: 15s
 
+  # IoT-Agent is configured for JSON over MQTT
   iot-agent:
     image: fiware/iotagent-json #:1.24.0-distroless
     hostname: iot-agent
@@ -236,9 +98,9 @@ services:
       - orion
     networks:
       - default
-#   expose:
-#     - 4041
-#     - 7896 
+    expose:
+      - 4041
+      - 7896 
     ports:
       - 4041:4041 # http://localhost:4041
       - 7896:7896 # http://localhost:7896
@@ -285,8 +147,8 @@ services:
       - mysql-db
     networks:
       - default
-#   expose:
-#     - 3005
+    expose:
+      - 3005
     ports:
       - 3005:3005 # http://localhost:3005
     environment:
@@ -307,7 +169,6 @@ services:
 #   healthcheck:
 #     interval: 25s
 
-
   # PEP Proxy for Orion
   orion-proxy:
     #image: pep-slim
@@ -317,15 +178,13 @@ services:
     depends_on:
       keyrock:
         condition: service_started
-      orion:
-        condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
     networks:
       - default
-#   expose:
-#     - 1027
+    expose:
+      - 1027
     ports:
       - 1027:1027 # http://localhost:1027
     environment:
@@ -345,8 +204,8 @@ services:
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
       - PEP_PROXY_PUBLIC_PATHS=/version
-#   healthcheck:
-#     interval: 50s
+    healthcheck:
+      interval: 50s
 
   # PEP Proxy for Orion LD
   orion-ld-proxy:
@@ -357,15 +216,13 @@ services:
     depends_on:
       keyrock:
         condition: service_started
-      orion-ld:
-        condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
     networks:
       - default
-#   expose:
-#     - 1029
+    expose:
+      - 1029
     ports:
       - 1029:1029 # http://localhost:1029
     environment:
@@ -385,8 +242,8 @@ services:
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
       - PEP_PROXY_PUBLIC_PATHS=/version
-#   healthcheck:
-#     interval: 50s
+    healthcheck:
+      interval: 50s
 
 #  # Tutorial acts as a series of dummy IoT Sensors over HTTP
 #  tutorial:
@@ -435,13 +292,13 @@ services:
 
    # Sample Express App
   express-app:
-    build: ./express-app/.
+    build: ./express-app
     hostname: express-app
     container_name: express-app
     networks:
       - default
-#   expose:
-#     - 8000
+    expose:
+      - 8000
     ports:
       - 8000:8000 # http://localhost:8000
     healthcheck: 
@@ -456,15 +313,13 @@ services:
     depends_on:
       keyrock:
         condition: service_started
-      express-app:
-        condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
     networks:
       - default
-#   expose:
-#     - 8001
+    expose:
+      - 8001
     ports:
       - 8001:8001 # http://localhost:8001
     environment:
@@ -484,8 +339,8 @@ services:
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
       - PEP_PROXY_PUBLIC_PATHS=/version
-#   healthcheck:
-#     interval: 50s
+    healthcheck:
+      interval: 50s
 
 #  # Sample Web App
 #  web-app:
@@ -521,7 +376,7 @@ services:
 #       }).listen(PORT);
 #       console.log('Server started on port ' + PORT);"
 #    healthcheck: 
-#      test: curl -f http://localhost:8082 || exit 1
+#      test: curl -f http://localhost:8082/test || exit 1
   
 #  # PEP Proxy for Web App
 #  web-app-proxy:
@@ -533,8 +388,6 @@ services:
 #      - default
 #    depends_on:
 #      keyrock:
-#        condition: service_started
-#      web-app:
 #        condition: service_started
 #    deploy:
 #      restart_policy:
@@ -560,19 +413,19 @@ services:
 #      - PEP_PROXY_PDP=idm
 #      - PEP_PROXY_MAGIC_KEY=1234
 #      - PEP_PROXY_PUBLIC_PATHS=/version
-##   healthcheck:
-##     interval: 50s
+#    healthcheck:
+#      interval: 50s
 
   # Node-RED for flow-programming automation
   node-red:
     build: ./node-red
-  # image: fiware/node-red
+    #image: nodered/node-red #:3.0.2
     hostname: node-red
     container_name: node-red
     networks:
       - default
-#   expose:
-#     - 1880
+    expose:
+      - 1880
     ports:
       - 1880:1880 # http://localhost:1880
     environment:
@@ -590,15 +443,13 @@ services:
     depends_on:
       keyrock:
         condition: service_started
-      node-red:
-        condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
     networks:
       - default
-#   expose:
-#     - 1881
+    expose:
+      - 1881
     ports:
       - 1881:1881 # http://localhost:1881
     environment:
@@ -618,19 +469,42 @@ services:
       - PEP_PROXY_PDP=idm
       - PEP_PROXY_MAGIC_KEY=1234
       - PEP_PROXY_PUBLIC_PATHS=/version
-#   healthcheck:
-#     interval: 50s
+    healthcheck:
+      interval: 50s
 
 
-  # Databases
+  # Databases and frontends
+
+  # Apache Cassandra is a distributed, wide-column, NoSQL database
+  cassandra:
+    image: cassandra #:4.0
+    hostname: cassandra
+    container_name: db-cassandra
+    networks:
+      - default
+#   expose:
+#     - 7000
+#     - 9042
+#   ports:
+#     - 7000:7000 # http://localhost:7000
+#     - 9042:9042 # http://localhost:9042
+    volumes:
+      - ./cassandra/.db:/var/lib/cassandra/data
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+
+  # MongoDB is a non-relational document database
   mongo-db:
     image: mongo:5 #:5.0.11 # compliant with Orion LD
     hostname: mongo-db
     container_name: db-mongo
     networks:
       - default
-#   expose:
-#     - 27017
+    expose:
+      - 27017
     ports:
       - 27017:27017 # http://localhost:27017
     command: --nojournal
@@ -642,10 +516,32 @@ services:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     healthcheck:
       test: |
-        mongo --quiet mongo-db/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
+        mongo --quiet 127.0.0.1/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
+#       mongo --quiet mongo-db/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
 #       host=`hostname --ip-address || echo '127.0.0.1'`; 
 #       mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
       interval: 25s
+
+  mongo-express:
+    image: mongo-express #:1.0.0-alpha
+    hostname: mongo-express
+    container_name: mongo-express
+    depends_on:
+      mongo-db:
+        condition: service_healthy
+    networks:
+      - default
+    expose:
+      - 8081
+    ports:
+      - 8081:8081 # http://localhost:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo-db
+    healthcheck:
+      test: curl -f http://localhost:8081 || exit 1
+#     interval: 25s
+#     timeout: 5s
+#     retries: 20
 
   mysql-db:
   # docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql # backup
@@ -656,8 +552,8 @@ services:
     container_name: db-mysql
     networks:
       - default
-#   expose:
-#     - 3306
+    expose:
+      - 3306
     ports:
       - 3306:3306 # http://localhost:3306
     environment:
@@ -671,13 +567,124 @@ services:
 #   secrets:
 #     - my_secret_data
     healthcheck:
-      #test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       test: mysqladmin ping -h localhost
       timeout: 20s
       retries: 10
 
 
+  # TIG stack
+
+  # Telegraf is an open source plugin-driven server agent for collecting and reporting metrics
+  telegraf:
+    image: telegraf #:1.24.2
+    hostname: telegraf
+    container_name: telegraf
+    depends_on:
+      influx-db: 
+        condition: service_healthy
+    networks:
+      - default
+    expose:
+      - 8125
+#     - 8125/udp
+    ports:
+      - 8125:8125 # http://localhost:8125 # healthcheck
+#     - 8125:8125/udp
+#   env_file:
+#     - ./telegraf/telegraf.env
+    environment:
+      - INFLUXDB_INIT_ORG=myorganization
+      - INFLUXDB_INIT_BUCKET=mybucket
+      - INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    healthcheck:
+      test: curl -f http://localhost:8125 || exit 1
+
+  # InfluxDB is a time series database
+  influx-db:
+    image: influxdb #:2.4.0-alpine
+    hostname: influx-db
+    container_name: db-influx
+    networks:
+      - default
+    expose:
+      - 8086
+    ports:
+      - 8086:8086 # http://localhost:8086
+#   env_file:
+#     - ./influx/influxdb.env
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=influxdb
+      - DOCKER_INFLUXDB_INIT_ORG=myorganization
+      - DOCKER_INFLUXDB_INIT_BUCKET=mybucket
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
+    volumes:
+#     - influx-data:/var/lib/influxdb2
+      - ./influx/.db:/var/lib/influxdb2
+      - ./influx/config.yml:/etc/influxdb2/config.yml
+    healthcheck:
+      test: curl -f http://localhost:8086/ping || exit 1
+#     interval: 10s
+#     timeout: 10s
+#     retries: 5
+#     start_period: 40s
+
+  # Grafana is an open source analytics & monitoring solution for every database
+  grafana:
+    image: grafana/grafana-enterprise #:9.2.0
+    hostname: grafana
+    container_name: grafana
+    depends_on:
+      influx-db:
+        condition: service_healthy
+    networks:
+      - default
+    expose:
+      - 3000
+    ports:
+      - 3000:3000 # http://localhost:3000
+#   env_file:
+#     - ./grafana/grafana.env
+    environment:
+      - GF_DEFAULT_INSTANCE_NAME=setup
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource # ,briangann-gauge-panel,natel-plotly-panel
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
+#   user: "0"
+    volumes:
+#     - grafana_data:/var/lib/grafana
+      - ./grafana/.db:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/etc/dashboards
+    healthcheck:
+      test: curl -f http://localhost:3000/api/health || exit 1
+#     interval: 10s
+#     timeout: 10s
+#     retries: 5
+#     start_period: 40s
+
+
   # Other services
+
+  ganache:
+    image: trufflesuite/ganache #:v7.4.4
+    hostname: ganache
+    container_name: truffle-ganache
+    networks:
+      - default
+    expose:
+      - 7545
+    ports:
+      - 7545:7545 # http://localhost:7545
+    command: --database.dbPath /db --server.host 0.0.0.0  --server.port 7545 --wallet.mnemonic "visit carpet logic blame furnace confirm rebel deliver medal mean illness error"
+    volumes:
+      - ./ganache/.db:/db
+    healthcheck:
+      test: ganache --chain.chainId  # curl -f http://localhost:7545 || exit 1
+
   mosquitto:
   # docker exec mqtt-broker mosquitto_pub -t "telegraf/sensor/01" -m '{"id":"TT001","temperature":24}'
   # docker exec mqtt-broker mosquitto_sub -t "telegraf/#"
@@ -686,8 +693,8 @@ services:
     container_name: mqtt-broker
     networks:
       - default
-#   expose:
-#     - 1883
+    expose:
+      - 1883
 #     - 9001
     ports:
       - 1883:1883 # http://localhost:1883
@@ -696,31 +703,9 @@ services:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     healthcheck:
       test: timeout 5 mosquitto_sub -t '$$SYS/#' -C 1 | grep -v Error || exit 1
-      interval: 10s
-      timeout: 10s
-      retries: 6
-
-  mongo-express:
-#   restart: on-failure
-    image: mongo-express #:1.0.0-alpha
-    hostname: mongo-express
-    container_name: mongo-express
-    depends_on:
-      mongo-db:
-        condition: service_healthy
-    networks:
-      - default
-#   expose:
-#     - 8081
-    ports:
-      - 8081:8081 # http://localhost:8081
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=mongo-db
-    healthcheck:
-      test: curl -f http://localhost:8081 || exit 1
-      interval: 25s
-      timeout: 5s
-      retries: 20
+#     interval: 10s
+#     timeout: 10s
+#     retries: 6
 
 
 networks:
