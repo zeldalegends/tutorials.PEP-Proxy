@@ -5,10 +5,10 @@
 [![Support badge](https://img.shields.io/badge/tag-fiware-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware)
 <br/> [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
-This tutorial uses the FIWARE [Wilma](https://fiware-pep-proxy.rtfd.io/) PEP Proxy combined with **Keyrock** to secure
+This repository uses the FIWARE [Wilma](https://fiware-pep-proxy.rtfd.io/) PEP Proxy combined with **Keyrock** to secure
 access to endpoints exposed by FIWARE generic enablers. Users (or other actors) must log-in and use a token to gain
 access to services. The application code created in the
-[previous tutorial](https://github.com/FIWARE/tutorials.Securing-Access) is expanded to authenticate users throughout a
+[FIWARE tutorial](https://github.com/FIWARE/tutorials.Securing-Access) is expanded to authenticate users throughout a
 distributed system. The design of FIWARE Wilma - a PEP Proxy is discussed, and the parts of the Keyrock GUI and REST API
 relevant to authenticating other services are described in detail.
 
@@ -16,8 +16,7 @@ relevant to authenticating other services are described in detail.
 [Postman documentation](https://fiware.github.io/tutorials.PEP-Proxy/) for these calls is also available.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6b143a6b3ad8bcba69cf)
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/zeldalegends/tutorials.PEP-Proxy/tree/pre-production)
-[![Try in PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/zeldalegends/tutorials.PEP-Proxy/pre-production/docker-compose-context-broker-only.yml)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/alinonet/tutorials.PEP-Proxy/tree/pre-production)
 
 -   このチュートリアルは[日本語](README.ja.md)でもご覧いただけます。
 
@@ -86,7 +85,7 @@ relevant to authenticating other services are described in detail.
 >
 > — Gandalf (The Fellowship of the Ring by J.R.R Tolkien)
 
-The [previous tutorial](https://github.com/FIWARE/tutorials.Securing-Access) demonstrated that it is possible to Permit
+The [FIWARE tutorial](https://github.com/FIWARE/tutorials.Securing-Access) demonstrated that it is possible to Permit
 or Deny access to resources based on an authenticated user identifying themselves within an application. It was simply a
 matter of the code following a different line of execution if the `access_token` was not found (Level 1 -
 _Authentication Access_), or confirming that a given `access_token` had appropriate rights (Level 2 - _Basic
@@ -164,7 +163,7 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 # Architecture
 
 This application protects access to the existing Stock Management and Sensors-based application by adding PEP Proxy
-instances around the services created in previous tutorials and uses data pre-populated into the **MySQL** database used
+instances around the services created in FIWARE tutorials and uses data pre-populated into the **MySQL** database used
 by **Keyrock**. It will make use of four FIWARE components - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
 [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/), the
@@ -174,7 +173,7 @@ Orion Context Broker is sufficient for an application to qualify as _“Powered 
 
 Both the Orion Context Broker and the IoT Agent rely on open source [MongoDB](https://www.mongodb.com/) technology to
 keep persistence of the information they hold. We will also be using the dummy IoT devices created in the
-[previous tutorial](https://github.com/FIWARE/tutorials.IoT-Sensors/). **Keyrock** uses its own
+[FIWARE tutorial](https://github.com/FIWARE/tutorials.IoT-Sensors/). **Keyrock** uses its own
 [MySQL](https://www.mysql.com/) database.
 
 Therefore the overall architecture will consist of the following elements:
@@ -301,7 +300,7 @@ One application, with appropriate roles and permissions has also been created:
 | RedirectURL   | `http://localhost:3000/login`          |
 
 To save time, the data creating users and organizations from the
-[previous tutorial](https://github.com/FIWARE/tutorials.Roles-Permissions) has been downloaded and is automatically
+[FIWARE tutorial](https://github.com/FIWARE/tutorials.Roles-Permissions) has been downloaded and is automatically
 persisted to the MySQL database on start-up so the assigned UUIDs do not change and the data does not need to be entered
 again.
 
@@ -406,7 +405,7 @@ The response will return the details of the associated user
 
 # Managing PEP Proxies and IoT Agents
 
-User accounts have been created in a [previous tutorial](https://github.com/FIWARE/tutorials.Identity-Management).
+User accounts have been created in a [FIWARE tutorial](https://github.com/FIWARE/tutorials.Identity-Management).
 Non-human actors such as a PEP Proxy can be set up in the same manner. The account for each PEP Proxy, IoT Agent or IoT
 Sensor will merely consist of a Username and password linked to an application within Keyrock. PEP Proxy and IoT Agents
 accounts can be created by using either the Keyrock GUI or by using the REST API.
@@ -772,8 +771,8 @@ tutorial-app:
         - "CALLBACK_URL=http://localhost:3000/login"
 ```
 
-All of the `tutorial` container settings have been described in previous tutorials. One important change is necessary
-however, rather than accessing **Orion** directly on the default port `1026` as shown in all previous tutorials, all
+All of the `tutorial` container settings have been described in FIWARE tutorials. One important change is necessary
+however, rather than accessing **Orion** directly on the default port `1026` as shown in all FIWARE tutorials, all
 context broker traffic is now sent to `orion-proxy` on port `1027`. As a reminder, the relevant settings are detailed
 below:
 
@@ -1070,8 +1069,8 @@ tutorial-app:
 ```
 
 The `tutorial` container hosts the dummy Ultralight sensors. Rather than accessing the **IoT Agent** directly on port
-`7896` as shown in all previous tutorials, all traffic is forwarded to `iot-agent-proxy` on port `7897`. Most of the
-relevant `tutorial` container settings have been described in previous tutorials, the `DUMMY_DEVICES_USER` and
+`7896` as shown in all FIWARE tutorials, all traffic is forwarded to `iot-agent-proxy` on port `7897`. Most of the
+relevant `tutorial` container settings have been described in FIWARE tutorials, the `DUMMY_DEVICES_USER` and
 `DUMMY_DEVICES_PASSWORD` are new additions.
 
 | Key                     | Value                                             | Description                                                                                                                        |

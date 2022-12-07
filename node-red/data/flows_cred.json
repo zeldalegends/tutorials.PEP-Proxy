@@ -6,9 +6,12 @@
         "client_secret": "tutorial-dckr-site-0000-clientsecret"
     },
     "a46f63f7bc8183e7": {
-        "privateKey": "${ETHEREUM_PRIVATE_KEY}"
+        "privateKey": "0x18bad27b0ce67b140d49667e030cdb5067c362390a93d8ddae34fd2b436c9f64"
     },
     "93b18379800c0f5a": {
-        "keyPrivate": "${ETHEREUM_PRIVATE_KEY}"
+        "keyPrivate": "0x18bad27b0ce67b140d49667e030cdb5067c362390a93d8ddae34fd2b436c9f64"
+    },
+    "63ac671491a13a4b": {
+        "privatekey": "0x18bad27b0ce67b140d49667e030cdb5067c362390a93d8ddae34fd2b436c9f64"
     }
 }
