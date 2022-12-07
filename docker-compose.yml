@@ -21,7 +21,7 @@ services:
 
   # Orion LD is another context broker
   orion-ld:
-    image: fiware/orion-ld:1.1.1 # latest stable (1.0.1 latest succesfullt tested) 
+    image: fiware/orion-ld:1.1.1 # latest stable (1.0.1 latest succesfully tested) 
     hostname: orion-ld
     container_name: fiware-orion-ld
     depends_on:
@@ -139,7 +139,7 @@ services:
       
   # Keyrock is an Identity Management Front-End
   keyrock:
-    image: fiware/idm #:8.1.0-distroless
+    image: fiware/idm #:8.3.0-distroless
     #image: keyrock-slim
     hostname: keyrock
     container_name: fiware-keyrock
@@ -164,6 +164,7 @@ services:
       - IDM_ADMIN_USER=alice
       - IDM_ADMIN_EMAIL=alice-the-admin@test.com
       - IDM_ADMIN_PASS=test
+      - IDM_CSP_FORM_ACTION=*
 #   secrets:
 #     - my_secret_data
 #   healthcheck:
@@ -172,7 +173,7 @@ services:
   # PEP Proxy for Orion
   orion-proxy:
     #image: pep-slim
-    image: fiware/pep-proxy #:8.1.0-distroless
+    image: fiware/pep-proxy #:8.3.0-distroless
     hostname: orion-proxy
     container_name: fiware-orion-proxy
     depends_on:
@@ -210,7 +211,7 @@ services:
   # PEP Proxy for Orion LD
   orion-ld-proxy:
     #image: pep-slim
-    image: fiware/pep-proxy #:8.1.0-distroless
+    image: fiware/pep-proxy #:8.3.0-distroless
     hostname: orion-ld-proxy
     container_name: fiware-orion-ld-proxy
     depends_on:
@@ -290,57 +291,57 @@ services:
 #      - "KEYROCK_CLIENT_SECRET=tutorial-dckr-site-0000-clientsecret"
 #      - "CALLBACK_URL=http://localhost:3000/login"
 
-   # Sample Express App
-  express-app:
-    build: ./express-app
-    hostname: express-app
-    container_name: express-app
-    networks:
-      - default
-    expose:
-      - 8000
-    ports:
-      - 8000:8000 # http://localhost:8000
-    healthcheck: 
-      test: curl -f http://localhost:8000/test || exit 1
+#  # Sample Express App
+# express-app:
+#   build: ./express-app
+#   hostname: express-app
+#   container_name: express-app
+#   networks:
+#     - default
+#   expose:
+#     - 8000
+#   ports:
+#     - 8000:8000 # http://localhost:8000
+#   healthcheck: 
+#     test: curl -f http://localhost:8000/test || exit 1
   
-  # PEP Proxy for Express App
-  express-app-proxy:
-    #image: pep-slim
-    image: fiware/pep-proxy #:8.1.0-distroless
-    hostname: express-app-proxy
-    container_name: express-app-proxy
-    depends_on:
-      keyrock:
-        condition: service_started
-    deploy:
-      restart_policy:
-        condition: on-failure
-    networks:
-      - default
-    expose:
-      - 8001
-    ports:
-      - 8001:8001 # http://localhost:8001
-    environment:
-      - DEBUG=pep-proxy:*
-      - PEP_PROXY_DEBUG=true
-      - PEP_PROXY_APP_HOST=express-app
-      - PEP_PROXY_APP_PORT=8000
-      - PEP_PROXY_PORT=8001
-      - PEP_PROXY_IDM_HOST=keyrock
-      - PEP_PROXY_HTTPS_ENABLED=false
-      - PEP_PROXY_AUTH_ENABLED=false
-      - PEP_PROXY_IDM_SSL_ENABLED=false
-      - PEP_PROXY_IDM_PORT=3005
-      - PEP_PROXY_APP_ID=tutorial-dckr-site-0000-xpresswebapp
-      - PEP_PROXY_USERNAME=pep_proxy_00000000-0000-0000-0000-000000000000
-      - PEP_PASSWORD=test
-      - PEP_PROXY_PDP=idm
-      - PEP_PROXY_MAGIC_KEY=1234
-      - PEP_PROXY_PUBLIC_PATHS=/version
-    healthcheck:
-      interval: 50s
+# # PEP Proxy for Express App
+# express-app-proxy:
+#   #image: pep-slim
+#   image: fiware/pep-proxy #:8.3.0-distroless
+#   hostname: express-app-proxy
+#   container_name: express-app-proxy
+#   depends_on:
+#     keyrock:
+#       condition: service_started
+#   deploy:
+#     restart_policy:
+#       condition: on-failure
+#   networks:
+#     - default
+#   expose:
+#     - 8001
+#   ports:
+#     - 8001:8001 # http://localhost:8001
+#   environment:
+#     - DEBUG=pep-proxy:*
+#     - PEP_PROXY_DEBUG=true
+#     - PEP_PROXY_APP_HOST=express-app
+#     - PEP_PROXY_APP_PORT=8000
+#     - PEP_PROXY_PORT=8001
+#     - PEP_PROXY_IDM_HOST=keyrock
+#     - PEP_PROXY_HTTPS_ENABLED=false
+#     - PEP_PROXY_AUTH_ENABLED=false
+#     - PEP_PROXY_IDM_SSL_ENABLED=false
+#     - PEP_PROXY_IDM_PORT=3005
+#     - PEP_PROXY_APP_ID=tutorial-dckr-site-0000-xpresswebapp
+#     - PEP_PROXY_USERNAME=pep_proxy_00000000-0000-0000-0000-000000000000
+#     - PEP_PASSWORD=test
+#     - PEP_PROXY_PDP=idm
+#     - PEP_PROXY_MAGIC_KEY=1234
+#     - PEP_PROXY_PUBLIC_PATHS=/version
+#   healthcheck:
+#     interval: 50s
 
 #  # Sample Web App
 #  web-app:
@@ -381,7 +382,7 @@ services:
 #  # PEP Proxy for Web App
 #  web-app-proxy:
 #    #image: pep-slim
-#    image: fiware/pep-proxy #:8.1.0-distroless
+#    image: fiware/pep-proxy #:8.3.0-distroless
 #    container_name: fiware-web-app-proxy
 #    hostname: web-app-proxy
 #    networks:
@@ -437,7 +438,7 @@ services:
   # PEP Proxy for Node-RED
   node-red-proxy:
     #image: pep-slim
-    image: fiware/pep-proxy #:8.1.0-distroless
+    image: fiware/pep-proxy #:8.3.0-distroless
     hostname: node-red-proxy
     container_name: node-red-proxy
     depends_on:
@@ -476,18 +477,18 @@ services:
   # Databases and frontends
 
   # Apache Cassandra is a distributed, wide-column, NoSQL database
-  cassandra:
+  cassandra-db:
     image: cassandra #:4.0
-    hostname: cassandra
+    hostname: cassandra-db
     container_name: db-cassandra
     networks:
       - default
-#   expose:
+    expose:
 #     - 7000
-#     - 9042
-#   ports:
+      - 9042
+    ports:
 #     - 7000:7000 # http://localhost:7000
-#     - 9042:9042 # http://localhost:9042
+      - 9042:9042 # http://localhost:9042
     volumes:
       - ./cassandra/.db:/var/lib/cassandra/data
     healthcheck:
@@ -495,6 +496,37 @@ services:
       interval: 5s
       timeout: 10s
       retries: 6
+
+  # InfluxDB is a time series database
+  influx-db:
+    image: influxdb #:2.4.0-alpine
+    hostname: influx-db
+    container_name: db-influx
+    networks:
+      - default
+    expose:
+      - 8086
+    ports:
+      - 8086:8086 # http://localhost:8086
+#   env_file:
+#     - ./influx/influxdb.env
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=influxdb
+      - DOCKER_INFLUXDB_INIT_ORG=myorganization
+      - DOCKER_INFLUXDB_INIT_BUCKET=mybucket
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
+    volumes:
+#     - influx-data:/var/lib/influxdb2
+      - ./influx/.db:/var/lib/influxdb2
+      - ./influx/config.yml:/etc/influxdb2/config.yml
+    healthcheck:
+      test: curl -f http://localhost:8086/ping || exit 1
+#     interval: 10s
+#     timeout: 10s
+#     retries: 5
+#     start_period: 40s
 
   # MongoDB is a non-relational document database
   mongo-db:
@@ -547,7 +579,7 @@ services:
   # docker exec db-mysql /usr/bin/mysqldump --databases -u root --password=secret idm > backup.sql # backup
   # cat backup.sql | docker exec -i db-mysql /usr/bin/mysql -u root --password=secret idm # restore
     restart: on-failure
-    image: mysql:5 #:5.7 # compliant with the provided dump
+    image: mysql #:8.0.31 # compliant with the provided dump
     hostname: mysql-db
     container_name: db-mysql
     networks:
@@ -572,65 +604,23 @@ services:
       retries: 10
 
 
-  # TIG stack
+  # Other services
 
-  # Telegraf is an open source plugin-driven server agent for collecting and reporting metrics
-  telegraf:
-    image: telegraf #:1.24.2
-    hostname: telegraf
-    container_name: telegraf
-    depends_on:
-      influx-db: 
-        condition: service_healthy
+  ganache:
+    image: trufflesuite/ganache #:v7.4.4
+    hostname: ganache
+    container_name: truffle-ganache
     networks:
       - default
     expose:
-      - 8125
-#     - 8125/udp
+      - 7545
     ports:
-      - 8125:8125 # http://localhost:8125 # healthcheck
-#     - 8125:8125/udp
-#   env_file:
-#     - ./telegraf/telegraf.env
-    environment:
-      - INFLUXDB_INIT_ORG=myorganization
-      - INFLUXDB_INIT_BUCKET=mybucket
-      - INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
+      - 7545:7545 # http://localhost:7545
+    command: --database.dbPath /db --server.host 0.0.0.0  --server.port 7545 --wallet.mnemonic "visit carpet logic blame furnace confirm rebel deliver medal mean illness error"
     volumes:
-      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./ganache/.db:/db
     healthcheck:
-      test: curl -f http://localhost:8125 || exit 1
-
-  # InfluxDB is a time series database
-  influx-db:
-    image: influxdb #:2.4.0-alpine
-    hostname: influx-db
-    container_name: db-influx
-    networks:
-      - default
-    expose:
-      - 8086
-    ports:
-      - 8086:8086 # http://localhost:8086
-#   env_file:
-#     - ./influx/influxdb.env
-    environment:
-      - DOCKER_INFLUXDB_INIT_MODE=setup
-      - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=influxdb
-      - DOCKER_INFLUXDB_INIT_ORG=myorganization
-      - DOCKER_INFLUXDB_INIT_BUCKET=mybucket
-      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
-    volumes:
-#     - influx-data:/var/lib/influxdb2
-      - ./influx/.db:/var/lib/influxdb2
-      - ./influx/config.yml:/etc/influxdb2/config.yml
-    healthcheck:
-      test: curl -f http://localhost:8086/ping || exit 1
-#     interval: 10s
-#     timeout: 10s
-#     retries: 5
-#     start_period: 40s
+      test: ganache --chain.chainId  # curl -f http://localhost:7545 || exit 1
 
   # Grafana is an open source analytics & monitoring solution for every database
   grafana:
@@ -666,25 +656,6 @@ services:
 #     retries: 5
 #     start_period: 40s
 
-
-  # Other services
-
-  ganache:
-    image: trufflesuite/ganache #:v7.4.4
-    hostname: ganache
-    container_name: truffle-ganache
-    networks:
-      - default
-    expose:
-      - 7545
-    ports:
-      - 7545:7545 # http://localhost:7545
-    command: --database.dbPath /db --server.host 0.0.0.0  --server.port 7545 --wallet.mnemonic "visit carpet logic blame furnace confirm rebel deliver medal mean illness error"
-    volumes:
-      - ./ganache/.db:/db
-    healthcheck:
-      test: ganache --chain.chainId  # curl -f http://localhost:7545 || exit 1
-
   mosquitto:
   # docker exec mqtt-broker mosquitto_pub -t "telegraf/sensor/01" -m '{"id":"TT001","temperature":24}'
   # docker exec mqtt-broker mosquitto_sub -t "telegraf/#"
@@ -707,6 +678,32 @@ services:
 #     timeout: 10s
 #     retries: 6
 
+  # Telegraf is an open source plugin-driven server agent for collecting and reporting metrics
+  telegraf:
+    image: telegraf #:1.24.2
+    hostname: telegraf
+    container_name: telegraf
+    depends_on:
+      influx-db: 
+        condition: service_healthy
+    networks:
+      - default
+    expose:
+      - 8125
+#     - 8125/udp
+    ports:
+      - 8125:8125 # http://localhost:8125 # healthcheck
+#     - 8125:8125/udp
+#   env_file:
+#     - ./telegraf/telegraf.env
+    environment:
+      - INFLUXDB_INIT_ORG=myorganization
+      - INFLUXDB_INIT_BUCKET=mybucket
+      - INFLUXDB_INIT_ADMIN_TOKEN=myadmintoken
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    healthcheck:
+      test: curl -f http://localhost:8125 || exit 1
 
 networks:
   default:

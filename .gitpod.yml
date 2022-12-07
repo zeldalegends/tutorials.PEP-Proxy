@@ -69,11 +69,11 @@ ports:
     port: 3000
     onOpen: ignore
     visibility: public
-  - description: Keyrock Identity Manager
+  - description: Keyrock IdM
     port: 3005
     onOpen: ignore
     visibility: public
-  - description: MySQL Database
+  - description: MySQL DB
     port: 3306
     onOpen: ignore
   - description: IoT Agent (North Port)
@@ -86,18 +86,11 @@ ports:
   - description: IoT Agent (South Port)
     port: 7896
     onOpen: ignore
-  - description: Express web application
-    port: 8000
-    onOpen: ignore
-  - description: PEP Proxy (Express App)
-    port: 8001
-    onOpen: ignore
-    visibility: public
   - description: MongoExpress
     port: 8081
     onOpen: ignore
     visibility: public
-  - description: InfluxDB
+  - description: Influx DB
     port: 8086
     onOpen: ignore
     visibility: public
@@ -109,10 +102,27 @@ ports:
     port: 9001
     onOpen: ignore
     visibility: public
-  - description: MongoDB
+  - description: Cassandra DB
+    port: 9042
+    onOpen: ignore
+  - description: Mongo DB
     port: 27017
     onOpen: ignore
 
+#  - description: Tutorial App context data
+#    port: 3000
+#    onOpen: ignore | notify | open-browser | open-preview
+#    visibility: public
+#  - description: Tutorial Devices over HTTP
+#    port: 3001
+#    onOpen: ignore
+#  - description: Express web application
+#    port: 8000
+#    onOpen: ignore
+#  - description: PEP Proxy (Express App)
+#    port: 8001
+#    onOpen: ignore
+#    visibility: public
 #  - description: Simple web application
 #    port: 8082
 #    onOpen: ignore
@@ -122,10 +132,3 @@ ports:
 #    onOpen: ignore
 #    visibility: public
 
-#  - description: Tutorial App context data
-#    port: 3000
-#    onOpen: ignore | notify | open-browser | open-preview
-#    visibility: public
-#  - description: Tutorial Devices over HTTP
-#    port: 3001
-#    onOpen: ignore
